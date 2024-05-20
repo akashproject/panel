@@ -107,7 +107,7 @@ class MediaController extends Controller
 
     public function resizeMobile($profile,$fileName,$request){
         $config = config('constant.imageSize.'.$profile);
-        $image = Image::make($request->file('file')->getRealPath());
+        $image = Image::read($request->file('file')->getRealPath());
         $width = (768 * $image->width()/1920);
         
         $image->resize($width, $width, function ($constraint) {

@@ -9,7 +9,19 @@ use App\Models\User;
 class UserController extends Controller
 {
     //
-    public function index($role)
+    public function index()
+    {
+        try {
+            $users = User::all();
+            return view('administrator.users.index',compact('users'));
+
+        } catch(\Illuminate\Database\QueryException $e){
+            //throw $th;
+        }
+        
+    }
+
+    public function userByCategory($role)
     {
         try {
             $users = User::role($role)->get();;
@@ -52,9 +64,16 @@ class UserController extends Controller
         }
     }
 
-    
+    public function approve($id) {
+        $user = User::findOrFail($id);
+        $user->is_approved = 1;
+        $user->save();
+        return redirect()->back()->with('success', 'User approved successfully.');
+    }
+
+
     public function delete($id) {
-        $course = User::findOrFail($id);
+        $user = User::findOrFail($id);
         $course->delete();
         return redirect('/administrator/users');
     }

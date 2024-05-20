@@ -24,11 +24,11 @@ class SuperAdminSeeder extends Seeder
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Akash Dutta',
-            'email' => "akashdutta.scriptcrown@gmail.com",
+            'email' => "akashduttaphp@gmail.com",
             'mobile' => "9836555023",
-            'password' => Hash::make("SE~you@9062"),
+            'password' => Hash::make("Admin@123"),
+            'is_approved' => 1,
         ]);
-        $user->assignRole($role);
-        
+        $user->assignRole($role);   
     }
 }

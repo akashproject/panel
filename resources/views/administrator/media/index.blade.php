@@ -54,7 +54,7 @@
                         @default
                         <img src="{{ getSizedImage($value->id,'thumb') }}" alt="{{$value->alternative}}" style="width:100%">                       
                     @endswitch
-                        <span > {{$value->filename}} </span>
+                        <span > {{$value->name}} </span>
                     </a>
                     <a target="_blank" href="{{ url('administrator/view-file') }}/{{ $value->id }}" style="display:block">Edit</a>
                 </div>

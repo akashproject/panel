@@ -83,16 +83,28 @@
                <div data-i18n="globe">Visit Site</div>
             </a>
          </li>
-
+         <li class="menu-item">
+            <a href="{{ route('admin-media') }}" class="menu-link">
+               <i class="menu-icon tf-icons bx bx-image"></i>
+               <div data-i18n="Settings">Media Library</div>
+            </a>
+         </li>
          <li class="menu-header small text-uppercase">
             <span class="menu-header-text">-</span>
          </li>
+         
+         
          <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                <i class="menu-icon tf-icons bx bx-user"></i>
                <div data-i18n="Account Settings">Users</div>
             </a>
             <ul class="menu-sub">
+               <li class="menu-item">
+                  <a href="{{ route('admin-all-users') }}" class="menu-link">
+                     <div data-i18n="Notifications">All Users</div>
+                  </a>
+               </li>
                <li class="menu-item">
                   <a href="{{ route('admin-users','teacher') }}" class="menu-link">
                      <div data-i18n="Notifications">Teachers</div>
@@ -106,10 +118,23 @@
             </ul>
          </li>
          <li class="menu-item">
-            <a href="{{ route('admin-media') }}" class="menu-link">
-               <i class="menu-icon tf-icons bx bx-image"></i>
-               <div data-i18n="Settings">Media Library</div>
+            <a href="javascript:void(0)" class="menu-link menu-toggle">
+               <i class="menu-icon tf-icons bx bx-calendar"></i>
+               <div data-i18n="Account Settings">Schedules</div>
             </a>
+            <ul class="menu-sub">
+               <li class="menu-item">
+                  <a href="{{ route('admin-all-users') }}" class="menu-link">
+                     <div data-i18n="Notifications">Manage Slot</div>
+                  </a>
+               </li>
+               <li class="menu-item">
+                  <a href="{{ route('admin-users','teacher') }}" class="menu-link">
+                     <div data-i18n="Notifications">Manage Schedule</div>
+                  </a>
+               </li>
+
+            </ul>
          </li>
          <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">

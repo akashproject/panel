@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('mobile',20)->after('password');
             $table->string('featured_image')->nullable()->after('mobile');
             $table->enum('status', ['0', '1'])->default('1')->after('remember_token');
+            $table->boolean('is_approved')->default(false)->after('status');
         });
     }
 

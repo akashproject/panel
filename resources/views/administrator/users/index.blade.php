@@ -12,6 +12,7 @@
 							<th>Name</th>
 							<th>Email</th>
 							<th>Mobile</th>
+							<th>Is Approved</th>
 							<th>Status</th>
 							<th>Actions</th>
 						</tr>
@@ -22,6 +23,19 @@
 							<td>{{ $value->name }}</td>													
 							<td>{{ $value->email }}</td>													
 							<td>{{ $value->mobile }}</td>
+							<td>
+								@switch($value->is_approved)
+								@case('0')
+									<span class="badge bg-label-danger me-1">
+									Unapproved
+								@break
+								@case('1')
+									<span class="badge bg-label-success me-1">
+									Approved
+								@break
+								@endswitch
+								</span>
+							</td>
 							<td>
 								@switch($value->status)
 								@case('0')
@@ -41,12 +55,20 @@
 								<i class="bx bx-dots-vertical-rounded"></i>
 								</button>
 								<div class="dropdown-menu">
+									@if($value->is_approved == 0)
+									<a class="dropdown-item" href="{{ route('admin-approve-user',$value->id) }}"
+									onclick="return confirm('Are you sure?')"; ><i class="bx bx-check-circle me-1"></i> Approve</a
+									>
+									@else
+									<a class="dropdown-item" href="{{ route('admin-user',$value->id) }}"
+										><i class="bx bx-edit-alt me-1"></i> Unapprove</a>
+									@endif
 									<a class="dropdown-item" href="{{ route('admin-user',$value->id) }}"
 										><i class="bx bx-edit-alt me-1"></i> Edit</a
 									>
 									@can('delete')
 									<a class="dropdown-item" href="{{ route('admin-delete-user',$value->id) }}"
-										><i class="bx bx-trash me-1"></i> Deactive</a
+									onclick="return confirm('Are you sure?')"; ><i class="bx bx-trash me-1"></i> Deactive</a
 									>
 									@endcan
 									@role('super-admin')

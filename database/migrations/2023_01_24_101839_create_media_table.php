@@ -16,15 +16,15 @@ return new class extends Migration
         Schema::create('media', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("type",20);
-            $table->string("filename");
-            $table->string("alternative");
-            $table->string("caption");
-            $table->text("description");
-            $table->string("extension",50);
-            $table->string("size",50);
-            $table->string("dimension",50);
-            $table->text("path");
+            $table->string("type",20)->nullable();
+            $table->string("filename")->nullable();
+            $table->string("alternative")->nullable();
+            $table->string("caption")->nullable();
+            $table->text("description")->nullable();
+            $table->string("extension",50)->nullable();
+            $table->string("size",50)->nullable();
+            $table->string("dimension",50)->nullable();
+            $table->text("path")->nullable();
             $table->timestamps();
         });
     }
