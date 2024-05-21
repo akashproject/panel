@@ -11,6 +11,6 @@ class Schedule extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'id','day','start_time','end_time','created_at'
+        'id','slug','day','start_time','end_time','created_at'
     ];
 }
