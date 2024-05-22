@@ -61,11 +61,16 @@
 									>
 									@else
 									<a class="dropdown-item" href="{{ route('admin-user',$value->id) }}"
-										><i class="bx bx-edit-alt me-1"></i> Unapprove</a>
+										><i class='bx bxs-x-circle me-1'></i> Unapprove {{ $value->role }}</a>
 									@endif
 									<a class="dropdown-item" href="{{ route('admin-user',$value->id) }}"
 										><i class="bx bx-edit-alt me-1"></i> Edit</a
 									>
+									@if(in_array('teacher',  json_decode($value->getRoleNames())))
+									<a class="dropdown-item" href="{{ route('admin-user',$value->id) }}"
+										><i class='bx bx-calendar-event me-1' ></i> Slots</a
+									>
+									@endif
 									@can('delete')
 									<a class="dropdown-item" href="{{ route('admin-delete-user',$value->id) }}"
 									onclick="return confirm('Are you sure?')"; ><i class="bx bx-trash me-1"></i> Deactive</a
@@ -75,7 +80,7 @@
 									<a class="dropdown-item" href="{{ route('assign-role.index',$value->id) }}"
 										><i class="bx bx-lock-open me-1"></i> Role</a
 									>
-									@endcan
+									@endrole
 								</div>
 							</div>
 							</td>
