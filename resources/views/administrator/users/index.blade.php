@@ -67,7 +67,7 @@
 										><i class="bx bx-edit-alt me-1"></i> Edit</a
 									>
 									@if(in_array('teacher',  json_decode($value->getRoleNames())))
-									<a class="dropdown-item" href="{{ route('admin-user',$value->id) }}"
+									<a class="dropdown-item" href="{{ route('admin-teacher-slots',$value->id) }}"
 										><i class='bx bx-calendar-event me-1' ></i> Slots</a
 									>
 									@endif

@@ -48,13 +48,17 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::post('/save-schedule', [App\Http\Controllers\Administrator\ScheduleController::class, 'save'])->name('admin-save-schedule');
         Route::get('/delete-schedule', [App\Http\Controllers\Administrator\ScheduleController::class, 'delete'])->name('admin-delete-schedule');
 
+        // Assign Slots
+        Route::get('/teacher-slots/{teacher_id}', [App\Http\Controllers\Administrator\TeacherSlotController::class, 'index'])->name('admin-teacher-slots');
+        Route::post('/save-schedule', [App\Http\Controllers\Administrator\TeacherSlotController::class, 'save'])->name('admin-save-schedule');
+        Route::get('/delete-teacher-slots', [App\Http\Controllers\Administrator\TeacherSlotController::class, 'delete'])->name('admin-delete-teacher-slots');
+
         //Courses
         Route::get('/courses', [App\Http\Controllers\Administrator\CourseController::class, 'index'])->name('admin-courses');
         Route::get('/add-course', [App\Http\Controllers\Administrator\CourseController::class, 'Add'])->name('admin-add-course');
         Route::get('/show-course/{id}', [App\Http\Controllers\Administrator\CourseController::class, 'show'])->name('admin-show-course');
         Route::post('/save-course', [App\Http\Controllers\Administrator\CourseController::class, 'save'])->name('admin-save-course');
         Route::get('/delete-course/{id}', [App\Http\Controllers\Administrator\CourseController::class, 'delete'])->name('admin-delete-course');
-
         Route::get('/curriculum/{id}', [App\Http\Controllers\Administrator\CourseController::class, 'curriculum'])->name('admin-curriculum');
         Route::post('/save-curriculum', [App\Http\Controllers\Administrator\CourseController::class, 'saveCurriculum'])->name('admin-save-curriculum');
 
