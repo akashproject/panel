@@ -28,4 +28,7 @@
     margin: 10px 0;
     border-radius: 5px;
 }
-input[type="checkbox"]:checked+label{ border: 1px solid red; color: red; } 
+input[type="checkbox"]:checked+label {
+    border: 1px solid #e7701c;
+    color: #e7701c;
+}

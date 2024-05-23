@@ -10,7 +10,7 @@ class TeacherSlot extends Model
     use HasFactory;
 
     protected $fillable = [
-        'teacher_id','course_id','slots','min','max'
+        'teacher_id','course_id','slots','min','max','status'
     ];
 
 }

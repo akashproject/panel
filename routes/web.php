@@ -50,8 +50,7 @@ Route::group(['prefix' => 'administrator'], function () {
 
         // Assign Slots
         Route::get('/teacher-slots/{teacher_id}', [App\Http\Controllers\Administrator\TeacherSlotController::class, 'index'])->name('admin-teacher-slots');
-        Route::post('/save-schedule', [App\Http\Controllers\Administrator\TeacherSlotController::class, 'save'])->name('admin-save-schedule');
-        Route::get('/delete-teacher-slots', [App\Http\Controllers\Administrator\TeacherSlotController::class, 'delete'])->name('admin-delete-teacher-slots');
+        Route::post('/assign-slot-to-teacher', [App\Http\Controllers\Administrator\TeacherSlotController::class, 'save'])->name('assign-slot-to-teacher');
 
         //Courses
         Route::get('/courses', [App\Http\Controllers\Administrator\CourseController::class, 'index'])->name('admin-courses');

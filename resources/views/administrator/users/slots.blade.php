@@ -16,12 +16,28 @@
 	</div>
 
 	@if($schedules)
+	<form method="post" action="{{ route('assign-slot-to-teacher') }}" enctype="multipart/form-data" >
+		@csrf
+		<div class="card mb-4">
+			<h5 class="card-header"> Select Required Slots </h5>
+			<div class="card-body">
+				<div class="row gx-3 gy-2 align-items-center">
+					<div class="col-md-3">
+						<label class="form-label" for="min">Minimum Slot</label>
+						<input type="text" id="min" name="min" class="form-control" value="{{ isset($teacherSlot->min)?$teacherSlot->min:''}}" placeholder="Select Minimum Slot" >
+					</div>
+					<div class="col-md-3">
+						<label class="form-label" for="max">Maximum Slot</label>
+						<input type="text" id="max" name="max" class="form-control" value="{{ isset($teacherSlot->max)?$teacherSlot->max:''}}" placeholder="Select Minimum Slot" >
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
 			@foreach($schedules as $value)
 			<div class="col-md-3">
-				<input type="checkbox" id="slots_{{$value->id}}" name="slots[]" value="{{ $value->id }}" style="visibility: hidden;">	
-				<label for="slots_{{$value->id}}" class="card shadow-none bg-white mb-2">
-					
+				<input type="checkbox" id="slots_{{$value->id}}" name="slots[]" value="{{ $value->id }}" style="visibility: hidden;" {{ in_array($value->id, json_decode(isset($teacherSlot->slots)?$teacherSlot->slots:'[]'))?'checked':'' }}>	
+				<label for="slots_{{$value->id}}" class="card shadow-none bg-white mb-2" @if($teacherSlot->status == '1') style="border:1px solid #23a31b;color: #23a31b;" @endif>
 					<div class="card-body">
 						<div class="row" >
 							<h5 class="card-title  mb-0">{{ $value->day }}  </h5>
@@ -32,6 +48,10 @@
 			</div>
 			@endforeach
 		</div>
+		<button type="submit" class="btn btn-primary">Save Changes</button>
+		<input type="hidden" name="teacher_slot_id" id="teacher_slot_id" value="{{ isset($teacherSlot->id)?$teacherSlot->id:''}}" >
+		<input type="hidden" name="teacher_id" id="teacher_id" value="{{ $teacher_id }}" >
+	</form>
 	@endif
 @endsection
 @section('script')
