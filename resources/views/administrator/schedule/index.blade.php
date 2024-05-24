@@ -63,20 +63,20 @@
 		</div>
 	</div>
 	<div class="row mb-2" >
-	@if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    @if(session()->has('message'))
-        <div class="alert alert-success" role="alert">{{ session()->get('message') }}</div>
-    @endif
+		@if ($errors->any())
+			<div class="alert alert-danger">
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+		@endif
+		@if(session()->has('message'))
+			<div class="alert alert-success" role="alert">{{ session()->get('message') }}</div>
+		@endif
 	</div>
-	@if($schedules)
+	@if(count($schedules) > 0)
 		<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
 			@foreach($schedules as $value)
 			<div class="col">
@@ -158,7 +158,12 @@
 			</div>
 			@endforeach
 		</div>
+	@else
+		<div class="alert alert-dark mb-0" role="alert">
+			No Records found
+		</div>
 	@endif
+</div>
 @endsection
 @section('script')
 <!-- ============================================================== -->

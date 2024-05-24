@@ -63,6 +63,6 @@ class ScheduleController extends Controller
     public function delete($id) {
         $schedule = Schedule::findOrFail($id);
         $schedule->delete();
-        return redirect('/administrator/courses');
+        return redirect()->route('admin-schedules');
     }
 }

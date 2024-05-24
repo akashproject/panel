@@ -46,7 +46,7 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::get('/schedules', [App\Http\Controllers\Administrator\ScheduleController::class, 'index'])->name('admin-schedules');
         Route::get('/show-schedule', [App\Http\Controllers\Administrator\ScheduleController::class, 'show'])->name('admin-show-schedule');
         Route::post('/save-schedule', [App\Http\Controllers\Administrator\ScheduleController::class, 'save'])->name('admin-save-schedule');
-        Route::get('/delete-schedule', [App\Http\Controllers\Administrator\ScheduleController::class, 'delete'])->name('admin-delete-schedule');
+        Route::get('/delete-schedule/{id}', [App\Http\Controllers\Administrator\ScheduleController::class, 'delete'])->name('admin-delete-schedule');
 
         // Assign Slots
         Route::get('/teacher-slots/{teacher_id}', [App\Http\Controllers\Administrator\TeacherSlotController::class, 'index'])->name('admin-teacher-slots');

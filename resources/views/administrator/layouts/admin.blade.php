@@ -23,7 +23,9 @@
     <!-- Styles -->
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="{{ url('assets/administrator/vendor/fonts/boxicons.css') }}" />
-    <link href="{{ url('assets/administrator/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('assets/administrator/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/administrator/vendor/libs/datatables-bs5/responsive.bootstrap5.css') }}">
+   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/min/dropzone.min.css">
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ url('assets/administrator/vendor/css/core.css') }}" class="template-customizer-core-css" />
@@ -94,7 +96,7 @@
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
 <script src="{{ url('assets/administrator/vendor/libs/jquery/jquery.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" ></script>
+<script src="{{ url('assets/administrator/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}" ></script>
 <script src="{{ url('assets/administrator/vendor/libs/popper/popper.js') }}"></script>
 <script src="{{ url('assets/administrator/vendor/js/bootstrap.js') }}"></script>
 <script src="{{ url('assets/administrator/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>

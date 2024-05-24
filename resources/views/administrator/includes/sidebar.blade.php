@@ -124,12 +124,7 @@
             </a>
             <ul class="menu-sub">
                <li class="menu-item">
-                  <a href="{{ route('admin-all-users') }}" class="menu-link">
-                     <div data-i18n="Notifications">Manage Slot</div>
-                  </a>
-               </li>
-               <li class="menu-item">
-                  <a href="{{ route('admin-users','teacher') }}" class="menu-link">
+                  <a href="{{ route('admin-schedules') }}" class="menu-link">
                      <div data-i18n="Notifications">Manage Schedule</div>
                   </a>
                </li>
