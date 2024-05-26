@@ -37,7 +37,7 @@
 			@foreach($schedules as $value)
 			<div class="col-md-3">
 				<input type="checkbox" id="slots_{{$value->id}}" name="slots[]" value="{{ $value->id }}" style="visibility: hidden;" {{ in_array($value->id, json_decode(isset($teacherSlot->slots)?$teacherSlot->slots:'[]'))?'checked':'' }}>	
-				<label for="slots_{{$value->id}}" class="card shadow-none bg-white mb-2" @if(isset($teacherSlot->status) && $teacherSlot->status == '1') style="border:1px solid #23a31b;color: #23a31b;" @endif>
+				<label for="slots_{{$value->id}}" class="card shadow-none bg-white mb-2 @if(in_array($value->id, json_decode(isset($teacherSlot->slots)?$teacherSlot->slots:'[]')) && isset($teacherSlot->status) && $teacherSlot->status == '1') active @endif" >
 					<div class="card-body">
 						<div class="row" >
 							<h5 class="card-title  mb-0">{{ $value->day }}  </h5>

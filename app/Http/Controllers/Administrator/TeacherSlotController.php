@@ -33,6 +33,7 @@ class TeacherSlotController extends Controller
             ]);
 
             $data['slots'] = json_encode($data['slots']);
+            $data['status'] = "0";
             if($data['teacher_slot_id'] <= 0){
                 $teacherSlot = TeacherSlot::create($data);
             } else {

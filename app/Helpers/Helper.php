@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\DB;
 use Jenssegers\Agent\Facades\Agent;
 use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Models\Permission;
+use App\Models\Setting;
 
 if (! function_exists('check_device')) {
     function check_device($param = null){

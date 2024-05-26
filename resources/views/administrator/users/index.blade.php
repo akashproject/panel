@@ -21,20 +21,21 @@
 						@foreach ($users as $value)
 						<tr>
 							<td>
-							<div class="d-flex justify-content-start align-items-center user-name">
-								<div class="avatar-wrapper">
-									<div class="avatar me-2">
-										<span class="avatar-initial rounded-circle bg-label-primary">AB</span>
+								<div class="d-flex justify-content-start align-items-center user-name">
+									<div class="avatar-wrapper">
+										<div class="avatar me-2">
+											<span class="avatar-initial rounded-circle bg-label-primary">AB</span>
+										</div>
+									</div>
+									<div class="d-flex flex-column">
+										<span class="emp_name text-truncate">{{ $value->name }}</span>
+										<small class="emp_post text-truncate text-muted">{{ $value->email }}</small>
 									</div>
 								</div>
-								<div class="d-flex flex-column">
-									<span class="emp_name text-truncate">{{ $value->name }}</span>
-									<small class="emp_post text-truncate text-muted">{{ $value->email }}</small>
-								</div>
-							</div>
 								
 							</td>													
 							<td>{{ $value->mobile }}</td>
+							<td></td>
 							<td>
 								@switch($value->is_approved)
 								@case('0')

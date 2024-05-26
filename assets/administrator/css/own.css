@@ -32,3 +32,13 @@ input[type="checkbox"]:checked+label {
     border: 1px solid #e7701c;
     color: #e7701c;
 }
+input[type="checkbox"]:checked+label.active h5 {
+    color: #e7701c;
+}
+input[type="checkbox"]:checked+label.active {
+    border: 2px solid #3bcd75;
+    color: #3bcd75;
+}
+input[type="checkbox"]:checked+label.active h5 {
+    color: #3bcd75;
+}
