@@ -2,18 +2,18 @@
 @section('content')
 	<div class="row mb-2 ">
 		<div class="col-md-12">
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createSchedule">
-				<span class="tf-icons bx bx-calendar"></span> Create Schedule
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createSlot">
+				<span class="tf-icons bx bx-calendar"></span> Create Slot
 			</button>
 		</div>
 	</div>
 	<!-- Modal -->
-	<div class="modal fade" id="createSchedule" tabindex="-1" aria-hidden="true">
+	<div class="modal fade" id="createSlot" tabindex="-1" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form class="" method="post" action="{{ route('admin-save-schedule') }}" enctype="multipart/form-data">
+				<form class="" method="post" action="{{ route('admin-save-slot') }}" enctype="multipart/form-data">
 					<div class="modal-header">
-						<h3 class="modal-title" id="exampleModalLabel1">Create Schedule</h3>
+						<h3 class="modal-title" id="exampleModalLabel1">Create Slot</h3>
 						<button
 							type="button"
 							class="btn-close"
@@ -24,8 +24,8 @@
 						<div class="modal-body">
 						
 							@csrf
-							<div class="row">
-								<div class="col mb-3">
+							<div class="row mb-3">
+								<div class="col">
 								<label for="day" class="form-label">Select Day</label>
 								<select class="form-select" id="day" name="day" aria-label="Default select example">
 									<option value="">Select Day</option>
@@ -39,7 +39,7 @@
 								</select>
 								</div>
 							</div>
-							<div class="row g-2">
+							<div class="row mb-3">
 								<div class="col mb-0">
 									<label for="start_time" class="form-label">Start Time</label>
 									<input type="time" id="start_time"  value="00:00:00" name="start_time" class="form-control" placeholder="xxxx@xxx.xx" />
@@ -49,8 +49,13 @@
 									<input type="time" id="end_time" value="00:00:00" name="end_time" class="form-control" placeholder="DD / MM / YY" />
 								</div>
 							</div>
-							<input type="hidden" name="schedule_id" id="schedule_id" value="" >
-						
+							<div class="row" >
+								<div class="mb-3 col-12">
+									<label for="firstName" class="form-label">Maximum Availability</label>
+									<input class="form-control" type="text" name="max"  id="max" autofocus />
+								</div>
+							</div>
+							<input type="hidden" name="slot_id" id="slot_id" value="" >
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -76,9 +81,9 @@
 			<div class="alert alert-success" role="alert">{{ session()->get('message') }}</div>
 		@endif
 	</div>
-	@if(count($schedules) > 0)
+	@if(count($slots) > 0)
 				<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
-					@foreach($schedules as $value)
+					@foreach($slots as $value)
 					<div class="col-md-3">
 						<div class="card shadow-none bg-primary text-white mb-3">
 							<div class="card-body">
@@ -91,8 +96,8 @@
 										<div class="dropdown">
 											<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded text-white"></i></button>
 											<div class="dropdown-menu">
-												<a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editSchedule_{{ $value->id }}" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-												<a class="dropdown-item" onclick="return confirm('Are you sure?')"; href="{{ route('admin-delete-schedule',$value->id) }}"><i class="bx bx-trash me-1"></i> Delete</a>
+												<a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editSlot_{{ $value->id }}" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+												<a class="dropdown-item" onclick="return confirm('Are you sure?')"; href="{{ route('admin-delete-slot',$value->id) }}"><i class="bx bx-trash me-1"></i> Delete</a>
 											</div>
 										</div>
 									</div>
@@ -102,12 +107,12 @@
 						</div>
 					</div>
 					<!-- Modal -->
-					<div class="modal fade" id="editSchedule_{{ $value->id }}" tabindex="-1" aria-hidden="true">
+					<div class="modal fade" id="editSlot_{{ $value->id }}" tabindex="-1" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
-								<form class="" method="post" action="{{ route('admin-save-schedule') }}" enctype="multipart/form-data">
+								<form class="" method="post" action="{{ route('admin-save-slot') }}" enctype="multipart/form-data">
 									<div class="modal-header">
-										<h3 class="modal-title" id="exampleModalLabel1">Update Schedule</h3>
+										<h3 class="modal-title" id="exampleModalLabel1">Update Slot</h3>
 										<button
 											type="button"
 											class="btn-close"
@@ -143,7 +148,13 @@
 													<input type="time" id="end_time" value="{{$value->end_time}}" name="end_time" class="form-control" placeholder="DD / MM / YY" />
 												</div>
 											</div>
-											<input type="hidden" name="schedule_id" id="schedule_id" value="{{$value->id}}" >
+											<div class="row g-2" >
+												<div class="mb-3 col-12">
+													<label for="firstName" class="form-label">Maximum Availability</label>
+													<input class="form-control" type="text" name="max" value="{{$value->max}}" id="max" autofocus />
+												</div>
+											</div>
+											<input type="hidden" name="slot_id" id="slot_id" value="{{$value->id}}" >
 										
 									</div>
 									<div class="modal-footer">

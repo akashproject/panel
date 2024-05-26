@@ -43,10 +43,10 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::get('/approve-user/{id}', [App\Http\Controllers\Administrator\UserController::class, 'approve'])->name('admin-approve-user');
 
         //Slots
-        Route::get('/schedules', [App\Http\Controllers\Administrator\ScheduleController::class, 'index'])->name('admin-schedules');
-        Route::get('/show-schedule', [App\Http\Controllers\Administrator\ScheduleController::class, 'show'])->name('admin-show-schedule');
-        Route::post('/save-schedule', [App\Http\Controllers\Administrator\ScheduleController::class, 'save'])->name('admin-save-schedule');
-        Route::get('/delete-schedule/{id}', [App\Http\Controllers\Administrator\ScheduleController::class, 'delete'])->name('admin-delete-schedule');
+        Route::get('/slots', [App\Http\Controllers\Administrator\SlotController::class, 'index'])->name('admin-slots');
+        Route::get('/show-slot', [App\Http\Controllers\Administrator\SlotController::class, 'show'])->name('admin-show-slot');
+        Route::post('/save-slot', [App\Http\Controllers\Administrator\SlotController::class, 'save'])->name('admin-save-slot');
+        Route::get('/delete-slot/{id}', [App\Http\Controllers\Administrator\SlotController::class, 'delete'])->name('admin-delete-slot');
 
         // Assign Slots
         Route::get('/teacher-slots/{teacher_id}', [App\Http\Controllers\Administrator\TeacherSlotController::class, 'index'])->name('admin-teacher-slots');

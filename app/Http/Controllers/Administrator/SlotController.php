@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Schedule;
+use App\Models\Slot;
 use Illuminate\Support\Facades\DB;
 
-class ScheduleController extends Controller
+class SlotController extends Controller
 {
     //
     public function index()
     {
         try {
-            $schedules = Schedule::all();
-            return view('administrator.schedule.index',compact('schedules'));
+            $slots = Slot::all();
+            return view('administrator.slot.index',compact('slots'));
 
         } catch(\Illuminate\Database\QueryException $e){
             //throw $th;
@@ -23,14 +23,14 @@ class ScheduleController extends Controller
     }
 
     public function add() {
-        return view('administrator.schedule.add');
+        return view('administrator.slot.add');
     }
 
     public function show($id)
     {
         try {
-            $schedule = Schedule::find($id);
-            return view('administrator.schedule.show',compact('schedule'));
+            $slot = Slot::find($id);
+            return view('administrator.slot.show',compact('slot'));
         } catch(\Illuminate\Database\QueryException $e){
         }        
     }
@@ -45,15 +45,15 @@ class ScheduleController extends Controller
                 'end_time' => 'required',
             ]);
             $data['slug'] = strtolower($data['day']).'-'.str_replace(':','-',$data['start_time']).'-'.str_replace(':','-',$data['end_time']);       
-            if($data['schedule_id'] <= 0){
-                $schedule = Schedule::create($data);
+            if($data['slot_id'] <= 0){
+                $slot = Slot::create($data);
                 
             } else {
-                $schedule = Schedule::findOrFail($data['schedule_id']);
-                $schedule->update($data);
+                $slot = Slot::findOrFail($data['slot_id']);
+                $slot->update($data);
             }
 
-            return redirect()->back()->with('message', 'Schedule updated successfully!');
+            return redirect()->back()->with('message', 'Slot updated successfully!');
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage()); 
         }
@@ -61,8 +61,8 @@ class ScheduleController extends Controller
 
     
     public function delete($id) {
-        $schedule = Schedule::findOrFail($id);
-        $schedule->delete();
-        return redirect()->route('admin-schedules');
+        $slot = Slot::findOrFail($id);
+        $slot->delete();
+        return redirect()->route('admin-slots');
     }
 }
