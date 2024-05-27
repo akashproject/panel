@@ -9,8 +9,8 @@ Auth::routes();
 Route::get('/signin', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/signin', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
-Route::get('/signup', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('/signup', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
+// Route::get('/signup', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+// Route::post('/signup', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
