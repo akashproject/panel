@@ -6,7 +6,7 @@
             <div class="card-header d-flex flex-wrap justify-content-between gap-3">
                 <div class="card-title mb-0 me-1">
                     <h5 class="mb-1">All Session</h5>
-                    <p class="text-muted mb-0">Total {{ count($batches) }} course you have purchased</p>
+                    <p class="text-muted mb-0">Total {{ count($batches) }} session you have created</p>
                 </div>
             </div>
             <div class="card-body">
