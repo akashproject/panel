@@ -25,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
         'email',
         'mobile',
         'password',
+        'email_verified_at',
         'status',
         'is_approved'
     ];

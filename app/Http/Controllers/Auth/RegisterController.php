@@ -80,9 +80,10 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         // Log the user out immediately after registration
-        Auth::logout();
+        //Auth::logout();
 
         // Redirect to the login page
-        return redirect('/login')->with('message', 'We\'ve send a email verification link to your email address! Please verify your email.');
+        //return redirect('/login')->with('message', 'We\'ve send a email verification link to your email address! Please verify your email.');
+        return redirect('/users');
     }
 }

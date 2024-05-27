@@ -15,8 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name',100);
             $table->string('slug',100);
+            $table->string('sku',20);
+            $table->text('description',100);
             $table->integer('slot');
             $table->integer('teacher');
+            $table->integer('discounted_price')->nullable();
             $table->integer('price');
             $table->integer('commission_amount')->nullable();
             $table->boolean('status')->default(false);

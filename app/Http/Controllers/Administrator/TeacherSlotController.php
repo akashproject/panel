@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\TeacherSlot;
-use App\Models\Schedule;
+use App\Models\Slot;
 
 class TeacherSlotController extends Controller
 {
@@ -15,8 +15,8 @@ class TeacherSlotController extends Controller
     {
         try {
             $teacherSlot = TeacherSlot::where('teacher_id',$teacher_id)->first();
-            $schedules = Schedule::all();
-            return view('administrator.users.slots',compact('schedules','teacherSlot','teacher_id'));
+            $slots = Slot::all();
+            return view('administrator.users.slots',compact('slots','teacherSlot','teacher_id'));
         } catch(\Illuminate\Database\QueryException $e){
             //throw $th;
         }        
@@ -41,7 +41,7 @@ class TeacherSlotController extends Controller
                 $teacherSlot->update($data);
             }
 
-            return redirect()->back()->with('message', 'Schedule updated successfully!');
+            return redirect()->back()->with('message', 'Slot updated successfully!');
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage()); 
         }

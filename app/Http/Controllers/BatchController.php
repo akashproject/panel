@@ -4,31 +4,73 @@ namespace App\Http\Controllers;
 
 use App\Models\Batch;
 use Illuminate\Http\Request;
+use App\Models\Slot;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class BatchController extends Controller
 {
+    private $_loggedin_user;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
+        try {
+            $batches = DB::table('batches')
+                ->join('slots', 'slots.id', '=', 'batches.slot')
+                ->where('batches.teacher',$this->getLoggedInUser()->id)
+                ->get();
+            return view('batches.index',compact('batches'));
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage());
+        }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function add()
     {
-        //
+        $slots = Slot::whereRaw('max > 0')->get();
+        return view('batches.add',compact('slots'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function save(Request $request)
     {
-        //
+        try {
+            $data = $request->all();
+            
+            $validatedData = $request->validate([
+                'name' => 'required',
+                'sku' => 'required',
+                'slot' => 'required',
+                'price' => 'required',
+            ]);
+            $data['slug'] = strtolower(str_replace(' ','-',$data['name']));  
+            $data['teacher'] = $this->getLoggedInUser()->id;
+           
+            if($data['batch_id'] <= 0){
+                $batch = Batch::create($data);
+            } else {
+                $batch = Batch::findOrFail($data['batch_id']);
+                $batch->update($data);
+            }
+
+            return redirect()->back()->with('message', 'Record updated successfully!');
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage()); 
+        }
     }
 
     /**
@@ -61,5 +103,10 @@ class BatchController extends Controller
     public function destroy(Batch $batch)
     {
         //
+    }
+
+    protected function getLoggedInUser()
+    {
+        return $this->_loggedin_user = Auth::user();
     }
 }

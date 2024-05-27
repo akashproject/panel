@@ -37,10 +37,12 @@ Route::group(['prefix' => 'administrator'], function () {
         //Users
         Route::get('/users', [App\Http\Controllers\Administrator\UserController::class, 'index'])->name('admin-all-users');
         Route::get('/users/{role_id}', [App\Http\Controllers\Administrator\UserController::class, 'userByCategory'])->name('admin-users');
+        Route::get('/add-user', [App\Http\Controllers\Administrator\UserController::class, 'add'])->name('admin-add-user');
         Route::get('/user/{id}', [App\Http\Controllers\Administrator\UserController::class, 'show'])->name('admin-user');
         Route::post('/save-user', [App\Http\Controllers\Administrator\UserController::class, 'save'])->name('admin-save-user');
+        Route::post('/insert-user', [App\Http\Controllers\Administrator\UserController::class, 'insert'])->name('admin-insert-user');
         Route::get('/delete-user/{id}', [App\Http\Controllers\Administrator\UserController::class, 'delete'])->name('admin-delete-user');
-        Route::get('/approve-user/{id}', [App\Http\Controllers\Administrator\UserController::class, 'approve'])->name('admin-approve-user');
+        Route::get('/approve-user/{id}/{is_approve}', [App\Http\Controllers\Administrator\UserController::class, 'approve'])->name('admin-approve-user');
 
         //Slots
         Route::get('/slots', [App\Http\Controllers\Administrator\SlotController::class, 'index'])->name('admin-slots');
@@ -89,8 +91,17 @@ Route::group(['prefix' => 'administrator'], function () {
     });  
 });
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => ['auth', 'verified','role:teacher|super-admin|admin']], function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('home');
     })->name('website');    
+    Route::get('/account', [App\Http\Controllers\UserController::class, 'account'])->name('account');
+    Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+
+    //Batchs
+    Route::get('/batches', [App\Http\Controllers\BatchController::class, 'index'])->name('batches');
+    Route::get('/add-batch', [App\Http\Controllers\BatchController::class, 'add'])->name('add-batch');
+    Route::get('/show-batch/{id}', [App\Http\Controllers\BatchController::class, 'show'])->name('show-batch');
+    Route::post('/save-batch', [App\Http\Controllers\BatchController::class, 'save'])->name('save-batch');
+    Route::get('/delete-batch/{id}', [App\Http\Controllers\BatchController::class, 'delete'])->name('delete-batch');
 });

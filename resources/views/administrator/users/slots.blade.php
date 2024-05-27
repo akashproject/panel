@@ -15,7 +15,7 @@
     @endif
 	</div>
 
-	@if($schedules)
+	@if($slots)
 	<form method="post" action="{{ route('assign-slot-to-teacher') }}" enctype="multipart/form-data" >
 		@csrf
 		<div class="card mb-4">
@@ -34,7 +34,7 @@
 			</div>
 		</div>
 		<div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
-			@foreach($schedules as $value)
+			@foreach($slots as $value)
 			<div class="col-md-3">
 				<input type="checkbox" id="slots_{{$value->id}}" name="slots[]" value="{{ $value->id }}" style="visibility: hidden;" {{ in_array($value->id, json_decode(isset($teacherSlot->slots)?$teacherSlot->slots:'[]'))?'checked':'' }}>	
 				<label for="slots_{{$value->id}}" class="card shadow-none bg-white mb-2 @if(in_array($value->id, json_decode(isset($teacherSlot->slots)?$teacherSlot->slots:'[]')) && isset($teacherSlot->status) && $teacherSlot->status == '1') active @endif" >

@@ -83,12 +83,7 @@
                <div data-i18n="globe">Visit Site</div>
             </a>
          </li>
-         <li class="menu-item">
-            <a href="{{ route('admin-media') }}" class="menu-link">
-               <i class="menu-icon tf-icons bx bx-image"></i>
-               <div data-i18n="Settings">Media Library</div>
-            </a>
-         </li>
+         
          <li class="menu-header small text-uppercase">
             <span class="menu-header-text">-</span>
          </li>
@@ -120,42 +115,22 @@
          <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                <i class="menu-icon tf-icons bx bx-calendar"></i>
-               <div data-i18n="Account Settings">Schedules</div>
+               <div data-i18n="Account Settings">Sessions</div>
             </a>
             <ul class="menu-sub">
                <li class="menu-item">
-                  <a href="{{ route('admin-slots') }}" class="menu-link">
-                     <div data-i18n="Notifications">Manage Slots</div>
+                  <a href="{{ route('batches') }}" class="menu-link">
+                     <div data-i18n="Notifications">Manage Sessions</div>
+                  </a>
+               </li>
+               <li class="menu-item">
+                  <a href="{{ route('add-batch') }}" class="menu-link">
+                     <div data-i18n="Notifications">Create Sessions</div>
                   </a>
                </li>
 
             </ul>
          </li>
-         <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-               <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-               <div data-i18n="Authentications">Accessibility</div>
-            </a>
-            <ul class="menu-sub">
-               <li class="menu-item">
-                  <a href="{{ route('manage-roles') }}" class="menu-link">
-                     <div data-i18n="Basic">Manage Accessibility</div>
-                  </a>
-               </li>
-               <li class="menu-item">
-                  <a href="{{ route('role-master') }}" class="menu-link">
-                     <div data-i18n="Basic">Create Accessibility</div>
-                  </a>
-               </li>
-            </ul>
-         </li>
-         <li class="menu-item">
-            <a href="{{ route('admin-settings') }}" class="menu-link">
-               <i class="menu-icon tf-icons bx bx-cog"></i>
-               <div data-i18n="Settings">Settings</div>
-            </a>
-         </li>
-         
          
       </ul>
    </aside>
