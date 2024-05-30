@@ -13,24 +13,24 @@ class CreateCoursesTable extends Migration {
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->char('type_id', 100)->nullable();
             $table->string('name');
-            $table->string('slug')->nullable();
+            $table->string('slug');
             $table->string('featured_image')->nullable();
-            $table->text('description')->nullable();           
-            $table->text ('excerpt')->nullable();           
-            $table->char('duration', 50)->nullable();
-            $table->char('no_of_module', 50)->nullable();
+            $table->text('description')->nullable();
+            $table->text('excerpt')->nullable();
+            $table->char('max_price', 50)->nullable();
+            $table->char('number_of_rating', 50)->nullable();
+            $table->char('meta_description', 50)->nullable();
+            $table->char('schema', 50)->nullable();
+            $table->char('robots', 50)->nullable();
+            $table->char('utm_campaign', 50)->nullable();
+            $table->char('utm_source', 50)->nullable();
             $table->boolean('status',100)->default('1');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('courses');

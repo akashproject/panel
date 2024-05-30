@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
-            $table->string('name',100);
+            $table->integer('course_id',100);
             $table->string('slug',100);
             $table->string('sku',20);
             $table->text('description',100);

@@ -89,29 +89,7 @@
          </li>
          
          
-         <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-               <i class="menu-icon tf-icons bx bx-user"></i>
-               <div data-i18n="Account Settings">Users</div>
-            </a>
-            <ul class="menu-sub">
-               <li class="menu-item">
-                  <a href="{{ route('admin-all-users') }}" class="menu-link">
-                     <div data-i18n="Notifications">All Users</div>
-                  </a>
-               </li>
-               <li class="menu-item">
-                  <a href="{{ route('admin-users','teacher') }}" class="menu-link">
-                     <div data-i18n="Notifications">Teachers</div>
-                  </a>
-               </li>
-               <li class="menu-item">
-                  <a href="{{ route('admin-users','student') }}" class="menu-link">
-                     <div data-i18n="Connections"> Students </div>
-                  </a>
-               </li>
-            </ul>
-         </li>
+        
          <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                <i class="menu-icon tf-icons bx bx-calendar"></i>

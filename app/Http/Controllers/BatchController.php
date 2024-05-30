@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Batch;
 use Illuminate\Http\Request;
 use App\Models\Slot;
+use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -26,6 +27,7 @@ class BatchController extends Controller
         try {
             $batches = DB::table('batches')
                 ->join('slots', 'slots.id', '=', 'batches.slot')
+                ->join('courses', 'courses.id', '=', 'batches.course_id')
                 ->where('batches.teacher',$this->getLoggedInUser()->id)
                 ->get();
             return view('batches.index',compact('batches'));
@@ -40,7 +42,8 @@ class BatchController extends Controller
     public function add()
     {
         $slots = Slot::whereRaw('max > 0')->get();
-        return view('batches.add',compact('slots'));
+        $courses = Course::all();
+        return view('batches.add',compact('slots','courses'));
     }
 
     /**
@@ -52,12 +55,11 @@ class BatchController extends Controller
             $data = $request->all();
             
             $validatedData = $request->validate([
-                'name' => 'required',
+                'course_id' => 'required',
                 'sku' => 'required',
                 'slot' => 'required',
                 'price' => 'required',
             ]);
-            $data['slug'] = strtolower(str_replace(' ','-',$data['name']));  
             $data['teacher'] = $this->getLoggedInUser()->id;
            
             if($data['batch_id'] <= 0){

@@ -1,40 +1,32 @@
 @extends('administrator.layouts.admin')
 @section('content')
 <div class="col-12">
-	@if($courses)
+	@if($batches)
 		<div class="card">
 			<div class="card-header d-flex flex-wrap justify-content-between gap-3">
 				<div class="card-title mb-0 me-1">
-					<h5 class="mb-1"> {{ count($courses) }} Records found</h5>
-				</div>
-				<div class="d-flex justify-content-md-end align-items-center gap-3 flex-wrap">
-					<div class="position-relative">
-						<a href="{{ route('admin-add-course') }}" class="btn btn-secondary add-new btn-primary" tabindex="0">
-							<span>
-								<i class="bx bx-plus me-0 me-sm-1"></i>
-								<span class="d-none d-sm-inline-block">Add New Course</span>
-							</span>
-						</a>
-					</div>
+					<h5 class="mb-1"> {{ count($batches) }} Records found</h5>
 				</div>
 			</div>
 			<div class="table-responsive text-nowrap">
-				<table class="datatables-courses table">
+				<table class="datatables-batches table">
 				<thead class="table-light">
 					<tr>
-						<th>Name</th>
-						<th>Excerpt</th>
-						<th>Max Price</th>
+						<th>Teacher</th>
+						<th>Course</th>
+						<th>Price</th>
+						<th>Discounted Price</th>
 						<th>Status</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody class="table-border-bottom-0">
-					@foreach ($courses as $value)
+					@foreach ($batches as $value)
 					<tr>
-						<td> {{ $value->name }} </td>													
-						<td>{{ $value->excerpt }}</td>
-						<td>{{ $value->max_price }}</td>
+						<td> {{ $value->teacher }} </td>													
+						<td>{{ $value->course }}</td>
+						<td>{{ $value->price }}</td>
+						<td>{{ $value->discounted_price }}</td>
 						
 						<td>
 							@switch($value->status)

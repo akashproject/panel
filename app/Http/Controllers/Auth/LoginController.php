@@ -32,7 +32,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if (!$user->is_approved) {
+        if (!$user->status) {
             Auth::logout();
             return redirect('/login')->with('message', 'Your account is not approved yet! Please wait for admin approval');
         }

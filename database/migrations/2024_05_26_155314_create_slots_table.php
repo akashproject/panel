@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('slots', function (Blueprint $table) {
             $table->id();
-            table->integer('teacher_id');
-            $table->integer('course_id');
-            $table->text('slots');
-            $table->integer('min');
-            $table->integer('max');
+            $table->string("day",15);
+            $table->string("slug",100);
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
         });
     }

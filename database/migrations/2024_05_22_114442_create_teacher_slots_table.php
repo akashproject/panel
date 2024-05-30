@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('slots');
             $table->integer('min');
             $table->integer('max');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

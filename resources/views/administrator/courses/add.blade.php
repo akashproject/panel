@@ -20,52 +20,39 @@
 						{{ session()->get('message') }}
 					</div>
 				@endif
-
 				<div class="row">
 					<div class="col-md-8" >
-						<div class="form-group row">
-							<label for="name" class="col-sm-3 text-right control-label col-form-label">Name</label>
-							<div class="col-sm-9">
-								<input type="text" class="form-control" name="name" id="name" placeholder="Enter Name Here" >
+						<div class="mb-3 row">
+							<label for="name" class="col-md-3 col-form-label">Course Name</label>
+							<div class="col-md-9">
+								<input name="name" class="form-control" type="text" value="" id="name">
 							</div>
 						</div>
-						<div class="form-group row">
-							<label for="slug" class="col-sm-3 text-right control-label col-form-label">Slug</label>
-							<div class="col-sm-9">
-								<input type="text" class="form-control" name="slug" id="slug" placeholder="Slug Here" >
-							</div>
-						</div>
-						<div class="form-group row">
+						<div class="mb-3 row">
 							<label for="description" class="col-sm-3 text-right control-label col-form-label">Description</label>
 							<div class="col-sm-9">
 								<textarea class="form-control editor" name="description"  id="description" placeholder="Enter description Here" ></textarea>
 							</div>
 						</div>
-
-						<div class="form-group row">
-							<label for="excerpt" class="col-sm-3 text-right control-label col-form-label">Exerpt</label>
+						<div class="mb-3 row">
+							<label for="excerpt" class="col-sm-3 text-right control-label col-form-label">Short Description</label>
 							<div class="col-sm-9">
 								<textarea class="form-control" name="excerpt" id="excerpt" placeholder="Enter excerpt Here" ></textarea>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="duration" class="col-sm-3 text-right control-label col-form-label">Course Duration</label>
+							<label for="max_price" class="col-sm-3 text-right control-label col-form-label">Max Price</label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" name="duration" id="duration" placeholder="Enter Course Duration" >
+								<input type="text" class="form-control" name="max_price" id="max_price" placeholder="Enter Max Price" >
 							</div>
 						</div>
-						<div class="form-group row">
-							<label for="no_of_module" class="col-sm-3 text-right control-label col-form-label">No Of Module</label>
-							<div class="col-sm-9">
-								<input type="number" class="form-control" name="no_of_module" id="no_of_module" placeholder="Enter No Of Module" >
-							</div>
-						</div>	
+						
 					</div>
 
 					<div class="col-md-4">
-						<div class="form-group row">
-							<label for="state" class="col-sm-12 text-left control-label col-form-label">Status</label>
-							<div class="col-sm-12">
+						<div class="mb-4 row">
+							<label for="state" class="col-sm-3 text-left control-label col-form-label">Status</label>
+							<div class="col-sm-9">
 								<select name="status" id="status" class="select2 form-control custom-select" style="width: 100%; height:36px;">	
 									<option value="">Update Status</option>
 									<option value="1" selected> Publish</option>
@@ -73,7 +60,7 @@
 								<select>
 							</div>
 						</div>
-						<div class="form-group row">
+						<div class="mb-4 row">
 							<label for="tags" class="col-md-6 text-left control-label col-form-label">Featured Image</label>
 							<div class="col-sm-6 text-center">
 								<a href="#imageBox" class="image-profile open-popup-link">
@@ -83,6 +70,41 @@
 								@if(isset($course->featured_image))
 									<a href="javascript:void(0)" class="removeImage" style="color: #c90f0f;font-weight: 600;"> Remove Image </a>	
 								@endif
+							</div>
+						</div>
+					</div>
+				</div>
+				<h4 class="card-title my-4"> SEO Content </h4>
+				<div class="row">
+					<div class="col-md-8" >
+						<div class="mb-3 row">
+							<label for="number_of_rating" class="col-md-3 col-form-label">Number of Rating</label>
+							<div class="col-md-9">
+								<input name="number_of_rating" class="form-control" type="text" value="" id="number_of_rating">
+							</div>
+						</div>
+						<div class="mb-3 row">
+							<label for="meta_description" class="col-sm-3 text-right control-label col-form-label">Meta Description</label>
+							<div class="col-sm-9">
+								<textarea class="form-control editor" name="meta_description"  id="meta_description" placeholder="Enter Meta description Here" ></textarea>
+							</div>
+						</div>
+						<div class="mb-3 row">
+							<label for="schema" class="col-sm-3 text-right control-label col-form-label">schema</label>
+							<div class="col-sm-9">
+								<textarea class="form-control" name="schema" id="schema" placeholder="Enter schema Here" ></textarea>
+							</div>
+						</div>
+						<div class="mb-3 row">
+							<label for="utm_campaign" class="col-sm-3 text-right control-label col-form-label">UTM Campaign</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" name="utm_campaign" id="utm_campaign" placeholder="Enter UTM Campaign" >
+							</div>
+						</div>
+						<div class="mb-3 row">
+							<label for="utm_source" class="col-sm-3 text-right control-label col-form-label">UTM Source</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" name="utm_source" id="utm_source" placeholder="Enter UTM Source" >
 							</div>
 						</div>
 					</div>

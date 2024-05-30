@@ -92,8 +92,6 @@
          <li class="menu-header small text-uppercase">
             <span class="menu-header-text">-</span>
          </li>
-         
-         
          <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                <i class="menu-icon tf-icons bx bx-user"></i>
@@ -116,6 +114,18 @@
                   </a>
                </li>
             </ul>
+         </li>
+         <li class="menu-item">
+            <a href="{{ route('admin-courses') }}" class="menu-link">
+               <i class="menu-icon tf-icons bx bx-book"></i>
+               <div data-i18n="Settings">Courses</div>
+            </a>
+         </li>
+         <li class="menu-item">
+            <a href="{{ route('admin-batches') }}" class="menu-link">
+               <i class="menu-icon tf-icons bx bx-image"></i>
+               <div data-i18n="Settings">Batches</div>
+            </a>
          </li>
          <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
@@ -154,9 +164,7 @@
                <i class="menu-icon tf-icons bx bx-cog"></i>
                <div data-i18n="Settings">Settings</div>
             </a>
-         </li>
-         
-         
+         </li>   
       </ul>
    </aside>
 <!-- / Menu -->

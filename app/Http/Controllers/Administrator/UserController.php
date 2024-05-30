@@ -62,7 +62,8 @@ class UserController extends Controller
                 'email' => $data['email'],
                 'mobile' => $data['mobile'],
                 'password' => Hash::make($password),
-                'is_approved' => "1",
+                'is_approved' => "0",
+                'status' => "1",
                 'email_verified_at' => date('Y-m-d h:i:s'),
             ]);
             $user->assignRole('teacher');

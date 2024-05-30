@@ -38,19 +38,20 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="mb-3">
-                                <label class="form-label" for="name">Session Title</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter session title here" name="name">
+                                <label class="form-label" for="name">Select Course</label>
+                                <select type="text" class="form-control" id="course_id" name="course_id">
+                                    <option value="" > Select Your Course </option> 
+                                    @foreach($courses as $course)
+                                        <option value="{{$course->id}}" > {{$course->name}} </option> 
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="sku">SKU</label>
                                 <input type="text" class="form-control" id="sku" placeholder="Enter Session SKU here" name="sku">
                             </div>
                             <!-- Description -->
-                            <div>
-                            <label class="form-label">Description <span class="text-muted">(Optional)</span></label>
-                                <textarea class="editor form-control" name="description" ></textarea>
                             </div>
-                        </div>
                     </div>
                     <!-- /Product Information -->
                 </div>
@@ -65,7 +66,7 @@
                         </div>
                         <div class="card-body">
                             <!-- Base Price -->
-                            <div class="mb-3">
+                            <div class="mb-3 ">
                                 <label class="form-label" for="ecommerce-product-price">Base Price</label>
                                 <input type="number" class="form-control" id="ecommerce-product-price" placeholder="Price" name="price" aria-label="Product price">
                             </div>
