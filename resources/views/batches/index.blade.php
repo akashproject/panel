@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 <div class="col-xxl">
-    @if($loggedInUser->status == "1")
+    @if($loggedInUser->is_approved == "1")
     <div class="card mb-4">
             <div class="card-header d-flex flex-wrap justify-content-between gap-3">
                 <div class="card-title mb-0 me-1">

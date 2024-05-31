@@ -25,8 +25,7 @@ class UserController extends Controller
         return view('administrator.users.add');
     }
 
-    public function userByCategory($role)
-    {
+    public function userByCategory($role){
         try {
             $users = User::role($role)->get();;
             return view('administrator.users.index',compact('users'));
@@ -37,8 +36,7 @@ class UserController extends Controller
         
     }
 
-    public function show($id)
-    {
+    public function show($id){
         try {
             $user = User::findOrFail($id);
             return view('administrator.users.show',compact('user'));
@@ -99,7 +97,6 @@ class UserController extends Controller
         $user->save();
         return redirect()->back()->with('success', 'User approved successfully.');
     }
-
 
     public function delete($id) {
         $user = User::findOrFail($id);

@@ -23,11 +23,10 @@
 				<tbody class="table-border-bottom-0">
 					@foreach ($batches as $value)
 					<tr>
-						<td> {{ $value->teacher }} </td>													
+						<td>{{ $value->teacher }}</td>													
 						<td>{{ $value->course }}</td>
 						<td>{{ $value->price }}</td>
-						<td>{{ $value->discounted_price }}</td>
-						
+						<td>{{ $value->discounted }}</td>
 						<td>
 							@switch($value->status)
 							@case('0')
@@ -44,12 +43,7 @@
 						<td>
 							<div class="d-inline-block text-nowrap">
 								@can('update')
-								<a href="{{ route('admin-show-course',$value->id) }}" class="btn btn-sm btn-icon"><i class="bx bx-edit"></i></a>
-								@endcan
-								@can('delete')
-								<a href="{{ route('admin-delete-course',$value->id) }}" onclick="return confirm('Are you sure?')"; class="btn btn-sm btn-icon delete-record">
-									<i class="bx bx-trash"></i>
-								</a>
+								<a href="{{ route('admin-show-batch',$value->id) }}" class="btn btn-sm btn-icon"><i class="bx bx-edit"></i></a>
 								@endcan
 							</div>
 						</td>

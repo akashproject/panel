@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 <div class="col-xxl">
-    @if($loggedInUser->status == "1")
+    @if($loggedInUser->is_approved == "1")
     <form class="form-horizontal" method="post" action="{{ route('save-batch') }}" enctype="multipart/form-data">
         @csrf
         <div class="app-ecommerce">
