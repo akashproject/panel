@@ -72,7 +72,7 @@
 						<label class="col-sm-3 col-form-label" for="basic-icon-default-fullname">Commission Amount</label>
 						<div class="col-sm-9">
 							<div class="input-group input-group-merge">
-								<input type="number" name="commission_amount" value="" class="form-control" id="basic-icon-default-fullname" placeholder="Enter Commission Amount" />
+								<input type="number" name="commission_amount" class="form-control" id="basic-icon-default-fullname" placeholder="Enter Commission Amount" value="{{ $batch->commission_amount}}" />
 							</div>
 						</div>
 					</div>
