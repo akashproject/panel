@@ -14,8 +14,7 @@
 					<tr>
 						<th>Teacher</th>
 						<th>Course</th>
-						<th>Price</th>
-						<th>Discounted Price</th>
+						<th>Teacher Fees</th>
 						<th>Status</th>
 						<th>Actions</th>
 					</tr>
@@ -26,7 +25,6 @@
 						<td>{{ $value->teacher }}</td>													
 						<td>{{ $value->course }}</td>
 						<td>{{ $value->price }}</td>
-						<td>{{ $value->discounted }}</td>
 						<td>
 							@switch($value->status)
 							@case('0')

@@ -7,7 +7,7 @@
 		</div>
 		<div class="d-flex justify-content-md-end align-items-center gap-3 flex-wrap">
 			<div class="position-relative">
-				<h3 style="font-weight:bold" > Total Price : ₹{{$batch->discounted+get_theme_setting('commission_amount')}}/- </h3>
+				<h3 style="font-weight:bold" > Total Price : ₹{{$batch->price+get_theme_setting('commission_amount')}}/- </h3>
 			</div>
 		</div>
 	</div>
@@ -31,13 +31,7 @@
 					<div class="mb-2 row">
 						<label for="name" class="col-sm-3 text-right control-label col-form-label">Price</label>
 						<div class="col-sm-9">
-							<strike>₹{{ $batch->price}}/-</strike>
-						</div>
-					</div>
-					<div class="mb-2 row">
-						<label for="name" class="col-sm-3 text-right control-label col-form-label">Discounted Price</label>
-						<div class="col-sm-9">
-						₹{{ $batch->discounted}}/-
+							₹{{ $batch->price}}/-
 						</div>
 					</div>
 					<div class="mb-2 row">
