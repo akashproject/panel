@@ -1,0 +1,2 @@
+ALTER TABLE `batches` CHANGE `price` `teacher_fee` INT(11) NOT NULL;
+ALTER TABLE `batches` DROP `discounted_price`,DROP `commission_amount`;

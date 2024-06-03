@@ -139,13 +139,24 @@
 											/>
 										</div>
 										<div class="mb-3 col-12">
-											<label for="firstName" class="form-label">Razorpay Secret</label>
+											<label for="razorpay_secret" class="form-label">Razorpay Secret</label>
 											<input
 												class="form-control"
 												type="text"
 												name="razorpay_secret"
 												id="razorpay_secret" 
 												value="{{ (isset($settings['razorpay_secret']))?$settings['razorpay_secret']:'' }}"
+												autofocus
+											/>
+										</div>
+										<div class="mb-3 col-12">
+											<label for="commission_amount" class="form-label">Session Commission Amount</label>
+											<input
+												class="form-control"
+												type="text"
+												name="commission_amount"
+												id="commission_amount" 
+												value="{{ (isset($settings['commission_amount']))?$settings['commission_amount']:'' }}"
 												autofocus
 											/>
 										</div>

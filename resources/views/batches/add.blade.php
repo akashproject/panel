@@ -65,15 +65,10 @@
                             <h5 class="card-title mb-0">Pricing</h5>
                         </div>
                         <div class="card-body">
-                            <!-- Base Price -->
-                            <div class="mb-3 ">
-                                <label class="form-label" for="ecommerce-product-price">Base Price</label>
-                                <input type="number" class="form-control" id="ecommerce-product-price" placeholder="Price" name="price" aria-label="Product price">
-                            </div>
                             <!-- Discounted Price -->
                             <div class="mb-3">
-                            <label class="form-label" for="ecommerce-product-discount-price">Discounted Price</label>
-                            <input type="number" class="form-control" id="ecommerce-product-discount-price" placeholder="Discounted Price" name="discounted_price" aria-label="Product discounted price">
+                                <label class="form-label" for="teacher_fee">Batch Fees</label>
+                                <input type="number" class="form-control" id="teacher_fee" placeholder="Enter Batch fees" name="teacher_fee" >
                             </div>
                             
                         </div>
@@ -94,8 +89,10 @@
                             <label for="slots_{{$value->id}}" class="card slot_select_label shadow-none bg-white mb-2 @if(in_array($value->id, json_decode(isset($teacherSlot->slots)?$teacherSlot->slots:'[]')) && isset($teacherSlot->status) && $teacherSlot->status == '1') active @endif" >
                                 <div class="card-body">
                                     <div class="row" >
-                                        <h5 class="card-title  mb-0">{{ $value->day }}  </h5>
+                                        
+                                        <h5 class="card-title  mb-0">{{ $value->day }} </h5>
                                         <p class="card-text">{{ $value->start_time }} - {{ $value->end_time }}</p>
+                                        <h6 class=mb-0> {{ $value->max }} Slot Available</h6>
                                     </div>
                                 </div>
                             </label>

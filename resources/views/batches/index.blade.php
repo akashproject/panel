@@ -24,11 +24,9 @@
                                     <h6 class="d-flex align-items-center justify-content-center gap-1 mb-0">
                                         4.4 <span class="text-warning"><i class="bx bxs-star me-1"></i></span><span class="text-muted">(1.23k)</span>
                                     </h6>
-                                    <h6 class="d-flex align-items-center justify-content-center gap-1 mb-0 strikethrough">{{ $value->price }}/-</h6>
                                 </div>
                                 <a href="app-academy-course-details.html" class="h5 mb-2" style="display: block;">{{ $value->name }}</a>
-                                
-                                <p class="d-flex align-items-center"><i class="bx bx-time-five me-2"></i>Timing : 9:30 PM - 12:30 PM</p>
+                                <p class="d-flex align-items-center"><i class="bx bx-time-five me-2"></i>Timing : {{ $value->start_time }} - {{ $value->end_time }}</p>
                                 <div class="row mb-3 g-3">
                                     <div class="col-6">
                                         <div class="d-flex">
@@ -49,7 +47,7 @@
                                                 </span>
                                             </div>
                                             <div>
-                                                <h6 class="mb-0 text-nowrap"><strong>{{ $value->discounted_price }}/-</strong></h6>
+                                                <h6 class="mb-0 text-nowrap"><strong>{{ $value->teacher_fee }}/-</strong></h6>
                                                 <small>Price</small>
                                             </div>
                                         </div>
@@ -98,7 +96,7 @@
                     <p class="mb-4">
                         Please fill up the information of your profile to complete your account
                     </p>
-                    <a href="{{ route('profile' )}}" class="btn btn-primary"><i class="bx bx-user"></i> Complete Profile </a>
+                    <a href="{{ route('profile')}}" class="btn btn-primary"><i class="bx bx-user"></i> Complete Profile </a>
                 </div>
             </div>
         </div>

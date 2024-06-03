@@ -7,7 +7,7 @@
 		</div>
 		<div class="d-flex justify-content-md-end align-items-center gap-3 flex-wrap">
 			<div class="position-relative">
-				<h3 style="font-weight:bold" > Total Price : ₹{{$batch->discounted+$batch->commission_amount}}/- </h3>
+				<h3 style="font-weight:bold" > Total Price : ₹{{$batch->discounted+get_theme_setting('commission_amount')}}/- </h3>
 			</div>
 		</div>
 	</div>
@@ -41,12 +41,6 @@
 						</div>
 					</div>
 					<div class="mb-2 row">
-						<label for="name" class="col-sm-3 text-right control-label col-form-label">Commission Amount</label>
-						<div class="col-sm-9">
-						₹{{ $batch->commission_amount}}/-
-						</div>
-					</div>
-					<div class="mb-2 row">
 						<label for="name" class="col-sm-3 text-right control-label col-form-label">Session Slot</label>
 						<div class="col-sm-9">
 							{{$batch->day}}, {{$batch->start_time}} - {{$batch->end_time}}
@@ -66,14 +60,6 @@
 							@break
 							@endswitch
 							</span>
-						</div>
-					</div>
-					<div class="row mb-3">
-						<label class="col-sm-3 col-form-label" for="basic-icon-default-fullname">Commission Amount</label>
-						<div class="col-sm-9">
-							<div class="input-group input-group-merge">
-								<input type="number" name="commission_amount" class="form-control" id="basic-icon-default-fullname" placeholder="Enter Commission Amount" value="{{ $batch->commission_amount}}" />
-							</div>
 						</div>
 					</div>
 					<div class="row mb-3">
@@ -99,7 +85,4 @@
 </div>                   
 @endsection
 @section('script')
-@endsection 
-
-
-
+@endsection
