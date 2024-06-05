@@ -116,18 +116,6 @@
             </ul>
          </li>
          <li class="menu-item">
-            <a href="{{ route('admin-courses') }}" class="menu-link">
-               <i class="menu-icon tf-icons bx bx-book"></i>
-               <div data-i18n="Settings">Courses</div>
-            </a>
-         </li>
-         <li class="menu-item">
-            <a href="{{ route('admin-batches') }}" class="menu-link">
-               <i class="menu-icon tf-icons bx bx-image"></i>
-               <div data-i18n="Settings">Batches</div>
-            </a>
-         </li>
-         <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                <i class="menu-icon tf-icons bx bx-calendar"></i>
                <div data-i18n="Account Settings">Schedules</div>
@@ -140,6 +128,30 @@
                </li>
 
             </ul>
+         </li>
+         <li class="menu-item">
+            <a href="{{ route('admin-courses') }}" class="menu-link">
+               <i class="menu-icon tf-icons bx bx-book"></i>
+               <div data-i18n="Settings">Courses</div>
+            </a>
+         </li>
+         <li class="menu-item">
+            <a href="{{ route('admin-batches') }}" class="menu-link">
+               <i class="menu-icon tf-icons bx bx-image"></i>
+               <div data-i18n="Settings">Batches</div>
+            </a>
+         </li>
+         <li class="menu-item">
+            <a href="{{ route('admin-orders') }}" class="menu-link">
+               <i class="menu-icon tf-icons bx bx-cart-alt"></i>
+               <div data-i18n="Settings">Orders</div>
+            </a>
+         </li>
+         <li class="menu-item">
+            <a href="{{ route('admin-orders') }}" class="menu-link">
+               <i class="menu-icon tf-icons bx bxs-report"></i>
+               <div data-i18n="Settings">Reports</div>
+            </a>
          </li>
          <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">

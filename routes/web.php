@@ -66,7 +66,11 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::get('/show-batch/{id}', [App\Http\Controllers\Administrator\BatchController::class, 'show'])->name('admin-show-batch');
         Route::post('/save-batch', [App\Http\Controllers\Administrator\BatchController::class, 'save'])->name('admin-save-batch');
 
-        // Batches
+        // Orders
+        Route::get('/orders', [App\Http\Controllers\Administrator\OrderController::class, 'index'])->name('admin-orders');
+        Route::get('/order/{id}', [App\Http\Controllers\Administrator\OrderController::class, 'show'])->name('admin-show-order');
+
+        // Media
         Route::get('/media', [App\Http\Controllers\Administrator\MediaController::class, 'index'])->name('admin-media');
         Route::get('/view-file/{id}', [App\Http\Controllers\Administrator\MediaController::class, 'view'])->name('admin-view-file');
         Route::post('/upload', [App\Http\Controllers\Administrator\MediaController::class, 'save'])->name('admin-save-media');

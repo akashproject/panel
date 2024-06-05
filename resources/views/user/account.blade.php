@@ -19,7 +19,7 @@
         <div class="card-body">
             <div class="d-flex align-items-start align-items-sm-center gap-4">
             <img
-                src="../assets/img/avatars/1.png"
+                src="{{ url('assets/administrator/img/avatars/1.png') }}"
                 alt="user-avatar"
                 class="d-block rounded"
                 height="100"
@@ -76,7 +76,7 @@
                 <div class="mb-3 col-md-6">
                 <label class="form-label" for="phoneNumber">Phone Number</label>
                 <div class="input-group input-group-merge">
-                    <span class="input-group-text">IN (+19)</span>
+                    <span class="input-group-text">IN (+91)</span>
                     <input
                     type="text"
                     id="phoneNumber"
