@@ -15,4 +15,10 @@ Route::get('/batch/{id}', [App\Http\Controllers\Api\BatchController::class, 'sho
 Route::get('/teachers', [App\Http\Controllers\Api\TeacherController::class, 'index']);
 Route::get('/teacher/{id}', [App\Http\Controllers\Api\TeacherController::class, 'show']);
 
-//
+// User
+Route::get('/user/{id}', [App\Http\Controllers\Api\UserController::class, 'index'])->name('user');
+Route::get('/user', [App\Http\Controllers\Api\UserController::class, 'getAuthUser'])->name('getAuthUser');
+Route::post('/signup', [App\Http\Controllers\Api\UserController::class, 'register'])->name('register');
+Route::post('/login', [App\Http\Controllers\Api\UserController::class, 'login'])->name('login');
+Route::get('/logout', [App\Http\Controllers\Api\UserController::class, 'logout'])->name('logout');
+Route::put('/updateprofile', [App\Http\Controllers\Api\UserController::class, 'updateprofile'])->name('userupdate');
