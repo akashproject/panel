@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
-use PHPOpenSourceSaver\JWTAuth\JWTGuard;
 
 class UserController extends Controller
 {
@@ -22,7 +21,7 @@ class UserController extends Controller
     public function register(Request $request)
     {
       try {
-        $user = JWTGuard::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'mobile' => $request->mobile,
@@ -40,7 +39,7 @@ class UserController extends Controller
     public function login()
     {
         $credentials = request(['mobile', 'password']);
-        if (!$token = auth()->attempt($credentials)) {
+        if (!$token = auth("api")->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         return $this->respondWithToken($token);
