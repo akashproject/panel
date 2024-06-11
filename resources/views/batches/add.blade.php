@@ -46,12 +46,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="sku">SKU</label>
-                                <input type="text" class="form-control" id="sku" placeholder="Enter Session SKU here" name="sku">
-                            </div>
-                            <!-- Description -->
-                            </div>
+                        </div>
                     </div>
                     <!-- /Product Information -->
                 </div>

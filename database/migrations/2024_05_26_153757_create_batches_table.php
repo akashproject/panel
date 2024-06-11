@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
-            $table->integer('course_id',100);
-            $table->string('slug',100);
+            $table->integer('course_id');
+            $table->string('slug',100)->nullable();
             $table->string('sku',20);
-            $table->text('description',100);
             $table->integer('slot');
             $table->integer('teacher');
-            $table->integer('discounted_price')->nullable();
-            $table->integer('price');
-            $table->integer('commission_amount')->nullable();
+            $table->integer('price')->nullable();
+            $table->integer('teacher_fee');
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

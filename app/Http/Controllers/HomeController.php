@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Batch;
+use App\Models\Slot;
+use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+    private $_loggedin_user;
     /**
      * Create a new controller instance.
      *
@@ -23,6 +29,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        //
+        try {
+            $batches = DB::table('batches')
+                ->join('slots', 'slots.id', '=', 'batches.slot')
+                ->join('courses', 'courses.id', '=', 'batches.course_id')
+                ->where('batches.teacher',$this->getLoggedInUser()->id)
+                ->get();
+            return view('batches.index',compact('batches'));
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage());
+        }
+    }
+
+    protected function getLoggedInUser()
+    {
+        return $this->_loggedin_user = Auth::user();
     }
 }

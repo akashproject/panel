@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public function userByCategory($role){
         try {
-            $users = User::role($role)->get();;
+            $users = User::role($role)->get();
             return view('administrator.users.index',compact('users'));
 
         } catch(\Illuminate\Database\QueryException $e){

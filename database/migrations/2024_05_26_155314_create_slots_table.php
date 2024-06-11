@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("slug",100);
             $table->time('start_time');
             $table->time('end_time');
+            $table->integer('max')->nullable();
             $table->timestamps();
         });
     }

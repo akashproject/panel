@@ -20,6 +20,7 @@ class BatchController extends Controller
             return view('administrator.batches.index',compact('batches'));
         } catch(\Illuminate\Database\QueryException $e){
             //throw $th;
+            var_dump($e->getMessage()); 
         }
     }
 

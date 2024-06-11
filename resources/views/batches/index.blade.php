@@ -15,7 +15,7 @@
                     <div class="col-sm-6 col-lg-4">
                         <div class="card p-2 h-100 shadow-none border">
                             <div class="rounded-2 text-center mb-3">
-                                <a href="app-academy-course-details.html">
+                                <a href="javascript:void(0)">
                                     <img class="img-fluid" src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/pages/app-academy-tutor-2.png" alt="tutor image 1">
                                 </a>
                             </div>
@@ -25,7 +25,7 @@
                                         4.4 <span class="text-warning"><i class="bx bxs-star me-1"></i></span><span class="text-muted">(1.23k)</span>
                                     </h6>
                                 </div>
-                                <a href="app-academy-course-details.html" class="h5 mb-2" style="display: block;">{{ $value->name }}</a>
+                                <a href="javascript:void(0)" class="h5 mb-2" style="display: block;">{{ $value->name }}</a>
                                 <p class="d-flex align-items-center"><i class="bx bx-time-five me-2"></i>Timing : {{ $value->start_time }} - {{ $value->end_time }}</p>
                                 <div class="row mb-3 g-3">
                                     <div class="col-6">
@@ -59,31 +59,7 @@
                     </div>
                     @endforeach		
                 </div>
-                <nav aria-label="Page navigation" class="d-flex align-items-center justify-content-center">
-                    <ul class="pagination">
-                    <li class="page-item prev">
-                        <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-left"></i></a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="javascript:void(0);">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:void(0);">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:void(0);">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:void(0);">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:void(0);">5</a>
-                    </li>
-                    <li class="page-item next">
-                        <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-right"></i></a>
-                    </li>
-                    </ul>
-                </nav>
+                
             </div>
         </div>
     @else
