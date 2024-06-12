@@ -5,7 +5,6 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Auth::routes();
 
-
 Route::get('/signin', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/signin', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
@@ -34,7 +33,7 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::get('/dashboard', [App\Http\Controllers\Administrator\IndexController::class, 'index'])->name('dashboard');
         Route::get('/', [App\Http\Controllers\Administrator\IndexController::class, 'index'])->name('administrator');
         
-        //Users
+        // Users
         Route::get('/users', [App\Http\Controllers\Administrator\UserController::class, 'index'])->name('admin-all-users');
         Route::get('/users/{role_id}', [App\Http\Controllers\Administrator\UserController::class, 'userByCategory'])->name('admin-users');
         Route::get('/add-user', [App\Http\Controllers\Administrator\UserController::class, 'add'])->name('admin-add-user');
@@ -44,7 +43,7 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::get('/delete-user/{id}', [App\Http\Controllers\Administrator\UserController::class, 'delete'])->name('admin-delete-user');
         Route::get('/approve-user/{id}/{is_approve}', [App\Http\Controllers\Administrator\UserController::class, 'approve'])->name('admin-approve-user');
 
-        //Slots
+        // Slots
         Route::get('/slots', [App\Http\Controllers\Administrator\SlotController::class, 'index'])->name('admin-slots');
         Route::get('/show-slot', [App\Http\Controllers\Administrator\SlotController::class, 'show'])->name('admin-show-slot');
         Route::post('/save-slot', [App\Http\Controllers\Administrator\SlotController::class, 'save'])->name('admin-save-slot');
@@ -54,7 +53,7 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::get('/teacher-slots/{teacher_id}', [App\Http\Controllers\Administrator\TeacherSlotController::class, 'index'])->name('admin-teacher-slots');
         Route::post('/assign-slot-to-teacher', [App\Http\Controllers\Administrator\TeacherSlotController::class, 'save'])->name('assign-slot-to-teacher');
 
-        //Courses
+        // Courses
         Route::get('/courses', [App\Http\Controllers\Administrator\CourseController::class, 'index'])->name('admin-courses');
         Route::get('/add-course', [App\Http\Controllers\Administrator\CourseController::class, 'Add'])->name('admin-add-course');
         Route::get('/show-course/{id}', [App\Http\Controllers\Administrator\CourseController::class, 'show'])->name('admin-show-course');
@@ -77,7 +76,6 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::post('/save-file', [App\Http\Controllers\Administrator\MediaController::class, 'updateFile'])->name('admin-save-file');
         Route::get('/delete-file/{id}', [App\Http\Controllers\Administrator\MediaController::class, 'delete'])->name('admin-delete-job');
         Route::post('/search-media', [App\Http\Controllers\Administrator\MediaController::class, 'search'])->name('admin-search-media');
-
         Route::get('/settings', [App\Http\Controllers\Administrator\SettingController::class, 'show'])->name('admin-settings');
         Route::post('/save-settings', [App\Http\Controllers\Administrator\SettingController::class, 'save'])->name('admin-save-settings');
     });
@@ -89,7 +87,7 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::post('/save-accessibility', [App\Http\Controllers\Administrator\AccessibilityController::class, 'saveAccessibility'])->name('save-accessibility');
         Route::get('/assign-role/{id}', [App\Http\Controllers\Administrator\AssignRoleController::class, 'index'])->name('assign-role.index');
         Route::post('/assign-role', [App\Http\Controllers\Administrator\AssignRoleController::class, 'save'])->name('assign-role.save');
-    });  
+    });
 });
 
 Route::group(['middleware' => ['auth', 'verified','role:teacher|super-admin|admin']], function () {
