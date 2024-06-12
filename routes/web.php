@@ -43,7 +43,7 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::get('/delete-user/{id}', [App\Http\Controllers\Administrator\UserController::class, 'delete'])->name('admin-delete-user');
         Route::get('/approve-user/{id}/{is_approve}', [App\Http\Controllers\Administrator\UserController::class, 'approve'])->name('admin-approve-user');
 
-        // Slots
+        //Slots
         Route::get('/slots', [App\Http\Controllers\Administrator\SlotController::class, 'index'])->name('admin-slots');
         Route::get('/show-slot', [App\Http\Controllers\Administrator\SlotController::class, 'show'])->name('admin-show-slot');
         Route::post('/save-slot', [App\Http\Controllers\Administrator\SlotController::class, 'save'])->name('admin-save-slot');
