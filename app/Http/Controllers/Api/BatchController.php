@@ -55,7 +55,7 @@ class BatchController extends Controller
 
             foreach ($batches as $key => $batch) {
                 $batch->duration = getDuration($batch->start_time, $batch->end_time);
-
+                $batch->price = $batch->teacher_fee+get_theme_setting("commission_amount");
                 $batches[$key] = $batch;
             }
 
