@@ -34,7 +34,9 @@ class BatchController extends Controller
             $batches = DB::table('batches')
                 ->join('slots', 'slots.id', '=', 'batches.slot')
                 ->join('courses', 'courses.id', '=', 'batches.course_id')
+                ->join('users', 'users.id', '=', 'batches.teacher')
                 ->where('slots.day',$currentDay)
+                ->select("batches.id as batch_id","users.name as trainer","courses.name as course","slots.start_time","slots.end_time","batches.teacher_fee")
                 ->get();
             return response()->json($batches,$this->_statusOK); 
         } catch(\Illuminate\Database\QueryException $e){
@@ -49,7 +51,7 @@ class BatchController extends Controller
                 ->join('slots', 'slots.id', '=', 'batches.slot')
                 ->join('courses', 'courses.id', '=', 'batches.course_id')
                 ->join('users', 'users.id', '=', 'batches.teacher')
-                ->select("batches.id as batch_id","users.name as trainers","courses.name as course","slots.start_time","slots.end_time","batches.teacher_fee")
+                ->select("batches.id as batch_id","users.name as trainer","courses.name as course","slots.start_time","slots.end_time","batches.teacher_fee")
                 ->whereIn('slots.day',$nextDays)
                 ->get();
 
