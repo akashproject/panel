@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->integer('course_id');
-            $table->string('slug',100)->nullable();
-            $table->string('sku',20);
             $table->integer('slot');
             $table->integer('teacher');
             $table->integer('price')->nullable();

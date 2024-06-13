@@ -43,7 +43,7 @@ class BatchController extends Controller
         try {
             $data = $request->all();
             $validatedData = $request->validate([
-                'commission_amount' => 'required',
+                'status' => 'required',
             ]);
             $batch = Batch::findOrFail($data['batch_id']);
             $batch->update($data);
