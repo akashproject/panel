@@ -10,6 +10,9 @@ Route::get('/user', function (Request $request) {
 // Batches
 Route::get('/batches', [App\Http\Controllers\Api\BatchController::class, 'index']);
 Route::get('/batch/{id}', [App\Http\Controllers\Api\BatchController::class, 'show']);
+Route::get('/live-sessions', [App\Http\Controllers\Api\BatchController::class, 'liveSessions']);
+Route::get('/upcoming-sessions', [App\Http\Controllers\Api\BatchController::class, 'upcomingSessions']);
+
 
 // Teachers
 Route::get('/teachers', [App\Http\Controllers\Api\TeacherController::class, 'index']);

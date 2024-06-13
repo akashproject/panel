@@ -15,9 +15,13 @@ class TeacherController extends Controller
     public function index()
     {
         try {
-            $users = User::role("teacher")->get();
-            return response()->json($users,$this->_statusOK); 
-
+            //User::role("teacher")->get();
+            $users = User::whereHas(
+                'roles', function($q){
+                    $q->where('name', 'teacher');
+                }
+            )->where('is_approved',"1")->get();
+            return response()->json($users,$this->_statusOK);
         } catch(\Illuminate\Database\QueryException $e){
             //throw $th;
         }

@@ -75,3 +75,36 @@ if (! function_exists('get_theme_setting')) {
         return (isset($media->value))?$media->value:"null";
     }
 }
+
+function getNextDaysNames($days = 7) {
+    $daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    $result = [];
+
+    // Get today's day index
+    $today = (int) date('w');
+
+    // Loop through next days
+    foreach ($daysOfWeek as $key => $dayofWeek) {
+       
+        $key += 1;
+        $nextDayIndex = ($today + $key) % 7; // Calculate next day index
+        if($nextDayIndex == 0) break;
+        $result[] = $daysOfWeek[$nextDayIndex]; // Add day name to result
+    }
+
+    return $result;
+}
+
+function getDuration($start_time, $end_time) {
+    // Create DateTime objects from the start and end times
+    $start = new DateTime($start_time);
+    $end = new DateTime($end_time);
+
+    // Calculate the difference between the two times
+    $interval = $start->diff($end);
+
+    // Format the interval to a readable string
+    $minutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
+    return $minutes;
+}
+?>
