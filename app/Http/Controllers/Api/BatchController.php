@@ -39,15 +39,9 @@ class BatchController extends Controller
                 ->join('courses', 'courses.id', '=', 'batches.course_id')
                 ->join('users', 'users.id', '=', 'batches.teacher')
                 ->where('slots.day',$currentDay)
-                ->select("batches.id as batch_id","users.name as trainer","users.avator","courses.name as course","slots.day","slots.start_time","slots.end_time","batches.teacher_fee")
-                ->where(function($query) use ($currentTime) {
-                    $query->whereRaw('slots.start_time < slots.end_time')
-                          ->whereRaw('? BETWEEN slots.start_time AND slots.end_time', [$currentTime]);
-                })
-                ->orWhere(function($query) use ($currentTime) {
-                    $query->whereRaw('slots.start_time > slots.end_time')
-                          ->whereRaw('? >= slots.start_time OR ? <= slots.end_time', [$currentTime, $currentTime]);
-                })
+                ->where('batches.status',"1")
+                ->select("batches.id as batch_id","users.name as trainer","courses.name as course","slots.start_time","slots.end_time","batches.teacher_fee")
+
                 ->get();
 
                 foreach ($batches as $key => $batch) {
