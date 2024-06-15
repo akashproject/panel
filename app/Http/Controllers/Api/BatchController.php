@@ -40,10 +40,16 @@ class BatchController extends Controller
                 ->join('users', 'users.id', '=', 'batches.teacher')
                 ->where('slots.day',$currentDay)
                 ->where('batches.status',"1")
-                ->select("batches.id as batch_id","users.name as trainer","courses.name as course","slots.start_time","slots.end_time","batches.teacher_fee")
-
+                ->select("batches.id as batch_id","users.name as trainer","users.avator","courses.name as course","slots.day","slots.start_time","slots.end_time","batches.teacher_fee")
+                ->where(function($query) use ($currentTime) {
+                    $query->whereRaw('slots.start_time < slots.end_time')
+                          ->whereRaw('? BETWEEN slots.start_time AND slots.end_time', [$currentTime]);
+                })
+                ->orWhere(function($query) use ($currentTime) {
+                    $query->whereRaw('slots.start_time > slots.end_time')
+                          ->whereRaw('? >= slots.start_time OR ? <= slots.end_time', [$currentTime, $currentTime]);
+                })
                 ->get();
-
                 foreach ($batches as $key => $batch) {
                     $batch->duration = getDuration($batch->start_time, $batch->end_time);
                     $batch->price = $batch->teacher_fee+get_theme_setting("commission_amount");
