@@ -88,10 +88,9 @@ function getNextDaysNames($days = 7) {
        
         $key += 1;
         $nextDayIndex = ($today + $key) % 7; // Calculate next day index
-        if($nextDayIndex == 0) break;
+       // if($nextDayIndex == 0) break;
         $result[] = $daysOfWeek[$nextDayIndex]; // Add day name to result
     }
-
     return $result;
 }
 

@@ -94,6 +94,8 @@ Route::group(['middleware' => ['auth', 'verified','role:teacher|super-admin|admi
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('website');
     Route::get('/account', [App\Http\Controllers\UserController::class, 'account'])->name('account');
     Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+    Route::post('/save-account', [App\Http\Controllers\UserController::class, 'save'])->name('save-account');
+    Route::post('/save-profile', [App\Http\Controllers\UserController::class, 'saveProfile'])->name('save-profile');
 
     //Batchs
     Route::get('/batches', [App\Http\Controllers\BatchController::class, 'index'])->name('batches');
