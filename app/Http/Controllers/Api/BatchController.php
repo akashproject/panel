@@ -45,10 +45,6 @@ class BatchController extends Controller
                     $query->whereRaw('slots.start_time < slots.end_time')
                           ->whereRaw('? BETWEEN slots.start_time AND slots.end_time', [$currentTime]);
                 })
-                ->orWhere(function($query) use ($currentTime) {
-                    $query->whereRaw('slots.start_time > slots.end_time')
-                          ->whereRaw('? >= slots.start_time OR ? <= slots.end_time', [$currentTime, $currentTime]);
-                })
                 ->get();
                 foreach ($batches as $key => $batch) {
                     $batch->duration = getDuration($batch->start_time, $batch->end_time);
