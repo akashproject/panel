@@ -20,7 +20,7 @@ class TeacherController extends Controller
                 'roles', function($q){
                     $q->where('name', 'teacher');
                 }
-            )->where('is_approved',"1")->get();
+            )->where('is_approved',"1")->where('status',"1")->get();
             return response()->json($users,$this->_statusOK);
         } catch(\Illuminate\Database\QueryException $e){
             //throw $th;

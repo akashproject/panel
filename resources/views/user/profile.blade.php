@@ -20,45 +20,64 @@
         <div class="card-body">
             <form id="formAccountSettings" method="POST" onsubmit="return false">
             <div class="row">
-                <div class="mb-3 col-md-6">
-                <label for="firstName" class="form-label">Name</label>
-                <input
-                    class="form-control"
-                    type="text"
-                    id="firstName"
-                    value="{{$loggedInUser->name}}"
-                    name="firstName"
-                    value="John"
-                    autofocus
-                />
-                </div>
-                
-                <div class="mb-3 col-md-6">
-                    <label for="email" class="form-label">E-mail</label>
+            
+                <div class="mb-3 col-md-12">
+                    <label for="spoken_language" class="form-label">E-mail</label>
                     <input
                         class="form-control"
                         type="text"
-                        value="{{$loggedInUser->email}}"
-                        id="email"
-                        name="email"
+                        value=""
+                        id="spoken_language"
+                        name="spoken_language"
                         value="john.doe@example.com"
                         placeholder="john.doe@example.com"
                     />
                 </div>
                 
-                <div class="mb-3 col-md-6">
-                <label class="form-label" for="phoneNumber">Phone Number</label>
-                <div class="input-group input-group-merge">
-                    <span class="input-group-text">IN (+19)</span>
-                    <input
-                    type="text"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    value="{{$loggedInUser->mobile}}"
-                    class="form-control"
-                    placeholder="202 555 0111"
-                    />
+                <div class="mb-3 col-md-12">
+                    <label class="form-label" for="sebi_id">SEBI Registered ID</label>
+                    <div class="input-group input-group-merge">
+                        <input
+                        type="text"
+                        id="sebi_id"
+                        name="sebi_id"
+                        value=""
+                        class="form-control"
+                        placeholder="Enter SEBI Registered ID Here"
+                        />
+                    </div>
                 </div>
+
+                <div class="mb-3 col-md-12">
+                    <label class="form-label" for="sebi_id">Extertise</label>
+                    <div class="input-group input-group-merge">
+                        <select
+                        id="expertise"
+                        name="expertise"
+                        value=""
+                        class="form-control"
+                        >
+                           <option value="" >Select Expertise</option>
+                           <option value="Index Option" >Index Option</option>
+                           <option value="Equity Option" >Equity Option</option>
+                           <option value="Commodity" >Commodity</option>
+                           <option value="Forex" >Forex</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3 col-md-12">
+                    <label class="form-label" for="sebi_id">About Me</label>
+                    <div class="input-group input-group-merge">
+                        <textarea
+                        id="about_me"
+                        name="about_me"
+                        value=""
+                        class="form-control editor"
+                        >
+                           
+                        </textarea>
+                    </div>
                 </div>
             </div>
             <div class="mt-2">
