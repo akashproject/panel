@@ -3,9 +3,8 @@
       <div class="app-brand demo">
       <a href="{{ route('administrator') }}" class="app-brand-link">
          <span class="app-brand-logo demo">
-            
+            <img src="{{ url('/assets/administrator/img/logo.png') }}">
          </span>
-         <span class="app-brand-text demo menu-text fw-bolder ms-2">Baazar Live</span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">

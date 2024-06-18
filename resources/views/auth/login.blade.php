@@ -17,15 +17,11 @@
                 <div class="card-body">
                     <!-- Logo -->
                     <div class="app-brand justify-content-center">
-                    <a href="{{ route('website') }}" class="app-brand-link gap-2">
-                        <span class="app-brand-logo demo">
-                        
-                        </span>
-                        <span class="app-brand-text demo text-body fw-bolder">Baazar Live</span>
+                    <a href="{{ route('website') }}" class="app-brand-link gap-2 text-center">
+                        <img src="{{ url('assets/administrator/img/logo.png') }}">
                     </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2">Welcome to Baazar! 👋</h4>
                     <p class="mb-4">Please sign-in to your account and start the adventure</p>
                     @if(session()->has('message'))
 					<div class="alert alert-danger">

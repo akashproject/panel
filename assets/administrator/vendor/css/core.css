@@ -15649,8 +15649,10 @@ html:not(.layout-footer-fixed) .content-wrapper {
 }
 
 .app-brand-link {
-  display: flex;
-  align-items: center;
+  display: block;
+}
+.app-brand-link img{
+  width: 60%;
 }
 
 .app-brand-logo {
