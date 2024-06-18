@@ -16,12 +16,16 @@ class TeacherController extends Controller
     public function index()
     {
         try {
-            //User::role("teacher")->get();
             $users = User::whereHas(
                 'roles', function($q){
                     $q->where('name', 'teacher');
                 }
             )->where('is_approved',"1")->where('status',"1")->get();
+
+            foreach ($users as $key => $user) {
+                $user->experience = get_user_meta($user->id,"experience");
+                $users[$key] = $user;
+            }
             return response()->json($users,$this->_statusOK);
         } catch(\Illuminate\Database\QueryException $e){
             //throw $th;
