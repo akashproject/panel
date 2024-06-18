@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\UserMeta;
 
 class UserController extends Controller
 {
@@ -16,7 +17,13 @@ class UserController extends Controller
 
     public function profile()
     {
-        return view('user.profile');
+        $user = Auth::user();
+        $fieldData = UserMeta::where('user_id',$user->id)->get();
+        $user_meta = array();
+        foreach ($fieldData as $key => $value) {
+            $user_meta[$value->key] = $value->value;
+        }
+        return view('user.profile',compact("user_meta"));
     }
 
     public function account()
@@ -45,5 +52,24 @@ class UserController extends Controller
         };
     }
 
+    public function saveProfile(Request $request)
+    {
+        try {
+            $data = $request->all();
+            $user = Auth::user();
+            unset($data['_token']);
+            foreach($data as $key => $value){
+                $user_meta = UserMeta::where('key', $key)->where('user_id',$user->id);
+                if($user_meta->exists()){
+                    $user_meta->update(array("user_id"=>$user->id,"key"=>$key,"value"=>$value));  
+                } else {
+                    $user_meta->create(array("user_id"=>$user->id,"key"=>$key,"value"=>$value)); 
+                }
+            }
+            return redirect()->back()->with('message', 'Record updated successfully!');
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage()); 
+        };
+    }
 
 }
