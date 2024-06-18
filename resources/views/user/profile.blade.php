@@ -21,77 +21,74 @@
             <form id="formProfileSettings" method="POST"  action="{{ route('save-profile') }}" >
             @csrf
             <div class="row">
-                <div class="mb-3 col-md-6">
-                <label for="firstName" class="form-label">Name</label>
+                <div class="mb-3 col-md-3">
+                <label for="language" class="form-label">Language</label>
                 <input
                     class="form-control"
                     type="text"
-                    id="firstName"
-                    value="{{$loggedInUser->name}}"
-                    name="firstName"
-                    value="John"
+                    id="language"
+                    name="language"
+                    value="{{ (isset($user_meta['language']))?$user_meta['language']:'' }}"
+                    placeholder="Enter Your Spoken Language"
                     autofocus
+                    required
                 />
                 </div>
                 
-                <div class="mb-3 col-md-6">
-                    <label for="email" class="form-label">E-mail</label>
+                <div class="mb-3 col-md-3">
+                    <label for="sebi_id" class="form-label">SEBI Registration ID</label>
                     <input
                         class="form-control"
                         type="text"
-                        value="{{$loggedInUser->email}}"
-                        id="email"
-                        name="email"
-                        value="john.doe@example.com"
-                        placeholder="john.doe@example.com"
+                        id="sebi_id"
+                        name="sebi_id"
+                        value="{{ (isset($user_meta['sebi_id']))?$user_meta['sebi_id']:'' }}"
+                        placeholder="Enter Your SEBI Registration ID"
+                        required
+                    />
+                </div>
+
+                <div class="mb-3 col-md-3">
+                    <label for="experience" class="form-label">Years of Experience</label>
+                    <input
+                        class="form-control"
+                        type="text"
+                        value="{{ (isset($user_meta['experience']))?$user_meta['experience']:'' }}"
+                        id="experience"
+                        name="experience"
+                        placeholder="Enter Your Years of Experience"
+                        required
                     />
                 </div>
                 
-                <div class="mb-3 col-md-6">
-                <label class="form-label" for="phoneNumber">Phone Number</label>
-                <div class="input-group input-group-merge">
-                    <span class="input-group-text">IN (+19)</span>
-                    <input
-                    type="text"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    value="{{$loggedInUser->mobile}}"
-                    class="form-control"
-                    placeholder="202 555 0111"
-                    />
-                </div>
-                </div>
-
-                <div class="mb-3 col-md-12">
-                    <label class="form-label" for="sebi_id">Extertise</label>
+                <div class="mb-3 col-md-3">
+                    <label class="form-label" for="expertise">Expertise</label>
                     <div class="input-group input-group-merge">
                         <select
+                        type="text"
                         id="expertise"
                         name="expertise"
-                        value=""
                         class="form-control"
+                        required
                         >
-                           <option value="" >Select Expertise</option>
-                           <option value="Index Option" >Index Option</option>
-                           <option value="Equity Option" >Equity Option</option>
-                           <option value="Commodity" >Commodity</option>
-                           <option value="Forex" >Forex</option>
+                        <option value=""> Select Option </option>
+                        <option value="Index Option" {{ (isset($user_meta["expertise"]) && $user_meta["expertise"] == 'Index Option')?"selected":"" }}> Index Option </option>
+                        <option value="Equity Option" {{ (isset($user_meta["expertise"]) && $user_meta["expertise"] == 'Equity Option')?"selected":"" }}> Equity Option </option>
+                        <option value="Commodity" {{ (isset($user_meta["expertise"]) && $user_meta["expertise"] == 'Commodity')?"selected":"" }}> Commodity </option>
+                        <option value="Forex" {{ (isset($user_meta["expertise"]) && $user_meta["expertise"] == 'Forex')?"selected":"" }}> Forex </option>
                         </select>
                     </div>
                 </div>
 
                 <div class="mb-3 col-md-12">
-                    <label class="form-label" for="sebi_id">About Me</label>
-                    <div class="input-group input-group-merge">
-                        <textarea
+                    <label for="about_me" class="form-label">About Me</label>
+                    <textarea
+                        class="form-control editor"
                         id="about_me"
                         name="about_me"
-                        value=""
-                        class="form-control editor"
-                        >
-                           
-                        </textarea>
-                    </div>
+                    >
+                    {{ (isset($user_meta['about_me']))?$user_meta['about_me']:'' }}
+                    </textarea>
                 </div>
             </div>
             <div class="mt-2">
