@@ -23,7 +23,7 @@ class BatchController extends Controller
                 ->join('slots', 'slots.id', '=', 'batches.slot')
                 ->join('courses', 'courses.id', '=', 'batches.course_id')
                 ->get();
-            return response()->json($batches,$this->_statusOK); 
+            return response()->json($batches,$this->_statusOK);
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage());
         }
@@ -76,6 +76,57 @@ class BatchController extends Controller
                 $batches[$key] = $batch;
             }
 
+            return response()->json($batches,$this->_statusOK); 
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage());
+        }
+    }
+
+    public function todaySessions() {
+        try {
+            $currentDay = date('l');
+            $currentDay = date('l');
+            $currentTime = date('H:i');
+
+            $batches = DB::table('batches')
+                ->join('slots', 'slots.id', '=', 'batches.slot')
+                ->join('courses', 'courses.id', '=', 'batches.course_id')
+                ->join('users', 'users.id', '=', 'batches.teacher')
+                ->where('slots.day',$currentDay)
+                ->where('batches.status',"1")
+                ->select("batches.id as batch_id","users.name as trainer","users.avator","courses.name as course","slots.day","slots.start_time","slots.end_time","batches.teacher_fee")
+                ->get();
+                foreach ($batches as $key => $batch) {
+                    $batch->duration = getDuration($batch->start_time, $batch->end_time);
+                    $batch->price = $batch->teacher_fee+get_theme_setting("commission_amount");
+                    $batches[$key] = $batch;
+                }
+                
+            return response()->json($batches,$this->_statusOK); 
+
+            return response()->json($batches,$this->_statusOK); 
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage());
+        }
+    }
+
+    public function tommrowSessions() {
+        try {
+            $nextDay = date('l', strtotime(' +1 day'));
+            $batches = DB::table('batches')
+                ->join('slots', 'slots.id', '=', 'batches.slot')
+                ->join('courses', 'courses.id', '=', 'batches.course_id')
+                ->join('users', 'users.id', '=', 'batches.teacher')
+                ->where('slots.day',$nextDay)
+                ->where('batches.status',"1")
+                ->select("batches.id as batch_id","users.name as trainer","users.avator","courses.name as course","slots.day","slots.start_time","slots.end_time","batches.teacher_fee")
+                ->get();
+                foreach ($batches as $key => $batch) {
+                    $batch->duration = getDuration($batch->start_time, $batch->end_time);
+                    $batch->price = $batch->teacher_fee+get_theme_setting("commission_amount");
+                    $batches[$key] = $batch;
+                }
+                
             return response()->json($batches,$this->_statusOK); 
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage());

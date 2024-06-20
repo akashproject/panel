@@ -13,6 +13,8 @@ Route::get('/batch/{id}', [App\Http\Controllers\Api\BatchController::class, 'sho
 Route::get('/live-sessions', [App\Http\Controllers\Api\BatchController::class, 'liveSessions']);
 Route::get('/upcoming-sessions', [App\Http\Controllers\Api\BatchController::class, 'upcomingSessions']);
 
+Route::get('/today-sessions', [App\Http\Controllers\Api\BatchController::class, 'todaySessions']);
+Route::get('/tommrow-sessions', [App\Http\Controllers\Api\BatchController::class, 'tommrowSessions']);
 
 // Teachers
 Route::get('/teachers', [App\Http\Controllers\Api\TeacherController::class, 'index']);
