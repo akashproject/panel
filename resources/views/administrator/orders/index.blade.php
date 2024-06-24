@@ -66,7 +66,7 @@
 <div class="card">
 	<div class="card-header d-flex flex-wrap justify-content-between gap-3">
 		<div class="card-title mb-0 me-1">
-			<h5 class="mb-1"> 11 Records found</h5>
+			<h5 class="mb-1"> {{ count($orders) }} Records found</h5>
 		</div>
 		<div class="d-flex justify-content-md-end align-items-center gap-3 flex-wrap">
 			<div class="position-relative">
@@ -91,10 +91,10 @@
 				</tr>
 			</thead>
 			<tbody class="table-border-bottom-0">
-				
+				@foreach($orders as $order)
 				<tr>
-					<td><a href="app-ecommerce-order-details.html"><span class="fw-medium">#6979</span></a></td>
-					<td> <span class="text-nowrap">Apr 15, 2023, 10:21</span> </td>
+					<td><a href="{{ route('admin-show-order',$order->id) }}"><span class="fw-medium">#{{$order->id}}</span></a></td>
+					<td> <span class="text-nowrap">{{ $order->created_at->format('M d, Y h:i') }}</span> </td> 
 					<td>
 						<div class="d-flex justify-content-start align-items-center user-name">
 							<div class="avatar-wrapper">
@@ -104,20 +104,21 @@
 							</div>
 							<div class="d-flex flex-column">
 								<span class="emp_name text-truncate">Akash Dutta</span>
-								<small class="emp_post text-truncate text-muted">akashduttaphp@gmaail.com</small>
+								<small class="emp_post text-truncate text-muted">akashduttaphp@gmail.com</small>
 							</div>
 						</div>
-						
 					</td>					
-					<td><h6 class="mb-0 w-px-100 text-warning"><i class="bx bxs-circle fs-tiny me-2"></i>Pending</h6></td>
 					<td>
-						<span class="badge px-2 bg-label-success" text-capitalized="">Success</span>
+            <h6 class="mb-0 w-px-100 text-warning"><i class="bx bxs-circle fs-tiny me-2"></i>Pending</h6>
+          </td>
+					<td>
+						<span class="badge px-2 bg-label-success">{{ strtoupper($order->status) }}</span>
 					</td>
 					<td>
-						<a href="{{ route('admin-show-order',1) }}" class="btn btn-sm btn-icon"><i class="bx bx-show-alt"></i></a>
+						<a href="{{ route('admin-show-order',$order->id) }}" class="btn btn-sm btn-icon"><i class="bx bx-show-alt"></i></a>
 					</td>
 				</tr>
-				
+				@endforeach
 			</tbody>
 		</table>
 	</div>

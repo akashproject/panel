@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->integer('order_id');
+            $table->unsignedBigInteger('order_id');
             $table->string('type',20);
             $table->string('card_type',20);
             $table->integer('card');
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->datetime('date');
             $table->enum('status', ['pending','paid','failed','cancelled'])->default('pending');
             $table->timestamps();
+            $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

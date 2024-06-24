@@ -13,7 +13,6 @@ use App\Providers\RouteServiceProvider;
 
 class UserController extends Controller
 {
-    //
     public $_statusOK = 200;
     public $_statusErr = 500;
 
@@ -21,12 +20,14 @@ class UserController extends Controller
     public function register(Request $request)
     {
       try {
+        $data = $request->all();
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'mobile' => $request->mobile,
-            'password' => Hash::make($request->password),
-            'is_approved' => 1,
+          'name' => $data['signupUser']['name'],
+          'email' => $data['signupUser']['email'],
+          'mobile' => $data['signupUser']['mobile'],
+          'password' => Hash::make($data['signupUser']['password']),
+          'is_approved' => 1,
+          'status' => 1,
         ]);
         $user->assignRole('student');
         $token = auth('api')->login($user);
@@ -36,25 +37,26 @@ class UserController extends Controller
       }
     }
 
-    public function login()
+    public function login(Request $request)
     {
-        $credentials = request(['mobile', 'password']);
-        if (!$token = auth("api")->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-        return $this->respondWithToken($token);
+      $data = $request->all();
+      if (!$token = auth("api")->attempt($data['signinUser'])) {
+          return response()->json(['error' => 'Unauthorized'], 401);
+      }
+      return $this->respondWithToken($token);
     }
 
     public function getAuthUser(Request $request)
     {
-        return response()->json(auth()->user());
+      return response()->json(auth()->user());
     }
 
     public function logout()
     {
-        auth()->logout();
-        return response()->json(['message'=>'Successfully logged out']);
+      auth()->logout();
+      return response()->json(['message'=>'Successfully logged out']);
     }
+
     protected function respondWithToken($token)
     {
       return response()->json([

@@ -12,6 +12,7 @@ Route::get('/batches', [App\Http\Controllers\Api\BatchController::class, 'index'
 Route::get('/batch/{id}', [App\Http\Controllers\Api\BatchController::class, 'show']);
 Route::get('/live-sessions', [App\Http\Controllers\Api\BatchController::class, 'liveSessions']);
 Route::get('/upcoming-sessions', [App\Http\Controllers\Api\BatchController::class, 'upcomingSessions']);
+Route::get('/get-trainer-sessions/{trainer_id}', [App\Http\Controllers\Api\BatchController::class, 'getSessionByTrainer']);
 
 Route::get('/today-sessions', [App\Http\Controllers\Api\BatchController::class, 'todaySessions']);
 Route::get('/tommrow-sessions', [App\Http\Controllers\Api\BatchController::class, 'tommrowSessions']);
