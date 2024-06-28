@@ -48,6 +48,7 @@ class BatchController extends Controller
                 foreach ($batches as $key => $batch) {
                     $batch->duration = getDuration($batch->start_time, $batch->end_time);
                     $batch->price = $batch->teacher_fee+get_theme_setting("commission_amount");
+                    $batch->commission_amount = get_theme_setting("commission_amount");
                     $batch->experience = get_user_meta($batch->user_id,"experience");
                     $batch->expertise = get_user_meta($batch->user_id,"expertise");
                     $batches[$key] = $batch;
@@ -74,6 +75,7 @@ class BatchController extends Controller
             foreach ($batches as $key => $batch) {
                 $batch->duration = getDuration($batch->start_time, $batch->end_time);
                 $batch->price = $batch->teacher_fee+get_theme_setting("commission_amount");
+                $batch->commission_amount = get_theme_setting("commission_amount");
                 $batch->experience = get_user_meta($batch->user_id,"experience");
                 $batch->expertise = get_user_meta($batch->user_id,"expertise");
                 $batches[$key] = $batch;
@@ -102,6 +104,7 @@ class BatchController extends Controller
                 foreach ($batches as $key => $batch) {
                     $batch->duration = getDuration($batch->start_time, $batch->end_time);
                     $batch->price = $batch->teacher_fee+get_theme_setting("commission_amount");
+                    $batch->commission_amount = get_theme_setting("commission_amount");
                     $batch->experience = get_user_meta($batch->user_id,"experience");
                     $batch->expertise = get_user_meta($batch->user_id,"expertise");
                     $batches[$key] = $batch;
@@ -129,6 +132,7 @@ class BatchController extends Controller
                 foreach ($batches as $key => $batch) {
                     $batch->duration = getDuration($batch->start_time, $batch->end_time);
                     $batch->price = $batch->teacher_fee+get_theme_setting("commission_amount");
+                    $batch->commission_amount = get_theme_setting("commission_amount");
                     $batch->experience = get_user_meta($batch->user_id,"experience");
                     $batch->expertise = get_user_meta($batch->user_id,"expertise");
                     $batches[$key] = $batch;
@@ -153,6 +157,7 @@ class BatchController extends Controller
                 foreach ($batches as $key => $batch) {
                     $batch->duration = getDuration($batch->start_time, $batch->end_time);
                     $batch->price = $batch->teacher_fee+get_theme_setting("commission_amount");
+                    $batch->commission_amount = get_theme_setting("commission_amount");
                     $batch->experience = get_user_meta($batch->user_id,"experience");
                     $batch->expertise = get_user_meta($batch->user_id,"expertise");
                     $batches[$key] = $batch;
