@@ -28,3 +28,8 @@ Route::post('/signup', [App\Http\Controllers\Api\UserController::class, 'registe
 Route::post('/login', [App\Http\Controllers\Api\UserController::class, 'login'])->name('login');
 Route::get('/logout', [App\Http\Controllers\Api\UserController::class, 'logout'])->name('logout');
 Route::put('/updateprofile', [App\Http\Controllers\Api\UserController::class, 'updateprofile'])->name('userupdate');
+
+// Purchesed Session
+Route::get('/live-purchased-sessions', [App\Http\Controllers\Api\PurchasedController::class, 'liveSessions'])->name('live-purchased-sessions');
+Route::get('/upcoming-purchased-sessions', [App\Http\Controllers\Api\PurchasedController::class, 'upcomingSessions'])->name('upcoming-purchased-sessions');
+Route::get('/past-purchased-sessions', [App\Http\Controllers\Api\PurchasedController::class, 'pastSessions'])->name('past-purchased-sessions');

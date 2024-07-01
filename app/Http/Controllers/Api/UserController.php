@@ -48,7 +48,7 @@ class UserController extends Controller
 
     public function getAuthUser(Request $request)
     {
-      return response()->json(auth()->user());
+      return response()->json(auth("api")->user());
     }
 
     public function logout()

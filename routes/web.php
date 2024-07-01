@@ -82,11 +82,15 @@ Route::group(['prefix' => 'administrator'], function () {
 
     Route::group(['middleware' => ['role:super-admin']], function () {
         Route::get('/manage-roles', [App\Http\Controllers\Administrator\AccessibilityController::class, 'index'])->name('manage-roles');
+        
         Route::get('/create-accessibility', [App\Http\Controllers\Administrator\AccessibilityController::class, 'createAccessibility'])->name('role-master');
         Route::get('/edit-accessibility/{id}', [App\Http\Controllers\Administrator\AccessibilityController::class, 'show'])->name('edit-accessibility');
         Route::post('/save-accessibility', [App\Http\Controllers\Administrator\AccessibilityController::class, 'saveAccessibility'])->name('save-accessibility');
         Route::get('/assign-role/{id}', [App\Http\Controllers\Administrator\AssignRoleController::class, 'index'])->name('assign-role.index');
         Route::post('/assign-role', [App\Http\Controllers\Administrator\AssignRoleController::class, 'save'])->name('assign-role.save');
+
+        Route::get('/permissions', [App\Http\Controllers\Administrator\PermissionController::class, 'index'])->name('permissions');
+        Route::post('/save-permission', [App\Http\Controllers\Administrator\PermissionController::class, 'save'])->name('save-permission');
     });
 });
 

@@ -112,6 +112,11 @@
                   </a>
                </li>
                <li class="menu-item">
+                  <a href="{{ route('permissions') }}" class="menu-link">
+                     <div data-i18n="Basic">Permissions</div>
+                  </a>
+               </li>
+               <li class="menu-item">
                   <a href="{{ route('role-master') }}" class="menu-link">
                      <div data-i18n="Basic">Create Accessibility</div>
                   </a>
