@@ -33,3 +33,8 @@ Route::put('/updateprofile', [App\Http\Controllers\Api\UserController::class, 'u
 Route::get('/live-purchased-sessions', [App\Http\Controllers\Api\PurchasedController::class, 'liveSessions'])->name('live-purchased-sessions');
 Route::get('/upcoming-purchased-sessions', [App\Http\Controllers\Api\PurchasedController::class, 'upcomingSessions'])->name('upcoming-purchased-sessions');
 Route::get('/past-purchased-sessions', [App\Http\Controllers\Api\PurchasedController::class, 'pastSessions'])->name('past-purchased-sessions');
+
+//Order
+Route::get('/orders', [App\Http\Controllers\Api\OrderController::class, 'index'])->name('orders');
+Route::post('/create-order', [App\Http\Controllers\Api\OrderController::class, 'create'])->name('create-order');
+Route::post('/payment', [App\Http\Controllers\Api\OrderController::class, 'payment'])->name('payment');

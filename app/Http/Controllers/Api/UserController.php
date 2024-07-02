@@ -40,7 +40,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
       $data = $request->all();
-      if (!$token = auth("api")->attempt($data['signinUser'])) {
+      if (!$token = auth("api")->attempt($data)) {
           return response()->json(['error' => 'Unauthorized'], 401);
       }
       return $this->respondWithToken($token);
