@@ -39,35 +39,40 @@ class OrderController extends Controller
     public function create(Request $request)
     {
         try {
+            
             $user = auth("api")->user();
             if(!$user){
                 return response()->json(['unauthorize'],$this->_statusErr);
             }
+
+            $data = $request->all();
+            return response()->json($data,$this->_statusOK);
             $order = [
                 'order_no' => rand('111111','999999'),
                 'user_id' => $user->id,
                 'coupon_id' => "1",
-                'amount' => "1500",
+                'amount' => $data['amount'],
+                'plaform_fee' => $data['plaform_fee'],
+                'session_price' => $data['session_price'],
+                'tax'=> $data['tax'],
                 'status' => "pending",
             ];
 
             $order = Order::create($order);
+            $orderItem = [];
 
-            $orderItem = [
-                [
+            foreach ($data as $key => $value) {
+                $orderItem[$key] = [
                     'order_id' => $order->id,
-                    'batch_id' => "1",
-                    'quantity' => "1",
-                    'price' => "1000",
-                ],
-                [
-                    'order_id' => $order->id,
-                    'batch_id' => "2",
-                    'quantity' => "1",
-                    'price' => "500",
-                ],
-            ];
-
+                    'batch_id' => $value['batch_id'],
+                    'quantity' => '1',
+                    'price' => $value['price'],
+                    'trainer' => $value['trainer'],
+                    'teacher_fee' => $value['teacher_fee'],
+                    'platform_fee' => $value['commission_amount'],
+                ];
+            }
+            
             OrderItem::insert($orderItem);
 
         return response()->json($order,$this->_statusOK);
@@ -86,8 +91,9 @@ class OrderController extends Controller
             }
 
             $order = Order::findOrFail($data['order_id']);
+            
             $order->update([
-                ''
+                '' => '',
             ]);
 
             $payment = [

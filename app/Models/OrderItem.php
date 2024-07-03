@@ -11,6 +11,6 @@ class OrderItem extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'id','order_id','batch_id','quantity','price','created_at'
+        'id','order_id','batch_id','quantity','price','trainer','teacher_fee','platform_fee','created_at'
     ];
 }

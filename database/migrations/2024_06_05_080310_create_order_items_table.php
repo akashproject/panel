@@ -17,6 +17,9 @@ return new class extends Migration
             $table->integer('batch_id');
             $table->integer('quantity');
             $table->integer('price');
+            $table->integer('trainer');
+            $table->integer('teacher_fee');
+            $table->integer('platform_fee');
             $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

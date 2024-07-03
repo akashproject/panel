@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->integer('order_no');
             $table->integer('user_id');
+            $table->integer('coupon_id');
             $table->integer('amount');
+            $table->integer('plaform_fee');
+            $table->integer('session_price');
+            $table->integer('tax');
             $table->enum('status', ['pending','completed','cancelled'])->default('pending');
             $table->timestamps();
         });

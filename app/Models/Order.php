@@ -11,6 +11,6 @@ class Order extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'id','order_no','user_id','amount','payment_status','status','created_at'
+        'id','order_no','user_id','coupon_id','amount','plaform_fee','session_price','tax','status','created_at'
     ];
 }
