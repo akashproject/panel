@@ -50,57 +50,51 @@ class PurchasedController extends Controller
 
     public function upcomingSessions() {
         try {
-            $nextDays = getNextDaysNames();
-            $batches = DB::table('batches')
-                ->join('slots', 'slots.id', '=', 'batches.slot')
-                ->join('courses', 'courses.id', '=', 'batches.course_id')
-                ->join('users', 'users.id', '=', 'batches.teacher')
-                ->select("batches.id as batch_id","users.name as trainer","users.id as user_id","users.avator","courses.name as course","slots.day","slots.start_time","slots.end_time","batches.teacher_fee")
-                ->whereIn('slots.day',$nextDays)
-                ->where('batches.status',"1")
-                ->get();
-
-            foreach ($batches as $key => $batch) {
-                $batch->duration = getDuration($batch->start_time, $batch->end_time);
-                $batch->price = $batch->teacher_fee+get_theme_setting("commission_amount");
-                $batch->commission_amount = get_theme_setting("commission_amount");
-                $batch->experience = get_user_meta($batch->user_id,"experience");
-                $batch->expertise = get_user_meta($batch->user_id,"expertise");
-                $batches[$key] = $batch;
+            $user = auth("api")->user();
+            if(!$user){
+                return response()->json(['unauthorize'],$this->_statusErr);
             }
 
-            return response()->json($batches,$this->_statusOK); 
+            $sessions = DB::table('purchased_sessions')
+                ->join('batches', 'batches.id', '=', 'purchased_sessions.batch_id')
+                ->join('users', 'batches.teacher', '=', 'users.id')
+                ->where('purchased_sessions.user_id',$user->id)
+                ->where('purchased_sessions.status',"1")
+                ->get();
+                
+            foreach ($sessions as $key => $batch) {
+                $batch->duration = getDuration($batch->session_start, $batch->session_end);
+                $batch->experience = get_user_meta($batch->teacher,"experience");
+                $batch->expertise = get_user_meta($batch->teacher,"expertise");
+                $batches[$key] = $batch;
+            }
+            return response()->json($sessions,$this->_statusOK); 
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage());
         }
     }
 
-    public function todaySessions() {
+    public function pastSessions() {
         try {
-            $currentDay = date('l');
-            $currentDay = date('l');
-            $currentTime = date('H:i');
+            $user = auth("api")->user();
+            if(!$user){
+                return response()->json(['unauthorize'],$this->_statusErr);
+            }
 
-            $batches = DB::table('batches')
-                ->join('slots', 'slots.id', '=', 'batches.slot')
-                ->join('courses', 'courses.id', '=', 'batches.course_id')
-                ->join('users', 'users.id', '=', 'batches.teacher')
-                ->where('slots.day',$currentDay)
-                ->where('batches.status',"1")
-                ->select("batches.id as batch_id","users.name as trainer","users.id as user_id","users.avator","courses.name as course","slots.day","slots.start_time","slots.end_time","batches.teacher_fee")
+            $sessions = DB::table('purchased_sessions')
+                ->join('batches', 'batches.id', '=', 'purchased_sessions.batch_id')
+                ->join('users', 'batches.teacher', '=', 'users.id')
+                ->where('purchased_sessions.user_id',$user->id)
+                ->where('purchased_sessions.status',"0")
                 ->get();
-                foreach ($batches as $key => $batch) {
-                    $batch->duration = getDuration($batch->start_time, $batch->end_time);
-                    $batch->price = $batch->teacher_fee+get_theme_setting("commission_amount");
-                    $batch->commission_amount = get_theme_setting("commission_amount");
-                    $batch->experience = get_user_meta($batch->user_id,"experience");
-                    $batch->expertise = get_user_meta($batch->user_id,"expertise");
-                    $batches[$key] = $batch;
-                }
                 
-            return response()->json($batches,$this->_statusOK); 
-
-            return response()->json($batches,$this->_statusOK); 
+            foreach ($sessions as $key => $batch) {
+                $batch->duration = getDuration($batch->session_start, $batch->session_end);
+                $batch->experience = get_user_meta($batch->teacher,"experience");
+                $batch->expertise = get_user_meta($batch->teacher,"expertise");
+                $batches[$key] = $batch;
+            }
+            return response()->json($sessions,$this->_statusOK); 
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage());
         }

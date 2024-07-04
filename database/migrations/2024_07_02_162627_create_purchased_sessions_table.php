@@ -16,7 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('batch_id');
-            $table->dateTime('session_day', precision: 0);
+            $table->dateTime('session_start', precision: 0);
+            $table->dateTime('session_end', precision: 0);
             $table->enum('status', ['0','1'])->default('1');
             $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
