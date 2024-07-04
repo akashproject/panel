@@ -22,12 +22,12 @@ class UserController extends Controller
       try {
         $data = $request->all();
         $user = User::create([
-          'name' => $data['signupUser']['name'],
-          'email' => $data['signupUser']['email'],
-          'mobile' => $data['signupUser']['mobile'],
-          'password' => Hash::make($data['signupUser']['password']),
-          'is_approved' => 1,
-          'status' => 1,
+          'name' => $data['name'],
+          'email' => $data['email'],
+          'mobile' => $data['mobile'],
+          'password' => Hash::make($data['password']),
+          'is_approved' => "1",
+          'status' => "1",
         ]);
         $user->assignRole('student');
         $token = auth('api')->login($user);

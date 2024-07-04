@@ -77,6 +77,14 @@ if (! function_exists('get_theme_setting')) {
     }
 }
 
+if (! function_exists('getNextDateByDayName')) {
+    function getNextDateByDayName($dayName) {
+        $currentDate = date('Y-m-d');
+        $nextDate = date('Y-m-d', strtotime("next $dayName", 	strtotime($currentDate)));
+        return $nextDate;
+    }
+}
+
 if (! function_exists('get_user_meta')) {
     function get_user_meta($user_id,$value){
         $user_meta = UserMeta::where('user_id',$user_id)->where('key',$value)->first();

@@ -60,8 +60,8 @@ class BatchController extends Controller
                 'teacher_fee' => 'required',
             ]);
             $data['teacher'] = $this->getLoggedInUser()->id;
-            $data['sku'] = "sku_".rand(0000,9999);
-            
+            //$data['sku'] = "sku_".rand(0000,9999);
+         
             if($data['batch_id'] <= 0){
                 $batch = Batch::create($data);
                 //update max slot

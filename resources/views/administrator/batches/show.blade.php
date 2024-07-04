@@ -7,7 +7,7 @@
 		</div>
 		<div class="d-flex justify-content-md-end align-items-center gap-3 flex-wrap">
 			<div class="position-relative">
-				<h3 style="font-weight:bold" > Total Price : ₹{{$batch->price+get_theme_setting('commission_amount')}}/- </h3>
+				<h3 style="font-weight:bold" > Total Price : ₹{{$batch->price+(int)get_theme_setting('commission_amount')}}/- </h3>
 			</div>
 		</div>
 	</div>
