@@ -22,7 +22,7 @@ class PurchasedController extends Controller
             if(!$user){
                 return response()->json(['unauthorize'],$this->_statusErr);
             }
-           
+           echo base64_decode($id);
             $currentDay = date('l');
             $currentTime = date('H:i');
             $session = DB::table('purchased_sessions')
@@ -33,12 +33,12 @@ class PurchasedController extends Controller
                 ->select("users.name as teacher","users.id as trainer_id","purchased_sessions.session_start", "purchased_sessions.session_end")
                 ->first();
 
-            $session->duration = getDuration($session->session_start, $session->session_end);
-            $session->experience = get_user_meta($session->trainer_id,"experience");
-            $session->expertise = get_user_meta($session->trainer_id,"expertise");
+            // $session->duration = getDuration($session->session_start, $session->session_end);
+            // $session->experience = get_user_meta($session->trainer_id,"experience");
+            // $session->expertise = get_user_meta($session->trainer_id,"expertise");
 
             
-            return response()->json($session,$this->_statusOK); 
+            return response()->json(base64_decode($id),$this->_statusOK); 
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage());
         }
@@ -53,26 +53,24 @@ class PurchasedController extends Controller
                 return response()->json(['unauthorize'],$this->_statusErr);
             }
 
-            $currentDay = date('l');
-            $currentTime = date('H:i');
+            $currentTime = date('y-m-d H:i:s');
 
             $sessions = DB::table('purchased_sessions')
                 ->join('batches', 'batches.id', '=', 'purchased_sessions.batch_id')
-                ->join('slots', 'slots.id', '=', 'batches.slot')
                 ->join('users', 'batches.teacher', '=', 'users.id')
-                ->where('slots.day',$currentDay)
                 ->where('purchased_sessions.user_id',$user->id)
                 ->where('purchased_sessions.status',"1")
+                ->select("batches.id as batch_id","users.name as trainer","users.id as trainer_id","users.avator","purchased_sessions.session_start","purchased_sessions.session_end","batches.teacher_fee")
                 ->where(function($query) use ($currentTime) {
-                    $query->whereRaw('slots.start_time < slots.end_time')
-                          ->whereRaw('? BETWEEN slots.start_time AND slots.end_time', [$currentTime]);
+                    $query->whereRaw('purchased_sessions.session_start < purchased_sessions.session_end')
+                          ->whereRaw('? BETWEEN purchased_sessions.session_start AND purchased_sessions.session_end', [$currentTime]);
                 })
                 ->get();
                 
                 foreach ($sessions as $key => $batch) {
                     $batch->duration = getDuration($batch->session_start, $batch->session_end);
-                    $batch->experience = get_user_meta($batch->teacher,"experience");
-                    $batch->expertise = get_user_meta($batch->teacher,"expertise");
+                    $batch->experience = get_user_meta($batch->trainer_id,"experience");
+                    $batch->expertise = get_user_meta($batch->trainer_id,"expertise");
                     $sessions[$key] = $batch;
                 }
                 
