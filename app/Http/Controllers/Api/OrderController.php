@@ -92,9 +92,9 @@ class OrderController extends Controller
 
             $order = Order::findOrFail($data['order_id']);
             
-            $order->update([
-                '' => '',
-            ]);
+            // $order->update([
+            //     '' => '',
+            // ]);
 
             $payment = [
                 'order_id' => $data['order_id'],
@@ -124,21 +124,31 @@ class OrderController extends Controller
                     ->select("slots.day","slots.start_time","slots.end_time")
                     ->first();
 
+                    $currentDay = date('l'); 
+                    $currentTime = date('h:i:s');                    
+                    if(($currentDay == $batch->day) && (strtotime($batch->start_time) < strtotime($currentTime) && strtotime($currentTime) < strtotime($batch->end_time))){
+                        $session_start = date("y-m-d ",strtotime($batch->day)).' '.$batch->start_time;
+                        $session_end = date("y-m-d ",strtotime($batch->day)).' '.$batch->end_time;
+                    } else {
+                        $session_start = getNextDateByDayName($batch->day).' '.$batch->start_time;
+                        $session_end = getNextDateByDayName($batch->day).' '.$batch->end_time;
+                    }
+                    
                     PurchasedSession::create([
                         'order_id'=>$order->id,
                         'user_id' => $order->user_id,
                         'batch_id' => $value->batch_id, 
-                        'session_start' => getNextDateByDayName($batch->day).' '.$batch->start_time,
-                        'session_end' => getNextDateByDayName($batch->day).' '.$batch->end_time,
+                        'session_start' => $session_start,
+                        'session_end' => $session_end,
                         'status' => "1",
                     ]);
                 }
-                
+                return response()->json($order,$this->_statusOK);
 
 
             }
 
-            return response()->json($order,$this->_statusOK);
+            
             
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage());
