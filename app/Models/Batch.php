@@ -11,6 +11,6 @@ class Batch extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'id','course_id','slug','sku','slot','teacher','teacher_fee','status','created_at'
+        'id','course_id','slug','slot','teacher','teacher_fee','status','created_at'
     ];
 }

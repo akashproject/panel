@@ -35,7 +35,7 @@ class PurchasedController extends Controller
             $session->duration = getDuration($session->session_start, $session->session_end);
             $session->experience = get_user_meta($session->trainer_id,"experience");
             $session->expertise = get_user_meta($session->trainer_id,"expertise");
-
+            $session->streaming_player = get_user_meta($session->trainer_id,"streaming_player");
             
             return response()->json($session,$this->_statusOK); 
         } catch(\Illuminate\Database\QueryException $e){

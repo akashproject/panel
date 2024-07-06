@@ -88,7 +88,20 @@ if (! function_exists('getNextDateByDayName')) {
 if (! function_exists('get_user_meta')) {
     function get_user_meta($user_id,$value){
         $user_meta = UserMeta::where('user_id',$user_id)->where('key',$value)->first();
-        return (isset($user_meta->value))?$user_meta->value:"null";
+        return (isset($user_meta->value))?$user_meta->value:null;
+    }
+}
+
+if (! function_exists('save_user_meta')) {
+    function save_user_meta($id,$key,$value){
+        $user_meta = UserMeta::where('key', $key)->where('user_id',$id);
+        if($user_meta->exists()){
+            $user_meta->update(array("user_id"=>$id,"key"=>$key,"value"=>$value));  
+        } else {
+            $user_meta->create(array("user_id"=>$id,"key"=>$key,"value"=>$value)); 
+        }
+
+        return $user_meta;
     }
 }
 

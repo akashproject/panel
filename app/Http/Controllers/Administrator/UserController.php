@@ -103,4 +103,33 @@ class UserController extends Controller
         $user->delete();
         return redirect('/administrator/users');
     }
+
+    public function addStreamPlayer($id){
+        try {
+            $user_meta = [
+                'streaming_player' =>(get_user_meta($id,"streaming_player"))?get_user_meta($id,"streaming_player"):'',
+                'user_id' =>$id,
+            ];
+
+            return view('administrator.users.add-stream-player',compact("user_meta"));
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage()); 
+        }
+    }
+
+    public function saveStreamPlayer(Request $request) {
+        try {
+            $data = $request->all();
+            
+            $validatedData = $request->validate([
+                'user_id' => 'required',
+                'streaming_player' => 'required',
+            ]);
+
+            save_user_meta($data['user_id'],"streaming_player",$data['streaming_player']);
+            return redirect()->back()->with('message', 'Record updated successfully!');
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage()); 
+        }
+    }
 }

@@ -104,6 +104,9 @@
 								<a class="dropdown-item" href="{{ route('admin-teacher-slots',$value->id) }}"
 									><i class='bx bx-calendar-event me-1' ></i> Slots</a
 								>
+								<a class="dropdown-item" href="{{ route('admin-add-stream-player',$value->id) }}"
+									><i class='bx bx-movie-play me-1' ></i> Stream </a
+								>
 								@endif
 								@role('super-admin')
 								<a class="dropdown-item" href="{{ route('assign-role.index',$value->id) }}"
