@@ -2,8 +2,8 @@
 @section('content')
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
   <div class="d-flex flex-column justify-content-center">
-    <h5 class="mb-1 mt-3">Order #32543 
-		<span class="badge bg-label-success me-2 ms-2">Paid</span>
+    <h5 class="mb-1 mt-3">Order #{{ $order->order_no }} 
+		<span class="badge bg-label-success me-2 ms-2">{{ $order->status }} </span>
 	</h5>
     <p class="text-body">Aug 17, <span id="orderYear">2024</span>, 5:48 (ET)</p>
   </div>
@@ -30,7 +30,7 @@
 						</tr>
 					</thead>
 					<tbody class="table-border-bottom-0">
-						
+						@foreach($orderItems as $item)
 						<tr>
 							<td>
 								<div class="d-flex justify-content-start align-items-center user-name">
@@ -51,13 +51,13 @@
 							</td>
 							<td>2</td>
 							<td>
-								<h6 class="mb-0">₹1682</h6>
+								<h6 class="mb-0">₹{{ $item->price}}</h6>
 							</td>
 							<td>
 								<button class="btn btn-danger btn-small">Refund</button>
 							</td>
 						</tr>
-						
+						@endforeach
 					</tbody>
 				</table>
 			</div>
@@ -77,19 +77,19 @@
 					</div>
 				<div class="d-flex flex-column">
 					<a href="app-user-view-account.html" class="text-body text-nowrap">
-					<h6 class="mb-0">Shamus Tuttle</h6>
+					<h6 class="mb-0">{{ $user->name }}</h6>
 					</a>
-					<small class="text-muted">Customer ID: #58909</small></div>
+				</div>
 				</div>
 				<div class="d-flex justify-content-start align-items-center mb-4">
 				<span class="avatar rounded-circle bg-label-success me-2 d-flex align-items-center justify-content-center"><i class="bx bx-cart-alt bx-sm lh-sm"></i></span>
-				<h6 class="text-body text-nowrap mb-0">12 Orders</h6>
+				<h6 class="text-body text-nowrap mb-0">{{ count($orderItems) }} Orders</h6>
 				</div>
 				<div class="d-flex justify-content-between">
 				<h6>Contact info</h6>
 				</div>
-				<p class=" mb-1">Email: Shamus889@yahoo.com</p>
-				<p class=" mb-0">Mobile: +1 (609) 972-22-22</p>
+				<p class=" mb-1">Email: {{ $user->mail }}</p>
+				<p class=" mb-0">Mobile: {{ $user->mobile }}</p>
 			</div>
 		</div>
 	</div>
@@ -116,8 +116,9 @@
 						</tr>
 					</thead>
 					<tbody class="table-border-bottom-0">
+						@foreach($transactions as $transaction)
 						<tr>
-							<td><a href="app-ecommerce-order-details.html"><span class="fw-medium">#6979</span></a></td>
+							<td><a href="app-ecommerce-order-details.html"><span class="fw-medium">{{ $transaction->id }}</span></a></td>
 							<td> Credit Card</td>
 							<td>
 								<div class="d-flex justify-content-start align-items-center user-name">
@@ -127,17 +128,18 @@
 										</div>
 									</div>
 									<div class="d-flex flex-column">
-										<span class="emp_name text-truncate">Master Card</span>
-										<small class="emp_post text-truncate text-muted"> XXXXXXX 2028</small>
+										<span class="emp_name text-truncate">{{ $transaction->card_type }}</span>
+										<small class="emp_post text-truncate text-muted"> XXXXXXX {{ $transaction->card }}</small>
 									</div>
 								</div>
 							</td>	
-							<td> <span class="text-nowrap">2000</span> </td>				
+							<td> <span class="text-nowrap">{{ $transaction->amount}}</span> </td>				
 							<td> <span class="text-nowrap">Apr 15, 2023, 10:21</span> </td>				
 							<td>
-								<h6 class="mb-0 w-px-100 text-success"><i class="bx bxs-circle fs-tiny me-2"></i>Success</h6>
+								<h6 class="mb-0 w-px-100 text-success"><i class="bx bxs-circle fs-tiny me-2"></i>{{ $transaction->status }}</h6>
 							</td>
 						</tr>
+						@endforeach
 					</tbody>
 				</table>
 			</div>
