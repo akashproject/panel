@@ -25,6 +25,7 @@ Route::get('/teacher/{id}', [App\Http\Controllers\Api\TeacherController::class, 
 Route::get('/user/{id}', [App\Http\Controllers\Api\UserController::class, 'index'])->name('user');
 Route::get('/user', [App\Http\Controllers\Api\UserController::class, 'getAuthUser'])->name('getAuthUser');
 Route::post('/signup', [App\Http\Controllers\Api\UserController::class, 'register'])->name('register');
+Route::post('/get-otp', [App\Http\Controllers\Api\UserController::class, 'getOtp'])->name('get-otp');
 Route::post('/login', [App\Http\Controllers\Api\UserController::class, 'login'])->name('login');
 Route::get('/logout', [App\Http\Controllers\Api\UserController::class, 'logout'])->name('logout');
 Route::put('/updateprofile', [App\Http\Controllers\Api\UserController::class, 'updateprofile'])->name('userupdate');
@@ -34,7 +35,12 @@ Route::get('/live-purchased-sessions', [App\Http\Controllers\Api\PurchasedContro
 Route::get('/upcoming-purchased-sessions', [App\Http\Controllers\Api\PurchasedController::class, 'upcomingSessions'])->name('upcoming-purchased-sessions');
 Route::get('/past-purchased-sessions', [App\Http\Controllers\Api\PurchasedController::class, 'pastSessions'])->name('past-purchased-sessions');
 Route::get('/join-stream/{id}', [App\Http\Controllers\Api\PurchasedController::class, 'joinStream'])->name('join-stream');
+
 //Order
 Route::any('/orders', [App\Http\Controllers\Api\OrderController::class, 'index'])->name('orders');
 Route::post('/create-order', [App\Http\Controllers\Api\OrderController::class, 'create'])->name('create-order');
 Route::post('/payment', [App\Http\Controllers\Api\OrderController::class, 'payment'])->name('payment');
+
+
+//Settings
+Route::get('/all-settings', [App\Http\Controllers\Api\SettingsController::class, 'allSettings'])->name('all-settings');
