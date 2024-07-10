@@ -38,9 +38,11 @@ Route::get('/join-stream/{id}', [App\Http\Controllers\Api\PurchasedController::c
 
 //Order
 Route::any('/orders', [App\Http\Controllers\Api\OrderController::class, 'index'])->name('orders');
+Route::post('/apply-coupon', [App\Http\Controllers\Api\OrderController::class, 'applyCoupon'])->name('apply-coupon');
 Route::post('/create-order', [App\Http\Controllers\Api\OrderController::class, 'create'])->name('create-order');
 Route::post('/payment', [App\Http\Controllers\Api\OrderController::class, 'payment'])->name('payment');
 
 
 //Settings
 Route::get('/all-settings', [App\Http\Controllers\Api\SettingsController::class, 'allSettings'])->name('all-settings');
+Route::get('/all-states', [App\Http\Controllers\Api\OrderController::class, 'getStates'])->name('all-states');

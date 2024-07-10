@@ -10,9 +10,12 @@ use App\Models\Course;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
+use App\Models\State;
+use App\Models\Referrer;
 use App\Models\PurchasedSession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 use Carbon\Carbon;
 
 class OrderController extends Controller
@@ -32,6 +35,15 @@ class OrderController extends Controller
                 ->join('courses', 'courses.id', '=', 'batches.course_id')
                 ->get();
             return response()->json($batches,$this->_statusOK);
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage());
+        }
+    }
+
+    public function getStates(){
+        try {
+            $states = State::select('name','code')->get();
+            return response()->json($states,$this->_statusOK);
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage());
         }
@@ -76,6 +88,16 @@ class OrderController extends Controller
             OrderItem::insert($orderItem);
 
         return response()->json($order,$this->_statusOK);
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage());
+        }
+    }
+
+    public function applyCoupon(Request $request){
+        try {
+            $data = $request->all();
+            $coupon = Referrer::where('code',$data['code'])->get();
+            return response()->json($coupon,$this->_statusOK);
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage());
         }

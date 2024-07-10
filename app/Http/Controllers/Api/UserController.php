@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserMeta;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -20,15 +21,26 @@ class UserController extends Controller
   {
     try {
       $data = $request->all();
+      
       $user = User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'mobile' => $data['mobile'],
+        'name' => $data['user']['name'],
+        'email' => $data['user']['email'],
+        'mobile' => $data['user']['mobile'],
         'password' => Hash::make("123456"),
         'is_approved' => "1",
         'status' => "1",
       ]);
       $user->assignRole('student');
+
+      foreach ($data['userMeta'] as $key => $meta) {
+        $user_meta = UserMeta::where('key', $key)->where('user_id',$user->id);
+        if($user_meta->exists()){
+          $user_meta->update(array("user_id"=>$user->id,"key"=>$key,"value"=>$meta));  
+        } else {
+          $user_meta->create(array("user_id"=>$user->id,"key"=>$key,"value"=>$meta)); 
+        }
+      }
+      
       $token = auth('api')->login($user);
       return $this->respondWithToken($token);
     } catch(\Illuminate\Database\QueryException $e){
@@ -48,7 +60,8 @@ class UserController extends Controller
 
   public function getAuthUser(Request $request)
   {
-    return response()->json(auth("api")->user());
+    $user = auth("api")->user();
+    return response()->json($user);
   }
 
   public function logout()
