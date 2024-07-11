@@ -96,7 +96,7 @@ class OrderController extends Controller
     public function applyCoupon(Request $request){
         try {
             $data = $request->all();
-            $coupon = Referrer::where('code',$data['code'])->get();
+            $coupon = Referrer::where('code',$data['code'])->first();
             return response()->json($coupon,$this->_statusOK);
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage());
@@ -166,8 +166,6 @@ class OrderController extends Controller
                     ]);
                 }
                 return response()->json($order,$this->_statusOK);
-
-
             }
 
             
