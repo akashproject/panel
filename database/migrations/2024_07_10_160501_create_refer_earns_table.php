@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('refer_by');
             $table->integer('refer_to');
-            $table->integer('code');
+            $table->integer('order_id');
+            $table->string('code',20);
             $table->timestamps();
         });
     }

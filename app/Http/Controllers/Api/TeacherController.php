@@ -31,8 +31,18 @@ class TeacherController extends Controller
                 ->join('users', 'users.id', '=', 'batches.teacher')
                 ->where('users.id',$user->id)
                 ->where('batches.status',"1")
-                ->select("batches.id as batch_id","courses.name as course","slots.day","slots.start_time","slots.end_time","batches.teacher_fee")
+                ->select("batches.id as batch_id","users.name as trainer","users.id as trainer_id","users.avator","courses.name as course","slots.day","slots.start_time","slots.end_time","batches.teacher_fee")
                 ->get();
+                
+                foreach ($user->sessions as $key => $batch) {
+                    $batch->duration = getDuration($batch->start_time, $batch->end_time);
+                    $batch->price = $batch->teacher_fee+get_theme_setting("commission_amount");
+                    $batch->commission_amount = get_theme_setting("commission_amount");
+                    $batch->experience = get_user_meta($batch->trainer_id,"experience");
+                    $batch->expertise = get_user_meta($batch->trainer_id,"expertise");
+                    $user->sessions[$key] = $batch;
+                }
+
                 $users[$key] = $user;
             }
             return response()->json($users,$this->_statusOK);

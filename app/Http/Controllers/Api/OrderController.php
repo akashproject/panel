@@ -12,6 +12,7 @@ use App\Models\OrderItem;
 use App\Models\Transaction;
 use App\Models\State;
 use App\Models\Referrer;
+use App\Models\ReferEarn;
 use App\Models\PurchasedSession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -62,7 +63,7 @@ class OrderController extends Controller
             $order = [
                 'order_no' => rand('111111','999999'),
                 'user_id' => $user->id,
-                'coupon_id' => "1",
+                'coupon_id' => $data['coupon']['id'],
                 'amount' => $data['payableAmount'],
                 'plaform_fee' => $data['plaformFee'],
                 'session_price' => $data['sessionPrice'],
@@ -86,6 +87,13 @@ class OrderController extends Controller
             }
             
             OrderItem::insert($orderItem);
+
+            ReferEarn::create([
+                'refer_by'=> $data['coupon']['id'],
+                'refer_to'=> $user->id,
+                'order_id'=> $order->id,
+                'code'=> $data['coupon']['code'],
+            ]);
 
         return response()->json($order,$this->_statusOK);
         } catch(\Illuminate\Database\QueryException $e){

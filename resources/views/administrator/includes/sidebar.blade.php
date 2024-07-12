@@ -107,6 +107,12 @@
             </a>
          </li>
          <li class="menu-item">
+            <a href="{{ route('admin-refer-earn') }}" class="menu-link">
+               <i class="menu-icon tf-icons bx bx-rupee"></i>
+               <div data-i18n="Settings">Refer & Earn</div>
+            </a>
+         </li>
+         <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
                <div data-i18n="Authentications">Accessibility</div>

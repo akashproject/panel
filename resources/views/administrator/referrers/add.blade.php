@@ -36,7 +36,6 @@
                             class="form-control"
                             id="basic-icon-default-fullname"
                             placeholder="Enter Referrer Name"
-                           
                             />
                         </div>
                         </div>

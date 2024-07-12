@@ -79,6 +79,8 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::get('/referrer/{id}', [App\Http\Controllers\Administrator\ReferrerController::class, 'show'])->name('admin-show-refferer');
         Route::post('/save-referrer', [App\Http\Controllers\Administrator\ReferrerController::class, 'save'])->name('admin-save-referrer');
 
+        Route::get('/refer-earn', [App\Http\Controllers\Administrator\ReferrerController::class, 'referEarn'])->name('admin-refer-earn');
+
         // Media
         Route::get('/media', [App\Http\Controllers\Administrator\MediaController::class, 'index'])->name('admin-media');
         Route::get('/view-file/{id}', [App\Http\Controllers\Administrator\MediaController::class, 'view'])->name('admin-view-file');

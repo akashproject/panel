@@ -82,7 +82,7 @@ class UserController extends Controller
   public function getOtp(Request $request){
     try {
       $data = $request->all();
-      $randOTP = rand("111111","999999");
+      $randOTP = "123456"; //rand("111111","999999");
       if($data){
         return response()->json($randOTP);
       }
