@@ -63,7 +63,7 @@ class OrderController extends Controller
             $order = [
                 'order_no' => rand('111111','999999'),
                 'user_id' => $user->id,
-                'coupon_id' => $data['coupon']['id'],
+                'coupon_id' => (isset($data['coupon']) && $data['coupon'] != null)?$data['coupon']['id']:null,
                 'amount' => $data['payableAmount'],
                 'plaform_fee' => $data['plaformFee'],
                 'session_price' => $data['sessionPrice'],
@@ -87,13 +87,15 @@ class OrderController extends Controller
             }
             
             OrderItem::insert($orderItem);
-
-            ReferEarn::create([
-                'refer_by'=> $data['coupon']['id'],
-                'refer_to'=> $user->id,
-                'order_id'=> $order->id,
-                'code'=> $data['coupon']['code'],
-            ]);
+            if(isset($data['coupon']) && $data['coupon'] != null){
+                ReferEarn::create([
+                    'refer_by'=> $data['coupon']['id'],
+                    'refer_to'=> $user->id,
+                    'order_id'=> $order->id,
+                    'code'=> $data['coupon']['code'],
+                ]);
+            }
+            
 
         return response()->json($order,$this->_statusOK);
         } catch(\Illuminate\Database\QueryException $e){
