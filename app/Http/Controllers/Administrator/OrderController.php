@@ -15,8 +15,17 @@ class OrderController extends Controller
     public function index()
     {
         try {
-            $orders = Order::all();
-            return view('administrator.orders.index',compact('orders'));
+            $orders =  DB::table('orders')
+            ->join('users', 'users.id', '=', 'orders.user_id')
+            ->select('users.*','orders.*','orders.status as status',)
+            ->get();
+           // dd($orders);
+
+            $completed = Order::where('status','completed')->count();
+            $pending = Order::where('status','pending')->count();
+            $cancelled = Order::where('status','cancelled')->count();
+
+            return view('administrator.orders.index',compact('orders','completed','pending','cancelled'));
         } catch(\Illuminate\Database\QueryException $e){
             //throw $th;
         }

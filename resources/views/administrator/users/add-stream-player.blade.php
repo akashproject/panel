@@ -26,12 +26,10 @@
                     <div class="mb-3 col-md-12">
                         <label for="about_me" class="form-label">Streaming Player</label>
                         <textarea
-                            class="form-control editor"
+                            class="form-control"
                             id="streaming_player"
                             name="streaming_player"
-                        >
-                        {{ (isset($user_meta['streaming_player']))?$user_meta['streaming_player']:'' }}
-                        </textarea>
+                        >{{ (isset($user_meta['streaming_player']))?$user_meta['streaming_player']:'' }}</textarea>
                     </div>
                     <div class="row">
                         <div class="col-sm-10">

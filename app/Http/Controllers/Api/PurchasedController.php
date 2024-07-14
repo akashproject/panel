@@ -20,7 +20,7 @@ class PurchasedController extends Controller
         try {
             $user = auth("api")->user();
             if(!$user){
-                return response()->json(['unauthorize'],$this->_statusErr);
+                return response()->json('unauthorize',$this->_statusErr);
             }
             $currentDay = date('l');
             $currentTime = date('H:i');
@@ -49,7 +49,7 @@ class PurchasedController extends Controller
 
             $user = auth("api")->user();
             if(!$user){
-                return response()->json(['unauthorize'],$this->_statusErr);
+                return response()->json('unauthorize',$this->_statusErr);
             }
 
             $currentTime = date('y-m-d H:i:s');
@@ -83,7 +83,7 @@ class PurchasedController extends Controller
         try {
             $user = auth("api")->user();
             if(!$user){
-                return response()->json(['unauthorize'],$this->_statusErr);
+                return response()->json('unauthorize',$this->_statusErr);
             }
             $currentTime = date('y-m-d H:i:s');
             $nextDays = getNextDaysNames();
@@ -116,7 +116,7 @@ class PurchasedController extends Controller
         try {
             $user = auth("api")->user();
             if(!$user){
-                return response()->json(['unauthorize'],$this->_statusErr);
+                return response()->json('unauthorize',$this->_statusErr);
             }
 
             $sessions = DB::table('purchased_sessions')

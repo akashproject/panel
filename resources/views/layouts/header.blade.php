@@ -406,7 +406,7 @@
                       </div>
                       <div class="flex-grow-1">
                       <span class="fw-semibold d-block">{{ $loggedInUser->name }}</span>
-                      <small class="text-muted">Admin</small>
+                      <small class="text-muted">Teacher</small>
                       </div>
                   </div>
                   </a>

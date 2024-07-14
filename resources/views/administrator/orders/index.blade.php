@@ -7,7 +7,7 @@
         <div class="col-sm-6 col-lg-3">
           <div class="d-flex justify-content-between align-items-start card-widget-1 border-end pb-3 pb-sm-0">
             <div>
-              <h3 class="mb-2">56</h3>
+              <h3 class="mb-2">{{ $pending }}</h3>
               <p class="mb-0">Pending Payment</p>
             </div>
             <div class="avatar me-sm-4">
@@ -21,7 +21,7 @@
         <div class="col-sm-6 col-lg-3">
           <div class="d-flex justify-content-between align-items-start card-widget-2 border-end pb-3 pb-sm-0">
             <div>
-              <h3 class="mb-2">12,689</h3>
+              <h3 class="mb-2">{{ $completed }}</h3>
               <p class="mb-0">Completed</p>
             </div>
             <div class="avatar me-lg-4">
@@ -35,7 +35,7 @@
         <div class="col-sm-6 col-lg-3">
           <div class="d-flex justify-content-between align-items-start border-end pb-3 pb-sm-0 card-widget-3">
             <div>
-              <h3 class="mb-2">124</h3>
+              <h3 class="mb-2">{{ $cancelled }}</h3>
               <p class="mb-0">Refunded</p>
             </div>
             <div class="avatar me-sm-4">
@@ -48,7 +48,7 @@
         <div class="col-sm-6 col-lg-3">
           <div class="d-flex justify-content-between align-items-start">
             <div>
-              <h3 class="mb-2">32</h3>
+              <h3 class="mb-2">{{ $cancelled }}</h3>
               <p class="mb-0">Failed</p>
             </div>
             <div class="avatar">
@@ -83,9 +83,8 @@
 			<thead class="table-light">
 				<tr>
 					<th>ID</th>
+          <th>Customer</th>
 					<th>Date</th>
-					<th>Customer</th>
-					<th>Payment</th>
 					<th>Status</th>
 					<th>View</th>
 				</tr>
@@ -93,24 +92,16 @@
 			<tbody class="table-border-bottom-0">
 				@foreach($orders as $order)
 				<tr>
-					<td><a href="{{ route('admin-show-order',$order->id) }}"><span class="fw-medium">#{{$order->id}}</span></a></td>
-					<td> <span class="text-nowrap">{{ $order->created_at->format('M d, Y h:i') }}</span> </td> 
+					<td><a href="{{ route('admin-show-order',$order->id) }}"><span class="fw-medium">#{{$order->order_no}}</span></a></td>
 					<td>
 						<div class="d-flex justify-content-start align-items-center user-name">
-							<div class="avatar-wrapper">
-								<div class="avatar me-2">
-									<span class="avatar-initial rounded-circle bg-label-primary">AB</span>
-								</div>
-							</div>
 							<div class="d-flex flex-column">
-								<span class="emp_name text-truncate">Akash Dutta</span>
-								<small class="emp_post text-truncate text-muted">akashduttaphp@gmail.com</small>
+								<span class="emp_name text-truncate">{{$order->name}}</span>
+								<small class="emp_post text-truncate text-muted">{{$order->mobile}}</small>
 							</div>
 						</div>
-					</td>					
-					<td>
-            <h6 class="mb-0 w-px-100 text-warning"><i class="bx bxs-circle fs-tiny me-2"></i>Pending</h6>
-          </td>
+					</td>		
+          <td> <span class="text-nowrap">{{ date('M d, Y h:i',strtotime($order->created_at)) }}</span> </td>			
 					<td>
 						<span class="badge px-2 bg-label-success">{{ strtoupper($order->status) }}</span>
 					</td>

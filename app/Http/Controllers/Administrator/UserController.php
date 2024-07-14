@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserMeta;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -39,7 +40,12 @@ class UserController extends Controller
     public function show($id){
         try {
             $user = User::findOrFail($id);
-            return view('administrator.users.show',compact('user'));
+            $fieldData = UserMeta::where('user_id',$user->id)->get();
+            $user_meta = array();
+            foreach ($fieldData as $key => $value) {
+                $user_meta[$value->key] = $value->value;
+            }
+            return view('administrator.users.show',compact('user','user_meta'));
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage()); 
         }        
@@ -89,6 +95,26 @@ class UserController extends Controller
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage()); 
         }
+    }
+
+    public function saveProfile(Request $request)
+    {
+        try {
+            $data = $request->all();
+            $user = User::findOrFail($data['user_id']);
+            unset($data['_token']);
+            foreach($data as $key => $value){
+                $user_meta = UserMeta::where('key', $key)->where('user_id',$user->id);
+                if($user_meta->exists()){
+                    $user_meta->update(array("user_id"=>$user->id,"key"=>$key,"value"=>$value));  
+                } else {
+                    $user_meta->create(array("user_id"=>$user->id,"key"=>$key,"value"=>$value)); 
+                }
+            }
+            return redirect()->back()->with('message', 'Record updated successfully!');
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage()); 
+        };
     }
 
     public function approve($id,$is_approve) {

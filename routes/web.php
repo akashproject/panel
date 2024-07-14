@@ -39,6 +39,7 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::get('/add-user', [App\Http\Controllers\Administrator\UserController::class, 'add'])->name('admin-add-user');
         Route::get('/user/{id}', [App\Http\Controllers\Administrator\UserController::class, 'show'])->name('admin-user');
         Route::post('/save-user', [App\Http\Controllers\Administrator\UserController::class, 'save'])->name('admin-save-user');
+        Route::post('/save-profile', [App\Http\Controllers\Administrator\UserController::class, 'saveProfile'])->name('admin-save-profile');
         Route::post('/insert-user', [App\Http\Controllers\Administrator\UserController::class, 'insert'])->name('admin-insert-user');
         Route::get('/delete-user/{id}', [App\Http\Controllers\Administrator\UserController::class, 'delete'])->name('admin-delete-user');
         Route::get('/approve-user/{id}/{is_approve}', [App\Http\Controllers\Administrator\UserController::class, 'approve'])->name('admin-approve-user');

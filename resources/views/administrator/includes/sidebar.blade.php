@@ -102,7 +102,7 @@
          </li>
          <li class="menu-item">
             <a href="{{ route('admin-referrers') }}" class="menu-link">
-               <i class="menu-icon tf-icons bx bx-cart-alt"></i>
+               <i class="menu-icon tf-icons bx bx-user"></i>
                <div data-i18n="Settings">Referrer</div>
             </a>
          </li>
