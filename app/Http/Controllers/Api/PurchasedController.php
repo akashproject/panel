@@ -26,10 +26,11 @@ class PurchasedController extends Controller
             $currentTime = date('H:i');
             $session = DB::table('purchased_sessions')
                 ->join('batches', 'batches.id', '=', 'purchased_sessions.batch_id')
+                ->join('courses', 'courses.id', '=', 'batches.course_id')
                 ->join('users', 'batches.teacher', '=', 'users.id')
                 ->where('purchased_sessions.user_id',$user->id)
                 ->where('purchased_sessions.id',base64_decode($id))
-                ->select("users.name as teacher","users.id as trainer_id","purchased_sessions.session_start", "purchased_sessions.session_end")
+                ->select("users.name as teacher","courses.name as course","users.id as trainer_id","purchased_sessions.session_start", "purchased_sessions.session_end")
                 ->first();
 
             $session->duration = getDuration($session->session_start, $session->session_end);
@@ -57,9 +58,10 @@ class PurchasedController extends Controller
             $sessions = DB::table('purchased_sessions')
                 ->join('batches', 'batches.id', '=', 'purchased_sessions.batch_id')
                 ->join('users', 'batches.teacher', '=', 'users.id')
+                ->join('courses', 'courses.id', '=', 'batches.course_id')
                 ->where('purchased_sessions.user_id',$user->id)
                 ->where('purchased_sessions.status',"1")
-                ->select("purchased_sessions.id as id","users.name as trainer","users.id as trainer_id","users.avator","purchased_sessions.session_start","purchased_sessions.session_end","batches.teacher_fee")
+                ->select("purchased_sessions.id as id","users.name as trainer","users.id as trainer_id","users.avator","purchased_sessions.session_start","courses.name as course","purchased_sessions.session_end","batches.teacher_fee")
                 ->where(function($query) use ($currentTime) {
                     $query->whereRaw('purchased_sessions.session_start < purchased_sessions.session_end')
                           ->whereRaw('? BETWEEN purchased_sessions.session_start AND purchased_sessions.session_end', [$currentTime]);
@@ -89,9 +91,10 @@ class PurchasedController extends Controller
             $nextDays = getNextDaysNames();
             $sessions = DB::table('purchased_sessions')
                 ->join('batches', 'batches.id', '=', 'purchased_sessions.batch_id')
+                ->join('courses', 'courses.id', '=', 'batches.course_id')
                 ->join('users', 'batches.teacher', '=', 'users.id')
                 ->join('slots', 'slots.id', '=', 'batches.slot')
-                ->select("purchased_sessions.id as id","users.name as trainer","users.id as trainer_id","users.avator","purchased_sessions.session_start","purchased_sessions.session_end","batches.teacher_fee")
+                ->select("purchased_sessions.id as id","users.name as trainer","users.id as trainer_id","users.avator","purchased_sessions.session_start","purchased_sessions.session_end","courses.name as course","batches.teacher_fee")
                 ->where('purchased_sessions.user_id',$user->id)
                 ->where('purchased_sessions.status',"1")
                 ->where('purchased_sessions.session_start',">",$currentTime)
