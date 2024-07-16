@@ -157,8 +157,8 @@ class OrderController extends Controller
                     ->first();
 
                     $currentDay = date('l'); 
-                    $currentTime = date('h:i:s');                    
-                    if(($currentDay == $batch->day) && (strtotime($batch->start_time) < strtotime($currentTime) && strtotime($currentTime) < strtotime($batch->end_time))){
+                    $currentTime = date('H:i:s');     
+                    if(($currentDay == $batch->day) && ($currentTime >= $batch->start_time && $currentTime <= $batch->end_time)){
                         $session_start = date("y-m-d ",strtotime($batch->day)).' '.$batch->start_time;
                         $session_end = date("y-m-d ",strtotime($batch->day)).' '.$batch->end_time;
                     } else {

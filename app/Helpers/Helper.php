@@ -111,14 +111,13 @@ function getNextDaysNames($days = 7) {
 
     // Get today's day index
     $today = (int) date('w');
-
     // Loop through next days
     foreach ($daysOfWeek as $key => $dayofWeek) {
-       
         $key += 1;
         $nextDayIndex = ($today + $key) % 7; // Calculate next day index
-       // if($nextDayIndex == 0) break;
+        if($key == 7) break;
         $result[] = $daysOfWeek[$nextDayIndex]; // Add day name to result
+        
     }
     return $result;
 }

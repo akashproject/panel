@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Batch;
 use App\Models\Slot;
 use App\Models\Course;
+use App\Models\PurchasedSession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -52,7 +53,7 @@ class PurchasedController extends Controller
             if(!$user){
                 return response()->json('unauthorize',$this->_statusErr);
             }
-
+            $this->updateStatus($user->id);
             $currentTime = date('y-m-d H:i:s');
 
             $sessions = DB::table('purchased_sessions')
@@ -132,11 +133,21 @@ class PurchasedController extends Controller
                 
             foreach ($sessions as $key => $batch) {
                 $batch->duration = getDuration($batch->session_start, $batch->session_end);
-                $batch->experience = get_user_meta($batch->teacher,"experience");
-                $batch->expertise = get_user_meta($batch->teacher,"expertise");
+                $batch->experience = get_user_meta($batch->trainer_id,"experience");
+                $batch->expertise = get_user_meta($batch->trainer_id,"expertise");
                 $sessions[$key] = $batch;
             }
             return response()->json($sessions,$this->_statusOK); 
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage());
+        }
+    }
+
+    public function updateStatus($user_id){
+        try {
+            $currentDatetime = Carbon::now();
+            PurchasedSession::where('session_end', '<', $currentDatetime)->where('user_id',$user_id)
+            ->update(['status' => "0"]);
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage());
         }
