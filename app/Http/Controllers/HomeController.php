@@ -42,6 +42,15 @@ class HomeController extends Controller
         }
     }
 
+    public function invoice()
+    {
+        try {
+            return view('emails.invoice');
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage());
+        }
+    }
+
     protected function getLoggedInUser()
     {
         return $this->_loggedin_user = Auth::user();

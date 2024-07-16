@@ -16,7 +16,7 @@ use App\Models\ReferEarn;
 use App\Models\PurchasedSession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Mail;
 use Carbon\Carbon;
 
 class OrderController extends Controller
@@ -180,6 +180,31 @@ class OrderController extends Controller
 
             
             
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage());
+        }
+    }
+
+    public function invoice(){
+        try {
+            $starttime = microtime(true); // Top of page
+            $data = [
+                "name" => "Akash Dutta",
+                "email" => "akash.dutta@icagroup.in",
+            ];
+            $mail = Mail::send('emails.invoice', $data, function ($m) use ($data) {
+                $m->from('noreply@devsov.baazar.live', 'Baazar Live');
+                $m->to($data['email'], $data['name'])->subject('Request Submitted Index!');
+            });
+            $endtime = microtime(true); // Bottom of page
+            $totelTIme = $endtime - $starttime;
+            $time = [
+                'start_time' =>$starttime,
+                'end_time' => $endtime,
+                'total_time' => $totelTIme,
+            ];
+            return response()->json($time,$this->_statusOK);
+
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage());
         }

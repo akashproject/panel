@@ -41,6 +41,7 @@ Route::any('/orders', [App\Http\Controllers\Api\OrderController::class, 'index']
 Route::post('/apply-coupon', [App\Http\Controllers\Api\OrderController::class, 'applyCoupon'])->name('apply-coupon');
 Route::post('/create-order', [App\Http\Controllers\Api\OrderController::class, 'create'])->name('create-order');
 Route::post('/payment', [App\Http\Controllers\Api\OrderController::class, 'payment'])->name('payment');
+Route::get('/invoice', [App\Http\Controllers\Api\OrderController::class, 'invoice'])->name('invoice');
 
 
 //Settings
