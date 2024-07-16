@@ -94,7 +94,7 @@
                                 </td>
                                 <td>
                                     Invoice #: 123<br>
-                                    Created: January 1, 2024<br>
+                                    Purchesed Date: January 1, 2024<br>
                                 </td>
                             </tr>
                         </tbody></table>
@@ -107,13 +107,15 @@
                                 <td>
                                     <div> <Strong> Bill From</Strong> </div>
                                     Baazar Live Ptv LTD.<br>
-                                    12345 Sunny Road<br>
-                                    Sunnyville, TX 12345
+                                    sales@baazar.live<br>
+                                    9836550022<br>
+                                    GSTIN : 9658744477. 
                                 </td>
                                 <td>
                                     <div> <Strong> Bill To</Strong> </div>
                                     Akash Dutta<br>
                                     akashduttaphp@gmail.com<br>
+                                    9685478877<br>
                                     Bhattanagar, Liluah, Howrah 711203
                                 </td>
                             </tr>
