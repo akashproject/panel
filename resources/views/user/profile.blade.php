@@ -67,15 +67,16 @@
                             <select
                             type="text"
                             id="expertise"
-                            name="expertise"
+                            name="expertise[]"
                             class="form-control"
                             required
+                            multiple
                             >
-                            <option value=""> Select Option </option>
-                            <option value="Index Option" {{ (isset($user_meta["expertise"]) && $user_meta["expertise"] == 'Index Option')?"selected":"" }}> Index Option </option>
-                            <option value="Equity Option" {{ (isset($user_meta["expertise"]) && $user_meta["expertise"] == 'Equity Option')?"selected":"" }}> Equity Option </option>
-                            <option value="Commodity" {{ (isset($user_meta["expertise"]) && $user_meta["expertise"] == 'Commodity')?"selected":"" }}> Commodity </option>
-                            <option value="Forex" {{ (isset($user_meta["expertise"]) && $user_meta["expertise"] == 'Forex')?"selected":"" }}> Forex </option>
+                                
+                                <option value="Index Option" > Index Option </option>
+                                <option value="Equity Option" > Equity Option </option>
+                                <option value="Commodity" > Commodity </option>
+                                <option value="Forex" > Forex </option>
                             </select>
                         </div>
                     </div>

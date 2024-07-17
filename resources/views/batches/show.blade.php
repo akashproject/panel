@@ -27,7 +27,7 @@
                 </div>
                 <div class="d-flex align-content-center flex-wrap gap-3">
                     <button type="submit" class="btn btn-primary">Publish Batch</button>
-                    <input type="hidden" name="batch_id" id="batch_id" value="" >
+                    <input type="hidden" name="batch_id" id="batch_id" value="{{ $batch->id }}" >
                 </div>
             </div>
 
@@ -42,7 +42,7 @@
                                 <select type="text" class="form-control" id="course_id" name="course_id">
                                     <option value="" > Select Your Course </option> 
                                     @foreach($courses as $course)
-                                        <option value="{{$course->id}}" > {{$course->name}} </option> 
+                                        <option value="{{$course->id}}" {{ ($course->id == $batch->course_id)?'selected':'' }}> {{$course->name}} </option> 
                                     @endforeach
                                 </select>
                             </div>
@@ -63,7 +63,7 @@
                             <!-- Discounted Price -->
                             <div class="mb-3">
                                 <label class="form-label" for="teacher_fee">Batch Fees</label>
-                                <input type="number" class="form-control" id="teacher_fee" placeholder="Enter Batch fees" name="teacher_fee" >
+                                <input type="number" class="form-control" id="teacher_fee" placeholder="Enter Batch fees" name="teacher_fee" value="{{ $batch->teacher_fee }}">
                             </div>
                             <p> Maximum discount ₹<?php echo get_theme_setting("max_discount"); ?>/- </p>
                             <input type="hidden" name="max_discount" value="<?php echo get_theme_setting("max_discount"); ?>" >
@@ -81,8 +81,8 @@
                     <div class="row">
                         @foreach($slots as $value)
                         <div class="col-md-3">
-                            <input class="slot_select" type="radio" id="slots_{{$value->id}}" name="slot" value="{{ $value->id }}" style="visibility: hidden;" {{ in_array($value->id, json_decode(isset($teacherSlot->slots)?$teacherSlot->slots:'[]'))?'checked':'' }}>	
-                            <label for="slots_{{$value->id}}" class="card slot_select_label shadow-none bg-white mb-2 @if(in_array($value->id, json_decode(isset($teacherSlot->slots)?$teacherSlot->slots:'[]')) && isset($teacherSlot->status) && $teacherSlot->status == '1') active @endif" >
+                            <input class="slot_select" type="radio" id="slots_{{$value->id}}" name="slot" value="{{ $value->id }}" style="visibility: hidden;" {{ ($value->id == $batch->slot)?'checked':''}}>	
+                            <label for="slots_{{$value->id}}" class="card slot_select_label shadow-none bg-white mb-2" >
                                 <div class="card-body">
                                     <div class="row" >
                                         

@@ -21,9 +21,7 @@
                             </div>
                             <div class="card-body p-3 pt-2">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h6 class="d-flex align-items-center justify-content-center gap-1 mb-0">
-                                        4.4 <span class="text-warning"><i class="bx bxs-star me-1"></i></span><span class="text-muted">(1.23k)</span>
-                                    </h6>
+                                    
                                 </div>
                                 <a href="javascript:void(0)" class="h5 mb-2" style="display: block;">{{ $value->name }}</a>
                                 <p class="d-flex align-items-center"><i class="bx bx-time-five me-2"></i>Timing : {{ $value->start_time }} - {{ $value->end_time }}</p>
@@ -53,7 +51,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <div class="row">
+                                    <a href="{{ route('show-batch',$value->batch_id) }}" class="btn btn-primary" > Modify Batch</a>
+                                </div>
                             </div>
                         </div>
                     </div>

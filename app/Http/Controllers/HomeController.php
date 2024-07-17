@@ -35,6 +35,7 @@ class HomeController extends Controller
                 ->join('slots', 'slots.id', '=', 'batches.slot')
                 ->join('courses', 'courses.id', '=', 'batches.course_id')
                 ->where('batches.teacher',$this->getLoggedInUser()->id)
+                ->select('batches.*','slots.*','courses.*','batches.id as batch_id')
                 ->get();
             return view('batches.index',compact('batches'));
         } catch(\Illuminate\Database\QueryException $e){

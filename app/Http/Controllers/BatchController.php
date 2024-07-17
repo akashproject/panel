@@ -29,6 +29,7 @@ class BatchController extends Controller
                 ->join('slots', 'slots.id', '=', 'batches.slot')
                 ->join('courses', 'courses.id', '=', 'batches.course_id')
                 ->where('batches.teacher',$this->getLoggedInUser()->id)
+                ->select('batches.*','slots.*','courses.*','batches.id as batch_id')
                 ->get();
             return view('batches.index',compact('batches'));
         } catch(\Illuminate\Database\QueryException $e){
@@ -81,9 +82,17 @@ class BatchController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Batch $batch)
+    public function show($id)
     {
-        //
+        $user = Auth::user();
+        $batch = Batch::where('id',$id)->where('teacher',$user->id);
+        if(!$batch->exists()){
+            return redirect('batches');
+        }
+        $batch = $batch->first();
+        $slots = Slot::whereRaw('max > 0')->get();
+        $courses = Course::all();
+        return view('batches.show',compact('slots','courses','batch'));
     }
 
     /**

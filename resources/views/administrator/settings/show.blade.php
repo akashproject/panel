@@ -161,6 +161,17 @@
 											/>
 										</div>
 										<div class="mb-3 col-12">
+											<label for="max_discount" class="form-label">Maximum discount</label>
+											<input
+												class="form-control"
+												type="text"
+												name="max_discount"
+												id="max_discount" 
+												value="{{ (isset($settings['max_discount']))?$settings['max_discount']:'' }}"
+												autofocus
+											/>
+										</div>
+										<div class="mb-3 col-12">
 											<label for="footer_about" class="form-label">Footer About</label>
 											<textarea
 												class="form-control"
