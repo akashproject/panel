@@ -30,5 +30,12 @@ class IndexController extends Controller
         return view('administrator.dashboard');
     }
 
+    public function chcekMailTemplate($template){
+        try {
+            return view('emails.'.$template);
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage());
+        }
+    }
     
 }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserMeta;
 use Illuminate\Support\Facades\Hash;
-
+use Mail;
 class UserController extends Controller
 {
     //
@@ -60,7 +60,7 @@ class UserController extends Controller
                 'mobile' => 'required',
             ]);
 
-            $password = "12345678";
+            $password = random_strings(8);
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -71,7 +71,7 @@ class UserController extends Controller
                 'email_verified_at' => date('Y-m-d h:i:s'),
             ]);
             $user->assignRole('teacher');
-
+            $this->createTeacherNotification($user,$password);
             return redirect()->back()->with('message', 'User inserted successfully!');
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage()); 
@@ -154,6 +154,26 @@ class UserController extends Controller
 
             save_user_meta($data['user_id'],"streaming_player",$data['streaming_player']);
             return redirect()->back()->with('message', 'Record updated successfully!');
+        } catch(\Illuminate\Database\QueryException $e){
+            var_dump($e->getMessage()); 
+        }
+    }
+
+    public function createTeacherNotification($user, $password){
+        try {
+            $starttime = microtime(true); // Top of page
+            $data = [
+                "name" => "Akash Dutta",
+                "email" => "akashdutta.scriptcrown@gmail.com",
+            ];
+            $mail = Mail::send('emails.registerTeacherNotification', $data, function ($m) use ($data) {
+                $m->from('noreply@devsov.baazar.live', 'Baazar Live');
+                $m->to($data['email'], $data['name'])->subject('Congratulations! Your Registration has been successfull');
+            });
+            $endtime = microtime(true); // Bottom of page
+            echo $totelTIme = $endtime - $starttime;
+            exit;
+            return true;
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage()); 
         }

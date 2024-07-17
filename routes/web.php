@@ -34,7 +34,7 @@ Route::group(['prefix' => 'administrator'], function () {
     Route::group(['middleware' => ['auth', 'verified','role:super-admin|admin']], function () {
         Route::get('/dashboard', [App\Http\Controllers\Administrator\IndexController::class, 'index'])->name('dashboard');
         Route::get('/', [App\Http\Controllers\Administrator\IndexController::class, 'index'])->name('administrator');
-        
+        Route::get('/mail-template/{template}', [App\Http\Controllers\Administrator\IndexController::class, 'chcekMailTemplate'])->name('admin-mail-template');
         // Users
         Route::get('/users', [App\Http\Controllers\Administrator\UserController::class, 'index'])->name('admin-all-users');
         Route::get('/users/{role_id}', [App\Http\Controllers\Administrator\UserController::class, 'userByCategory'])->name('admin-users');
@@ -45,7 +45,7 @@ Route::group(['prefix' => 'administrator'], function () {
         Route::post('/insert-user', [App\Http\Controllers\Administrator\UserController::class, 'insert'])->name('admin-insert-user');
         Route::get('/delete-user/{id}', [App\Http\Controllers\Administrator\UserController::class, 'delete'])->name('admin-delete-user');
         Route::get('/approve-user/{id}/{is_approve}', [App\Http\Controllers\Administrator\UserController::class, 'approve'])->name('admin-approve-user');
-
+        
         // Add Stream Player
         Route::get('/add-stream-player/{id}', [App\Http\Controllers\Administrator\UserController::class, 'addStreamPlayer'])->name('admin-add-stream-player');
         Route::post('/save-stream-player', [App\Http\Controllers\Administrator\UserController::class, 'saveStreamPlayer'])->name('admin-save-stream-player');

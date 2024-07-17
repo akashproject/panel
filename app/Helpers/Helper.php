@@ -104,34 +104,50 @@ if (! function_exists('save_user_meta')) {
         return $user_meta;
     }
 }
+if (! function_exists('getNextDaysNames')) {
+    function getNextDaysNames($days = 7) {
+        $daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        $result = [];
 
-function getNextDaysNames($days = 7) {
-    $daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    $result = [];
-
-    // Get today's day index
-    $today = (int) date('w');
-    // Loop through next days
-    foreach ($daysOfWeek as $key => $dayofWeek) {
-        $key += 1;
-        $nextDayIndex = ($today + $key) % 7; // Calculate next day index
-        if($key == 7) break;
-        $result[] = $daysOfWeek[$nextDayIndex]; // Add day name to result
-        
+        // Get today's day index
+        $today = (int) date('w');
+        // Loop through next days
+        foreach ($daysOfWeek as $key => $dayofWeek) {
+            $key += 1;
+            $nextDayIndex = ($today + $key) % 7; // Calculate next day index
+            if($key == 7) break;
+            $result[] = $daysOfWeek[$nextDayIndex]; // Add day name to result
+            
+        }
+        return $result;
     }
-    return $result;
 }
 
-function getDuration($start_time, $end_time) {
-    // Create DateTime objects from the start and end times
-    $start = new DateTime($start_time);
-    $end = new DateTime($end_time);
+if (! function_exists('getDuration')) {
+    function getDuration($start_time, $end_time) {
+        // Create DateTime objects from the start and end times
+        $start = new DateTime($start_time);
+        $end = new DateTime($end_time);
 
-    // Calculate the difference between the two times
-    $interval = $start->diff($end);
+        // Calculate the difference between the two times
+        $interval = $start->diff($end);
 
-    // Format the interval to a readable string
-    $minutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
-    return $minutes;
+        // Format the interval to a readable string
+        $minutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
+        return $minutes;
+    }
+}
+
+if (! function_exists('random_strings')) {
+    function random_strings($length_of_string) {
+    
+        // String of all alphanumeric character
+        $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    
+        // Shuffle the $str_result and returns substring
+        // of specified length
+        return substr(str_shuffle($str_result),
+                        0, $length_of_string);
+    }
 }
 ?>

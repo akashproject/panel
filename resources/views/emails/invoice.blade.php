@@ -67,6 +67,16 @@
             border-top: 2px solid #eee;
             font-weight: bold;
         }
+        .billing-details{
+            padding: 0 20px;
+            width: 25%;
+            float: right;
+        }
+        .billing-details {
+            padding: 0 20px;
+            width: 100%;
+            float: right;
+        }
         @media only screen and (max-width: 600px) {
             .invoice-box table tr.top table td {
                 width: 100%;
@@ -122,6 +132,11 @@
                         </tbody></table>
                     </td>
                 </tr>
+                <tr class="information">
+                    <td colspan="5" style="border: 1px solid;text-align: center;">
+                        <h1 style="font-size: 18px;padding: 5px;background: #043a3a;color: #fff;"> Congratulation! Session has been Purchesed successfully </h1>
+                    </td>
+                </tr>
                 <tr class="heading">
                     <td>Sl No.</td>
                     <td>Item</td>
@@ -136,41 +151,43 @@
                     <td>₹100.00/-</td>
                     <td>₹200.00/-</td>
                 </tr>
-                <tr class="total">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <div style="display: block;overflow: hidden;">
-                            <span style="float: left;"> Session Fee: </span>
-                            <span style="float: right;"><strong>₹200/-</strong></span>
-                        </div>
-                        <div style="display: block;overflow: hidden;">
-                            <span style="float: left;"> Platform Fee : </span>
-                            <span style="float: right;"><strong>₹200/-</strong></span>
-                        </div>
-                        <div style="display: block;overflow: hidden;">
-                            <span style="float: left;"> Discount : </span>
-                            <span style="float: right;"><strong>₹100/-</strong></span>
-                        </div>
-                        <div style="display: block;overflow: hidden;">
-                            <span style="float: left;"> CGST 9%: </span>
-                            <span style="float: right;"><strong>₹9.00/-</strong></span>
-                        </div>
-                        <div style="display: block;overflow: hidden;">
-                            <span style="float: left;"> SGST 9%: </span>
-                            <span style="float: right;"><strong>₹9.00/-</strong></span>
-                        </div>
-                        <div style="display: block;overflow: hidden;">
-                            <span style="float: left;">Total:</span>
-                            <span style="float: right;"> <strong>₹385.00/-</strong></span>
-                        </div>
-                        
-                    </td>
+                <tr class="item">
+                    <td>2.</td>
+                    <td>Future Option Treding Session</td>
+                    <td>₹100.00/-</td>
+                    <td>₹100.00/-</td>
+                    <td>₹200.00/-</td>
                 </tr>
             </tbody>
         </table>
+        <div style="display: block;overflow: hidden;">
+            <div class="billing-details" style="padding: 0 20px;">
+                <div style="display: block;overflow: hidden;">
+                    <span style="float: left;"> Session Fee: </span>
+                    <span style="float: right;"><strong>₹200.00/-</strong></span>
+                </div>
+                <div style="display: block;overflow: hidden;">
+                    <span style="float: left;"> Platform Fee : </span>
+                    <span style="float: right;"><strong>₹200.00/-</strong></span>
+                </div>
+                <div style="display: block;overflow: hidden;">
+                    <span style="float: left;"> Discount : </span>
+                    <span style="float: right;"><strong>₹100.00/-</strong></span>
+                </div>
+                <div style="display: block;overflow: hidden;">
+                    <span style="float: left;"> CGST 9%: </span>
+                    <span style="float: right;"><strong>₹9.00/-</strong></span>
+                </div>
+                <div style="display: block;overflow: hidden;">
+                    <span style="float: left;"> SGST 9%: </span>
+                    <span style="float: right;"><strong>₹9.00/-</strong></span>
+                </div>
+                <div style="display: block;overflow: hidden;">
+                    <span style="float: left;">Total:</span>
+                    <span style="float: right;"> <strong>₹385.00/-</strong></span>
+                </div>    
+            </div>
+        </div>
     </div>
     <div style="text-align:center">
         All Copyright Reserved @ baazar.live
