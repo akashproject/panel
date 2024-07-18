@@ -43,7 +43,6 @@ Route::post('/create-order', [App\Http\Controllers\Api\OrderController::class, '
 Route::post('/payment', [App\Http\Controllers\Api\OrderController::class, 'payment'])->name('payment');
 Route::get('/invoice', [App\Http\Controllers\Api\OrderController::class, 'invoice'])->name('invoice');
 
-
 //Settings
 Route::get('/all-settings', [App\Http\Controllers\Api\SettingsController::class, 'allSettings'])->name('all-settings');
 Route::get('/all-states', [App\Http\Controllers\Api\OrderController::class, 'getStates'])->name('all-states');

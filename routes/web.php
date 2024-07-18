@@ -122,4 +122,8 @@ Route::group(['middleware' => ['auth', 'verified','role:teacher|super-admin|admi
     Route::get('/show-batch/{id}', [App\Http\Controllers\BatchController::class, 'show'])->name('show-batch');
     Route::post('/save-batch', [App\Http\Controllers\BatchController::class, 'save'])->name('save-batch');
     Route::get('/delete-batch/{id}', [App\Http\Controllers\BatchController::class, 'delete'])->name('delete-batch');
+
+    //Report
+    Route::get('/reports', [App\Http\Controllers\ReportController::class, 'index'])->name('reports');
+
 });
