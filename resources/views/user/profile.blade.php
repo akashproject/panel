@@ -73,10 +73,10 @@
                             multiple
                             >
                                 
-                                <option value="Index Option" > Index Option </option>
-                                <option value="Equity Option" > Equity Option </option>
-                                <option value="Commodity" > Commodity </option>
-                                <option value="Forex" > Forex </option>
+                                <option value="Index Option" {{ (in_array('Index Option',$user_meta['expertise']))?'selected':'' }} > Index Option </option>
+                                <option value="Equity Option" {{ (in_array('Equity Option',$user_meta['expertise']))?'selected':'' }} > Equity Option </option>
+                                <option value="Commodity" {{ (in_array('Commodity',$user_meta['expertise']))?'selected':'' }}> Commodity </option>
+                                <option value="Forex" {{ (in_array('Forex',$user_meta['expertise']))?'selected':'' }}> Forex </option>
                             </select>
                         </div>
                     </div>
@@ -93,8 +93,14 @@
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                    <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                    <div class="col-md-3 col-xs-6">
+                        <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                    </div>
+                    <div class="col-md-2 col-xs-6">
+                        <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                    </div>
+                    
+                    
                 </div>
             </form>
         </div>

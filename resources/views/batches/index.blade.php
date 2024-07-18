@@ -14,11 +14,7 @@
                     @foreach ($batches as $value)
                     <div class="col-sm-6 col-lg-4">
                         <div class="card p-2 h-100 shadow-none border">
-                            <div class="rounded-2 text-center mb-3">
-                                <a href="javascript:void(0)">
-                                    <img class="img-fluid" src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/pages/app-academy-tutor-2.png" alt="tutor image 1">
-                                </a>
-                            </div>
+                            
                             <div class="card-body p-3 pt-2">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     

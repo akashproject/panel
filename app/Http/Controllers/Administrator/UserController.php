@@ -60,8 +60,15 @@ class UserController extends Controller
                 'mobile' => 'required',
             ]);
 
+            if ($request->hasFile('avator')) {
+                $imageFile = strtolower($data['mobile']).'_'.time().'.'.$request->avator->extension();  
+                $request->avator->move(public_path('images/teacher'), $imageFile);
+                $data['avator'] = 'images/teacher/'.$imageFile;
+            }
+
             $password = random_strings(8);
             $user = User::create([
+                'avator' => (isset($data['avator']))?$data['avator']:null,
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'mobile' => $data['mobile'],
@@ -70,6 +77,7 @@ class UserController extends Controller
                 'status' => "1",
                 'email_verified_at' => date('Y-m-d h:i:s'),
             ]);
+            
             $user->assignRole('teacher');
             $this->createTeacherNotification($user,$password);
             return redirect()->back()->with('message', 'User inserted successfully!');
@@ -89,6 +97,12 @@ class UserController extends Controller
             ]);
 
             $user = User::findOrFail($data['user_id']);
+            if ($request->hasFile('avator')) {
+                $imageFile = strtolower($user->mobile).'_'.time().'.'.$request->avator->extension();  
+                $request->avator->move(public_path('images/teacher'), $imageFile);
+                $data['avator'] = 'images/teacher/'.$imageFile;
+            }    
+            print_r($data);
             $user->update($data);
 
             return redirect()->back()->with('message', 'User updated successfully!');
@@ -171,8 +185,6 @@ class UserController extends Controller
                 $m->to($data['email'], $data['name'])->subject('Congratulations! Your Registration has been successfull');
             });
             $endtime = microtime(true); // Bottom of page
-            echo $totelTIme = $endtime - $starttime;
-            exit;
             return true;
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage()); 

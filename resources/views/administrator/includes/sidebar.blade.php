@@ -96,7 +96,7 @@
          </li>
          <li class="menu-item">
             <a href="{{ route('admin-orders') }}" class="menu-link">
-               <i class="menu-icon tf-icons bx bxs-report"></i>
+               <i class="menu-icon tf-icons bx bx-bar-chart-alt"></i>
                <div data-i18n="Settings">Reports</div>
             </a>
          </li>

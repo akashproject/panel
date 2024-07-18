@@ -57,14 +57,13 @@
         @else
 
 		@endif
-        
-       
-          @if(auth()->check())
-            <!-- Layout container -->
-            <div class="layout-page">
-            <!-- Navbar -->
-            @include('administrator.includes.navbar')
-          @endif
+    
+        @if(auth()->check())
+        <!-- Layout container -->
+        <div class="layout-page">
+        <!-- Navbar -->
+        @include('administrator.includes.navbar')
+        @endif
           <!-- / Navbar -->
             @if(auth()->check())
             <!-- Content wrapper -->

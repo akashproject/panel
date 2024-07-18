@@ -10,13 +10,7 @@
         <!-- Search -->
         <div class="navbar-nav align-items-center">
         <div class="nav-item d-flex align-items-center">
-            <i class="bx bx-search fs-4 lh-0"></i>
-            <input
-            type="text"
-            class="form-control border-0 shadow-none"
-            placeholder="Search..."
-            aria-label="Search..."
-            />
+            
         </div>
         </div>
         <!-- /Search -->
@@ -27,7 +21,7 @@
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
             <div class="avatar avatar-online">
-                <img src="{{ url('assets/administrator/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
+                <img src="{{ url('/public/'.$loggedInUser->avator) }}" alt class="rounded-circle" />
             </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -36,12 +30,12 @@
                 <div class="d-flex">
                     <div class="flex-shrink-0 me-3">
                     <div class="avatar avatar-online">
-                        <img src="{{ url('assets/administrator/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
+                        <img src="{{ url('/public/'.$loggedInUser->avator) }}" alt class="rounded-circle" />
                     </div>
                     </div>
                     <div class="flex-grow-1">
                     <span class="fw-semibold d-block">{{ $loggedInUser->name }}</span>
-                    <small class="text-muted">Admin</small>
+                    <small class="text-muted">{{ $roles }}</small>
                     </div>
                 </div>
                 </a>

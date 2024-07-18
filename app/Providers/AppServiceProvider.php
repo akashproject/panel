@@ -34,6 +34,14 @@ class AppServiceProvider extends ServiceProvider
             // Get User
             $loggedInUser = Auth::user();
             $view->with('loggedInUser', $loggedInUser);
+
+            if($loggedInUser){
+                $roles = $loggedInUser
+                ->roles
+                ->pluck('name');
+                $roles = implode(",",json_decode($roles));
+                $view->with('roles', ucfirst($roles));
+            }
         });
     }
 }

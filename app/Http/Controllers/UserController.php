@@ -23,12 +23,15 @@ class UserController extends Controller
         foreach ($fieldData as $key => $value) {
             $user_meta[$value->key] = $value->value;
         }
+        if(array_key_exists("expertise",$user_meta)){
+            $user_meta['expertise'] = json_decode($user_meta['expertise']);
+        }
+
         return view('user.profile',compact("user_meta"));
     }
 
     public function account()
     {
-
         return view('user.account');
     }
 
@@ -59,6 +62,7 @@ class UserController extends Controller
             $user = Auth::user();
             unset($data['_token']);
             foreach($data as $key => $value){
+                $value = (is_array($value))?json_encode($value):$value;
                 $user_meta = UserMeta::where('key', $key)->where('user_id',$user->id);
                 if($user_meta->exists()){
                     $user_meta->update(array("user_id"=>$user->id,"key"=>$key,"value"=>$value));  
