@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 </div>
-                <span>Total Purchesed Session</span>
+                <span>Total Past Session</span>
                 <h3 class="card-title text-nowrap mb-1">{{ $pastedBatches }}</h3>
             </div>
             </div>
@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 </div>
-                <span>Total Purchesed Session</span>
+                <span>Total Upcoming Session</span>
                 <h3 class="card-title text-nowrap mb-1">{{ $upcomingBatches }}</h3>
             </div>
             </div>
@@ -127,7 +127,8 @@
                             <td> {{ $order->start_time }} </td>
                             <td> {{ $order->end_time }} </td>
                             <td> {{ $order->teacher_fee }} </td>	
-                            <td> <span class="text-nowrap">{{ date('M d, Y h:i',strtotime($order->created_at)) }}</span> </td>			
+                            <td> <span class="text-nowrap">{{ date('M d, Y h:i',strtotime($order->created_at)) }}</span> </td>	
+                           	
                             
                         </tr>
                         @endforeach

@@ -21,15 +21,17 @@ class ReportController extends Controller
         try {
             $reports =  DB::table('order_items')
             ->join('orders', 'orders.id', '=', 'order_items.order_id')
+           // ->join('purchased_sessions', 'purchased_sessions.order_id', '=', 'orders.id')
             ->join('users', 'users.id', '=', 'orders.user_id')
             ->join('batches', 'batches.id', '=', 'order_items.batch_id')
             ->join('courses', 'courses.id', '=', 'batches.course_id')
             ->join('slots', 'slots.id', '=', 'batches.slot')
             ->where('order_items.trainer',$this->getLoggedInUser()->id)
             ->select('users.*','orders.*','orders.status as status','courses.name as course','order_items.teacher_fee as teacher_fee','slots.day','slots.start_time','slots.end_time')
+            //->whereRaw('GROUP by `order_items`.id;')
             ->get();
 
-            //dd($reports);
+         //   dd($reports);
             $totalCustomer = OrderItem::where('trainer',$this->getLoggedInUser()->id)->count();
             $earning = OrderItem::where('trainer',$this->getLoggedInUser()->id)->sum('teacher_fee');
             $pastedBatches = DB::table('purchased_sessions')
