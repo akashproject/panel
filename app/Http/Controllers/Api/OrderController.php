@@ -10,6 +10,7 @@ use App\Models\Course;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
+use App\Models\User;
 use App\Models\State;
 use App\Models\Referrer;
 use App\Models\ReferEarn;
@@ -124,10 +125,6 @@ class OrderController extends Controller
 
             $order = Order::findOrFail($data['order_id']);
             
-            // $order->update([
-            //     '' => '',
-            // ]);
-
             $payment = [
                 'order_id' => $data['order_id'],
                 'type' => $data['type'],
@@ -175,7 +172,8 @@ class OrderController extends Controller
                         'status' => "1",
                     ]);
                 }
-                return response()->json($order,$this->_statusOK);
+                $invoice = $this->invoice($order,$user);
+                return response()->json($invoice,$this->_statusOK);
             }
 
             
@@ -185,25 +183,37 @@ class OrderController extends Controller
         }
     }
 
-    public function invoice(){
+    public function invoice($order,$user){
         try {
-            $starttime = microtime(true); // Top of page
-            $data = [
-                "name" => "Akash Dutta",
-                "email" => "akash.dutta@icagroup.in",
+           // $starttime = microtime(true); // Top of page
+            
+            $orderItem = OrderItem::where('order_id',$order->id)->get();
+
+           
+            $invoiceData = [
+                'name' => $user->name,
+                'email' => $user->email,
+                'mobile' => $user->mobile,
+                'address' => get_user_meta('address',$user->id),
+                'pincode' => get_user_meta('pincode',$user->id),
+                'order_no' => $order->order_no,
+                'session_price' => $order->session_price,
+                'plaform_fee' => $order->plaform_fee,
+                'amount'=>$order->plaform_fee,
+                'tax' => $order->tax,
+                'state' => get_user_meta('state',$user->id),
+                'date' => $order->created_at,
+                'discount' => $order->coupon_id,
+                'orderItem' => $orderItem,
             ];
-            $mail = Mail::send('emails.invoice', $data, function ($m) use ($data) {
+
+            $mail = Mail::send('emails.invoice', $invoiceData, function ($m) use ($invoiceData) {
                 $m->from('noreply@devsov.baazar.live', 'Baazar Live');
-                $m->to($data['email'], $data['name'])->subject('Request Submitted Index!');
+                $m->to($invoiceData['email'], $invoiceData['name'])->subject('Coongratulations! Session Order Has been placed successfully');
             });
-            $endtime = microtime(true); // Bottom of page
-            $totelTIme = $endtime - $starttime;
-            $time = [
-                'start_time' =>$starttime,
-                'end_time' => $endtime,
-                'total_time' => $totelTIme,
-            ];
-            return response()->json($time,$this->_statusOK);
+
+            
+            return $invoiceData;
 
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage());

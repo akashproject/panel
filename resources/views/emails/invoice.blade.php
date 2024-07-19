@@ -103,8 +103,8 @@
                                     <img src="https://devsov.baazar.live/panel/assets/administrator/img/logo.png" style="width: 100%; max-width: 300px;">
                                 </td>
                                 <td>
-                                    Invoice #: 123<br>
-                                    Purchesed Date: January 1, 2024<br>
+                                    Invoice #: {{ $order_no }}<br>
+                                    Purchesed Date: {{ date("d M, Y",strtotime($date))}}<br>
                                 </td>
                             </tr>
                         </tbody></table>
@@ -123,10 +123,10 @@
                                 </td>
                                 <td>
                                     <div> <Strong> Bill To</Strong> </div>
-                                    Akash Dutta<br>
-                                    akashduttaphp@gmail.com<br>
-                                    9685478877<br>
-                                    Bhattanagar, Liluah, Howrah 711203
+                                    {{ $name }}<br>
+                                    {{ $email }}<br>
+                                    {{ $mobile }}<br>
+                                    {{ $address }}, {{ $state }}, {{ $pincode }}
                                 </td>
                             </tr>
                         </tbody></table>
@@ -144,47 +144,50 @@
                     <td>Platform Fee</td>
                     <td>Total Fee</td>
                 </tr>
+                @foreach($orderItem as $key => $item)
                 <tr class="item">
-                    <td>1.</td>
-                    <td>Live Intraday Treding Session</td>
-                    <td>₹100.00/-</td>
-                    <td>₹100.00/-</td>
-                    <td>₹200.00/-</td>
+                    <td>{{$key+1}}.</td>
+                    <td> {{ number_format($item->batch_id) }}</td>
+                    <td>₹{{ number_format($item->teacher_fee) }}/-</td>
+                    <td>₹{{ number_format($item->teacher_fee) }}/-</td>
+                    <td>₹{{ number_format($item->price) }}-</td>
                 </tr>
-                <tr class="item">
-                    <td>2.</td>
-                    <td>Future Option Treding Session</td>
-                    <td>₹100.00/-</td>
-                    <td>₹100.00/-</td>
-                    <td>₹200.00/-</td>
-                </tr>
+                @endforeach
+                
             </tbody>
         </table>
-        <div style="display: block;overflow: hidden;">
+        <div style="display: block;overflow: hidden;width: 80%;margin: auto;">
             <div class="billing-details" style="padding: 0 20px;">
                 <div style="display: block;overflow: hidden;">
                     <span style="float: left;"> Session Fee: </span>
-                    <span style="float: right;"><strong>₹200.00/-</strong></span>
+                    <span style="float: right;"><strong>{{ number_format($session_price) }}/-</strong></span>
                 </div>
                 <div style="display: block;overflow: hidden;">
                     <span style="float: left;"> Platform Fee : </span>
-                    <span style="float: right;"><strong>₹200.00/-</strong></span>
+                    <span style="float: right;"><strong>₹{{ number_format($plaform_fee) }}/-</strong></span>
                 </div>
                 <div style="display: block;overflow: hidden;">
                     <span style="float: left;"> Discount : </span>
-                    <span style="float: right;"><strong>₹100.00/-</strong></span>
+                    <span style="float: right;"><strong>{{ number_format($discount) }}/-</strong></span>
                 </div>
+                @if(isset($state) && $state == "WB")
                 <div style="display: block;overflow: hidden;">
                     <span style="float: left;"> CGST 9%: </span>
-                    <span style="float: right;"><strong>₹9.00/-</strong></span>
+                    <span style="float: right;"><strong>₹{{number_format($tax/2)}}/-</strong></span>
                 </div>
                 <div style="display: block;overflow: hidden;">
                     <span style="float: left;"> SGST 9%: </span>
-                    <span style="float: right;"><strong>₹9.00/-</strong></span>
+                    <span style="float: right;"><strong>₹{{number_format($tax/2)}}/-</strong></span>
                 </div>
+                @else 
+                <div style="display: block;overflow: hidden;">
+                    <span style="float: left;"> CGST 18%: </span>
+                    <span style="float: right;"><strong>₹{{number_format($tax)}}/-</strong></span>
+                </div>
+                @endif
                 <div style="display: block;overflow: hidden;">
                     <span style="float: left;">Total:</span>
-                    <span style="float: right;"> <strong>₹385.00/-</strong></span>
+                    <span style="float: right;"> <strong>₹{{ number_format($amount) }}/-</strong></span>
                 </div>    
             </div>
         </div>
