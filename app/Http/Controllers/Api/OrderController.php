@@ -22,8 +22,6 @@ use Carbon\Carbon;
 
 class OrderController extends Controller
 {
-    //
-
     public $_statusOK = 200;
     public $_statusErr = 500;
 
@@ -51,8 +49,7 @@ class OrderController extends Controller
         }
     }
 
-    public function create(Request $request)
-    {
+    public function create(Request $request) {
         try {
             
             $user = auth("api")->user();
@@ -188,7 +185,7 @@ class OrderController extends Controller
            // $starttime = microtime(true); // Top of page
             
             $orderItem = OrderItem::where('order_id',$order->id)->get();
-
+            $referrer = Referrer::findOrFail($order->coupon_id);
            
             $invoiceData = [
                 'name' => $user->name,
@@ -199,17 +196,18 @@ class OrderController extends Controller
                 'order_no' => $order->order_no,
                 'session_price' => $order->session_price,
                 'plaform_fee' => $order->plaform_fee,
-                'amount'=>$order->plaform_fee,
+                'amount'=>$order->amount,
                 'tax' => $order->tax,
                 'state' => get_user_meta('state',$user->id),
                 'date' => $order->created_at,
-                'discount' => $order->coupon_id,
+                'code' => $referrer->code,
+                'discount' => $referrer->discount,
                 'orderItem' => $orderItem,
             ];
 
             $mail = Mail::send('emails.invoice', $invoiceData, function ($m) use ($invoiceData) {
                 $m->from('noreply@devsov.baazar.live', 'Baazar Live');
-                $m->to($invoiceData['email'], $invoiceData['name'])->subject('Coongratulations! Session Order Has been placed successfully');
+                $m->to($invoiceData['email'], $invoiceData['name'])->subject('Congratulations! Session Order Has been placed successfully');
             });
 
             

@@ -22,7 +22,6 @@
         }
         div {
             margin: 13px 0;
-            border-bottom: 1px solid #ccc;
         }
         .invoice-box table {
             width: 100%;
@@ -102,7 +101,7 @@
                                 <td class="title">
                                     <img src="https://devsov.baazar.live/panel/assets/administrator/img/logo.png" style="width: 100%; max-width: 300px;">
                                 </td>
-                                <td>
+                                <td style="text-align: right;">
                                     Invoice #: {{ $order_no }}<br>
                                     Purchesed Date: {{ date("d M, Y",strtotime($date))}}<br>
                                 </td>
@@ -111,17 +110,17 @@
                     </td>
                 </tr>
                 <tr class="information">
-                    <td colspan="5" style="border: 1px solid;">
+                    <td colspan="5">
                         <table>
                             <tbody><tr>
-                                <td>
+                            <td>
                                     <div> <Strong> Bill From</Strong> </div>
                                     Baazar Live Ptv LTD.<br>
                                     sales@baazar.live<br>
                                     9836550022<br>
                                     GSTIN : 9658744477. 
                                 </td>
-                                <td>
+                                <td style="text-align: right;">
                                     <div> <Strong> Bill To</Strong> </div>
                                     {{ $name }}<br>
                                     {{ $email }}<br>
@@ -134,7 +133,7 @@
                 </tr>
                 <tr class="information">
                     <td colspan="5" style="border: 1px solid;text-align: center;">
-                        <h1 style="font-size: 18px;padding: 5px;background: #043a3a;color: #fff;"> Congratulation! Session has been Purchesed successfully </h1>
+                        <h1 style="font-size: 18px;padding: 15px;background: #043a3a;color: #fff;margin: 0;"> Congratulation! Session has been Purchesed successfully </h1>
                     </td>
                 </tr>
                 <tr class="heading">
@@ -149,48 +148,79 @@
                     <td>{{$key+1}}.</td>
                     <td> {{ number_format($item->batch_id) }}</td>
                     <td>₹{{ number_format($item->teacher_fee) }}/-</td>
-                    <td>₹{{ number_format($item->teacher_fee) }}/-</td>
+                    <td>₹{{ number_format($item->platform_fee) }}/-</td>
                     <td>₹{{ number_format($item->price) }}-</td>
                 </tr>
                 @endforeach
-                
+                <tr class="">
+                    <td colspan="5">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Session Fee:
+                                    </td>
+                                    <td style="padding-right: 17px;text-align: right;">
+                                        <strong>₹{{ number_format($session_price) }}/-</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Platform Fee
+                                    </td>
+                                    <td style="padding-right: 17px;text-align: right;">
+                                        <strong>₹{{ number_format($plaform_fee) }}/-</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Discount :
+                                    </td>
+                                    <td style="padding-right: 17px;text-align: right;">
+                                        <strong>{{ $code }}: ₹{{number_format($discount)}}/-</strong>
+                                    </td>
+                                </tr>
+                                @if(isset($state) && $state == "WB")
+                                <tr>
+                                    <td>
+                                        CGST 9%:
+                                    </td>
+                                    <td style="padding-right: 17px;text-align: right;">
+                                        <strong>₹{{number_format($tax/2)}}/-</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        SGST 9%:
+                                    </td>
+                                    <td style="padding-right: 17px;text-align: right;">
+                                        <strong>₹{{number_format($tax/2)}}/-</strong>
+                                    </td>
+                                </tr>
+                                @else 
+                                <tr>
+                                    <td>
+                                        IGST 18%:
+                                    </td>
+                                    <td style="padding-right: 17px;text-align: right;">
+                                        <strong>₹{{number_format($tax)}}/-</strong>
+                                    </td>
+                                </tr>
+                                @endif
+                                <tr>
+                                    <td>
+                                        Total:
+                                    </td>
+                                    <td style="padding-right: 17px;text-align: right;">
+                                        <strong>₹{{ number_format($amount) }}/-</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
             </tbody>
         </table>
-        <div style="display: block;overflow: hidden;width: 80%;margin: auto;">
-            <div class="billing-details" style="padding: 0 20px;">
-                <div style="display: block;overflow: hidden;">
-                    <span style="float: left;"> Session Fee: </span>
-                    <span style="float: right;"><strong>{{ number_format($session_price) }}/-</strong></span>
-                </div>
-                <div style="display: block;overflow: hidden;">
-                    <span style="float: left;"> Platform Fee : </span>
-                    <span style="float: right;"><strong>₹{{ number_format($plaform_fee) }}/-</strong></span>
-                </div>
-                <div style="display: block;overflow: hidden;">
-                    <span style="float: left;"> Discount : </span>
-                    <span style="float: right;"><strong>{{ number_format($discount) }}/-</strong></span>
-                </div>
-                @if(isset($state) && $state == "WB")
-                <div style="display: block;overflow: hidden;">
-                    <span style="float: left;"> CGST 9%: </span>
-                    <span style="float: right;"><strong>₹{{number_format($tax/2)}}/-</strong></span>
-                </div>
-                <div style="display: block;overflow: hidden;">
-                    <span style="float: left;"> SGST 9%: </span>
-                    <span style="float: right;"><strong>₹{{number_format($tax/2)}}/-</strong></span>
-                </div>
-                @else 
-                <div style="display: block;overflow: hidden;">
-                    <span style="float: left;"> CGST 18%: </span>
-                    <span style="float: right;"><strong>₹{{number_format($tax)}}/-</strong></span>
-                </div>
-                @endif
-                <div style="display: block;overflow: hidden;">
-                    <span style="float: left;">Total:</span>
-                    <span style="float: right;"> <strong>₹{{ number_format($amount) }}/-</strong></span>
-                </div>    
-            </div>
-        </div>
     </div>
     <div style="text-align:center">
         All Copyright Reserved @ baazar.live
