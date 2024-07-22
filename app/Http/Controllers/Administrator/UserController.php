@@ -48,7 +48,7 @@ class UserController extends Controller
             return view('administrator.users.show',compact('user','user_meta'));
         } catch(\Illuminate\Database\QueryException $e){
             var_dump($e->getMessage()); 
-        }        
+        }
     }
 
     public function insert(Request $request) {
