@@ -7,9 +7,7 @@
             <a class="nav-link" href="{{ route('account') }}"><i class="bx bx-user me-1"></i> Account</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="javascript:void(0)"
-            ><i class="bx bx-bell me-1"></i> Bio </a
-            >
+            <a class="nav-link active" href="javascript:void(0)"><i class="bx bx-bell me-1"></i> Bio </a>
         </li>
         
         </ul>
@@ -22,17 +20,17 @@
                 @csrf
                 <div class="row">
                     <div class="mb-3 col-md-3">
-                    <label for="language" class="form-label">Language</label>
-                    <input
-                        class="form-control"
-                        type="text"
-                        id="language"
-                        name="language"
-                        value="{{ (isset($user_meta['language']))?$user_meta['language']:'' }}"
-                        placeholder="Enter Your Spoken Language"
-                        autofocus
-                        required
-                    />
+                        <label for="language" class="form-label">Language</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="language"
+                            name="language"
+                            value="{{ (isset($user_meta['language']))?$user_meta['language']:'' }}"
+                            placeholder="Enter Your Spoken Language"
+                            autofocus
+                            required
+                        />
                     </div>
                     
                     <div class="mb-3 col-md-3">
@@ -73,10 +71,10 @@
                             multiple
                             >
                                 
-                                <option value="Index Option" {{ (in_array('Index Option',$user_meta['expertise']))?'selected':'' }} > Index Option </option>
-                                <option value="Equity Option" {{ (in_array('Equity Option',$user_meta['expertise']))?'selected':'' }} > Equity Option </option>
-                                <option value="Commodity" {{ (in_array('Commodity',$user_meta['expertise']))?'selected':'' }}> Commodity </option>
-                                <option value="Forex" {{ (in_array('Forex',$user_meta['expertise']))?'selected':'' }}> Forex </option>
+                                <option value="Index Option" {{ (isset($user_meta['expertise']) && in_array('Index Option',$user_meta['expertise']))?'selected':'' }} > Index Option </option>
+                                <option value="Equity Option" {{ (isset($user_meta['expertise']) && in_array('Equity Option',$user_meta['expertise']))?'selected':'' }} > Equity Option </option>
+                                <option value="Commodity" {{ (isset($user_meta['expertise']) && in_array('Commodity',$user_meta['expertise']))?'selected':'' }}> Commodity </option>
+                                <option value="Forex" {{ (isset($user_meta['expertise']) && in_array('Forex',$user_meta['expertise']))?'selected':'' }}> Forex </option>
                             </select>
                         </div>
                     </div>
@@ -99,8 +97,6 @@
                     <div class="col-md-2 col-xs-6">
                         <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                     </div>
-                    
-                    
                 </div>
             </form>
         </div>

@@ -149,6 +149,9 @@
                         Please fill up the information of your profile to complete your account
                     </p>
                     <a href="{{ route('profile')}}" class="btn btn-primary"><i class="bx bx-user"></i> Complete Profile </a>
+                    <p class="mt-4">
+                        <strong > NOTE </strong> : If you've complete your profile information. Please wait for admin approval <a href="mailto:support@baazar.live" > Contact Us</a>
+                    </p>
                 </div>
             </div>
         </div>

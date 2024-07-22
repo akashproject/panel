@@ -21,7 +21,7 @@ class UserController extends Controller
         $fieldData = UserMeta::where('user_id',$user->id)->get();
         $user_meta = array();
         foreach ($fieldData as $key => $value) {
-            $user_meta[$value->key] = $value->value;
+            $user_meta[$value->key] = ($value->key == 'expertise')?json_decode($value->value):$value->value;
         }
         if(array_key_exists("expertise",$user_meta)){
             $user_meta['expertise'] = json_decode($user_meta['expertise']);

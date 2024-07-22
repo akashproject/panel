@@ -43,7 +43,7 @@ class UserController extends Controller
             $fieldData = UserMeta::where('user_id',$user->id)->get();
             $user_meta = array();
             foreach ($fieldData as $key => $value) {
-                $user_meta[$value->key] = $value->value;
+                $user_meta[$value->key] = ($value->key == 'expertise')?json_decode($value->value):$value->value;
             }
             return view('administrator.users.show',compact('user','user_meta'));
         } catch(\Illuminate\Database\QueryException $e){
@@ -102,7 +102,6 @@ class UserController extends Controller
                 $request->avator->move(public_path('images/teacher'), $imageFile);
                 $data['avator'] = 'images/teacher/'.$imageFile;
             }    
-            print_r($data);
             $user->update($data);
 
             return redirect()->back()->with('message', 'User updated successfully!');
@@ -177,10 +176,16 @@ class UserController extends Controller
         try {
             $starttime = microtime(true); // Top of page
             $data = [
-                "name" => "Akash Dutta",
-                "email" => "akashdutta.scriptcrown@gmail.com",
+                "name" => $user->name,
+                "email" => $user->email,
             ];
-            $mail = Mail::send('emails.registerTeacherNotification', $data, function ($m) use ($data) {
+
+            $userData = [
+                'name' =>$user->name,
+                'email' =>$user->email,
+                'password' =>$password,
+            ];
+            $mail = Mail::send('emails.registerTeacherNotification', $userData, function ($m) use ($data) {
                 $m->from('noreply@devsov.baazar.live', 'Baazar Live');
                 $m->to($data['email'], $data['name'])->subject('Congratulations! Your Registration has been successfull');
             });

@@ -219,15 +219,16 @@
                                         <select
                                         type="text"
                                         id="expertise"
-                                        name="expertise"
+                                        name="expertise[]"
                                         class="form-control"
                                         required
+                                        multiple
                                         >
-                                        <option value=""> Select Option </option>
-                                        <option value="Index Option" {{ (isset($user_meta["expertise"]) && $user_meta["expertise"] == 'Index Option')?"selected":"" }}> Index Option </option>
-                                        <option value="Equity Option" {{ (isset($user_meta["expertise"]) && $user_meta["expertise"] == 'Equity Option')?"selected":"" }}> Equity Option </option>
-                                        <option value="Commodity" {{ (isset($user_meta["expertise"]) && $user_meta["expertise"] == 'Commodity')?"selected":"" }}> Commodity </option>
-                                        <option value="Forex" {{ (isset($user_meta["expertise"]) && $user_meta["expertise"] == 'Forex')?"selected":"" }}> Forex </option>
+                                            
+                                            <option value="Index Option" {{ (isset($user_meta['expertise']) && in_array('Index Option',$user_meta['expertise']))?'selected':'' }} > Index Option </option>
+                                            <option value="Equity Option" {{ (isset($user_meta['expertise']) && in_array('Equity Option',$user_meta['expertise']))?'selected':'' }} > Equity Option </option>
+                                            <option value="Commodity" {{ (isset($user_meta['expertise']) && in_array('Commodity',$user_meta['expertise']))?'selected':'' }}> Commodity </option>
+                                            <option value="Forex" {{ (isset($user_meta['expertise']) && in_array('Forex',$user_meta['expertise']))?'selected':'' }}> Forex </option>
                                         </select>
                                     </div>
                                 </div>
