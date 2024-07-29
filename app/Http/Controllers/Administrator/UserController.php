@@ -66,7 +66,7 @@ class UserController extends Controller
                 $data['avator'] = 'images/teacher/'.$imageFile;
             }
 
-            $password = random_strings(8);
+            $password = "12345678";//random_strings(8);
             $user = User::create([
                 'avator' => (isset($data['avator']))?$data['avator']:null,
                 'name' => $data['name'],

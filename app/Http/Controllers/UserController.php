@@ -23,9 +23,10 @@ class UserController extends Controller
         foreach ($fieldData as $key => $value) {
             $user_meta[$value->key] = ($value->key == 'expertise')?json_decode($value->value):$value->value;
         }
-        if(array_key_exists("expertise",$user_meta)){
-            $user_meta['expertise'] = json_decode($user_meta['expertise']);
-        }
+        
+        // if(array_key_exists("expertise",$user_meta)){
+        //     $user_meta['expertise'] = json_decode($user_meta['expertise']);
+        // }
 
         return view('user.profile',compact("user_meta"));
     }

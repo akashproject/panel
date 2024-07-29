@@ -21,9 +21,18 @@
             </a>
          </li>
 
+         @role('super-admin')
+         <li class="menu-item">
+            <a href="{{ route('administrator') }}" class="menu-link">
+               <i class="menu-icon tf-icons bx bx-cog"></i>
+               <div data-i18n="globe">Administrator</div>
+            </a>
+         </li>
+         @endrole
+
          <!-- Layouts -->
          <li class="menu-item">
-            <a href="{{ route('website') }}" class="menu-link">
+            <a href="https://devsov.baazar.live/" class="menu-link">
                <i class="menu-icon tf-icons bx bx-globe"></i>
                <div data-i18n="globe">Visit Site</div>
             </a>
