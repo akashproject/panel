@@ -118,6 +118,7 @@ class UserController extends Controller
             unset($data['_token']);
             foreach($data as $key => $value){
                 $user_meta = UserMeta::where('key', $key)->where('user_id',$user->id);
+                $value = (is_array($value))?json_encode($value):$value;
                 if($user_meta->exists()){
                     $user_meta->update(array("user_id"=>$user->id,"key"=>$key,"value"=>$value));  
                 } else {
